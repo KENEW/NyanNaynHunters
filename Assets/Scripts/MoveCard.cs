@@ -5,7 +5,6 @@ using UnityEngine;
 public class MoveCard : Card
 {
     public int distance;
-    public float percent;
     public enum MoveType
     {
         Down,
