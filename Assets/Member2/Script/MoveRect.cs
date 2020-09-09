@@ -9,7 +9,7 @@ public class MoveRect : MonoSingleton<MoveRect>
 
 	public int RectPos_x = 3;
 	public int RectPos_y = 2;
-
+	
 	private void Start()
 	{
 		//for (int i = 0; i < RectPos.GetLength(0); i++)

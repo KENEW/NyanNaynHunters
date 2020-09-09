@@ -4,13 +4,6 @@ using UnityEngine;
 
 public class UserPlayer : Player
 {
-
-    protected void Awake()
-    {
-        hp = TBL_GAME_SETTING.GetEntity(0).PlayerStartHP;
-        sp = TBL_GAME_SETTING.GetEntity(0).PlayerStartEnergy;
-    }
-
     protected override void Start()
     {
         base.Start();
