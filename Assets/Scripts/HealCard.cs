@@ -12,7 +12,7 @@ public class HealCard : Card
         this.HPIncrease = hc.HPIncrease;
         this.energyCost = hc.EnergyCost;
     }
-    public override void UseCard()
+    public override void UseCard(int index)
     {
 
     }

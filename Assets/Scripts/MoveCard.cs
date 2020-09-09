@@ -18,7 +18,7 @@ public class MoveCard : Card
     {
         this.distance = mc.Distance;
     }
-    public override void UseCard()
+    public override void UseCard(int index)
     {
 
     }

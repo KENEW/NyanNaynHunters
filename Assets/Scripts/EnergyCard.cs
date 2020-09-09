@@ -9,7 +9,7 @@ public class EnergyCard : Card
     {
         this.energyIncrease = ec.EnergyIncrease;
     }
-    public override void UseCard()
+    public override void UseCard(int index)
     {
 
     }

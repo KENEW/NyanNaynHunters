@@ -10,7 +10,7 @@ public class GuardCard : Card
     {
         this.damageReduction = gc.DamageReduction;
     }
-    public override void UseCard()
+    public override void UseCard(int index)
     {
 
     }

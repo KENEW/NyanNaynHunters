@@ -14,8 +14,8 @@ public class AttackCard : Card
         this.energyCost = ac.EnergyCost;
         this.positions = ac.Positions;
     }
-    public override void UseCard()
+    public override void UseCard(int index)
     {
-
+        
     }
 }

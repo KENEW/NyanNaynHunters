@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Card
+public abstract class Card : MonoBehaviour
 {
-    public string name;
+    public new string name;
     public string comment;
     public float percent;
 
@@ -14,5 +14,5 @@ public abstract class Card
         this.comment = comment;
         this.percent = percent;
     }
-    public abstract void UseCard();
+    public abstract void UseCard(int index);
 }

@@ -16,7 +16,7 @@ public class Test : MonoBehaviour
             Debug.Log(data.Distance);
             Debug.Log(data.Comment);
         }
-        
+
         TBL_MOVE_CARD.ForEachEntity((data) =>
         {
             Debug.Log(data.Name);
