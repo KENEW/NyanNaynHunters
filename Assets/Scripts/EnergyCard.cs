@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class EnergyCard : Card
 {
-    public float percent;
-    public int damageReduction;
+    public int energyIncrease;
 
     public override void UseCard()
     {
