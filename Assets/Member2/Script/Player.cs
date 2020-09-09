@@ -68,7 +68,7 @@ public class Player : MonoBehaviour
 		return hp;
 	}
 
-	public int SetHP()
+	public int GetSP()
 	{
 		return sp;
 	}

@@ -12,23 +12,43 @@ public class GameManager : MonoBehaviour
         playerEnergyBar,
         enemyHealthBar,
         enemyEnergyBar;
-    //public Character player,enemy;
-    //public CardField cardField;
+    public Player player,enemy;
+    public CardField cardField;
     public CoolDown coolDown;
+    private bool endAnimation; // 애니메이션이 끝나면 다음카드 사용하기, true : 애니메이션 끝남, false : 아직 안끝남
 
     private void Start()
     {
-        round = 1;
-        roundText.text = "Round : " + round.ToString();
-        //playerHelathBar.maxValue = player.maxHP;
-        //playerEnergyBar.maxValue = player.maxEnergy;
-        //enemyHealthBar.maxValue = enemy.maxHP;
-        //enemyEnergyBar.maxValue = enemy.maxEnergy;
+        round = 0;
+        playerHelathBar.maxValue = player.GetHP();
+        playerHelathBar.value = playerHelathBar.maxValue;
+        playerEnergyBar.maxValue = player.GetSP();
+        playerEnergyBar.value = playerEnergyBar.maxValue;
+        enemyHealthBar.maxValue = enemy.GetHP();
+        enemyHealthBar.value = enemyHealthBar.maxValue;
+        enemyEnergyBar.maxValue = enemy.GetSP();
+        enemyEnergyBar.value = enemyEnergyBar.maxValue;
+
+        StartGame();
+        coolDown.Restart();
+    }
+
+    private void Update()
+    {
+        if (endAnimation)
+        {
+            //끝나면 다음카드사용
+            coolDown.Restart();
+            endAnimation = false;
+        }
     }
 
     //라운드 1,2...마다 호출되는 게임시작 함수
     private void StartGame()
     {
+        round++;
+        roundText.text = "Round : " + round.ToString();
+
         if (coolDown.GetSliderValue() <= 0f) //쿨타임이 끝났다면
         {
             //셋팅된 카드 사용
