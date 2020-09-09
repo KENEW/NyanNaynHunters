@@ -1,0 +1,97 @@
+
+CAT1.png
+size: 694,110
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+body
+  rotate: true
+  xy: 536, 51
+  size: 57, 54
+  orig: 57, 54
+  offset: 0, 0
+  index: -1
+ear1
+  rotate: true
+  xy: 536, 5
+  size: 44, 53
+  orig: 44, 53
+  offset: 0, 0
+  index: -1
+ear2
+  rotate: false
+  xy: 592, 52
+  size: 37, 56
+  orig: 37, 56
+  offset: 0, 0
+  index: -1
+eye
+  rotate: true
+  xy: 591, 6
+  size: 43, 26
+  orig: 43, 26
+  offset: 0, 0
+  index: -1
+eye2
+  rotate: true
+  xy: 631, 56
+  size: 52, 22
+  orig: 52, 22
+  offset: 0, 0
+  index: -1
+hand1
+  rotate: false
+  xy: 655, 71
+  size: 37, 37
+  orig: 37, 37
+  offset: 0, 0
+  index: -1
+hand2
+  rotate: false
+  xy: 655, 33
+  size: 36, 36
+  orig: 36, 36
+  offset: 0, 0
+  index: -1
+hat
+  rotate: false
+  xy: 202, 9
+  size: 150, 99
+  orig: 150, 99
+  offset: 0, 0
+  index: -1
+head
+  rotate: false
+  xy: 354, 12
+  size: 117, 96
+  orig: 117, 96
+  offset: 0, 0
+  index: -1
+leg1
+  rotate: false
+  xy: 619, 10
+  size: 29, 40
+  orig: 29, 40
+  offset: 0, 0
+  index: -1
+leg2
+  rotate: true
+  xy: 650, 4
+  size: 27, 35
+  orig: 27, 35
+  offset: 0, 0
+  index: -1
+tail
+  rotate: true
+  xy: 473, 15
+  size: 93, 61
+  orig: 93, 61
+  offset: 0, 0
+  index: -1
+waepone
+  rotate: true
+  xy: 2, 2
+  size: 106, 198
+  orig: 106, 198
+  offset: 0, 0
+  index: -1

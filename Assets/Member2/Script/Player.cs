@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
@@ -19,7 +20,13 @@ public class Player : MonoBehaviour
 
 	private Queue<Card> cardQ;
 
+	[SerializeField]
+	float PlayerSize = 0.4f;
+
 	Vector2 startPos = Vector2.zero;
+
+	Vector3 flipPosOn	= Vector3.zero;
+	Vector3 flipPosOff	= Vector3.zero;
 
 	protected virtual void Start()
 	{
@@ -27,8 +34,10 @@ public class Player : MonoBehaviour
 		mSprite = GetComponent<SpriteRenderer>();
 		mMoveRect = FindObjectOfType<MoveRect>();
 
-		startPos = new Vector2(-1.09f, 0.46f);
+		flipPosOn	= new Vector3(-PlayerSize, PlayerSize, 1);
+		flipPosOff  = new Vector3(PlayerSize, PlayerSize, 1);
 
+		startPos = transform.position;//new Vector2(-1.65f, 0.26f);
 	}
 
 	protected virtual void Update()
@@ -39,12 +48,12 @@ public class Player : MonoBehaviour
 	{
 		if (mMoveRect.playerPos[playerNum, 0] < mMoveRect.playerPos[playerNum == 0 ? 1 : 0, 0])
 		{
-			mSprite.flipX = true;
+			transform.localScale = flipPosOn;
 			curFlip = true;
 		}
 		else if (mMoveRect.playerPos[playerNum, 0] > mMoveRect.playerPos[playerNum == 0 ? 1 : 0, 0])
 		{
-			mSprite.flipX = false;
+			transform.localScale = flipPosOff;
 			curFlip = false;
 		}
 	}
