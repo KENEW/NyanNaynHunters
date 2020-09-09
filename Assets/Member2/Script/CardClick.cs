@@ -5,6 +5,21 @@ using UnityEngine.EventSystems;
 
 public class CardClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
+    private Card card;
+    private CardField cardField;
+
+    void Awake()
+    {
+        card = GetComponent<Card>();
+        cardField = FindObjectOfType<CardField>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
     public void OnPointerDown(PointerEventData eventData)
     {
 
@@ -15,15 +30,5 @@ public class CardClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }

@@ -17,10 +17,13 @@ public class Player : MonoBehaviour
 
 	public float gapTile = 0.79f;
 
+	private Queue<Card> cardQ;
+
 	Vector2 startPos = Vector2.zero;
 
 	protected virtual void Start()
 	{
+		cardQ = new Queue<Card>();
 		mSprite = GetComponent<SpriteRenderer>();
 		mMoveRect = FindObjectOfType<MoveRect>();
 
@@ -72,4 +75,39 @@ public class Player : MonoBehaviour
 	{
 		return sp;
 	}
+
+	public void UseCard()
+    {
+		Card card = cardQ.Dequeue();
+		if (card is AttackCard) UseAttackCard(card.cardName);
+		else if (card is EnergyCard) UseEnergyCard(card.cardName);
+		else if (card is GuardCard) UseGuardCard(card.cardName);
+		else if (card is HealCard) UseHealCard(card.cardName);
+		else if (card is MoveCard) UseMoveCard(card.cardName);
+    }
+
+	public void UseAttackCard(string name)
+    {
+
+    }
+
+	public void UseEnergyCard(string name)
+    {
+
+    }
+
+	public void UseGuardCard(string name)
+    {
+
+    }
+
+	public void UseHealCard(string name)
+    {
+
+    }
+
+	public void UseMoveCard(string name)
+    {
+
+    }
 }
