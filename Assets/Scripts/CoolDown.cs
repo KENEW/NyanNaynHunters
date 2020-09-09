@@ -14,15 +14,23 @@ public class CoolDown : MonoBehaviour
         slider = GetComponent<Slider>();
         slider.value = slider.maxValue;
     }
-    void Update()
+
+    public void Restart()
     {
-        if (slider.value > 0)
+        StartCoroutine("RestartCoroutine");
+    }
+
+    IEnumerator RestartCoroutine()
+    {
+        while (slider.value > 0)
         {
             slider.value -= valuePerSecond * Time.deltaTime;
+            yield return null;
         }
-        else
-        {
-            slider.value = slider.maxValue;
-        }
+    }
+
+    public float GetSliderValue()
+    {
+        return slider.value;
     }
 }
