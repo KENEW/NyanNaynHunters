@@ -4,6 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 
+public enum PlayerType
+{
+	User,
+	Computer
+}
+
 public class Player : MonoBehaviour
 {
 	MoveRect mMoveRect = null;
@@ -28,6 +34,14 @@ public class Player : MonoBehaviour
 	Vector3 flipPosOn	= Vector3.zero;
 	Vector3 flipPosOff	= Vector3.zero;
 
+	private Vector2 m_PrevTilePosition;
+	public Vector2 prevTilePosition => m_PrevTilePosition;
+	
+	private Vector2 m_TilePosition;
+	public Vector2 tilePosition => m_TilePosition;
+
+	public PlayerType playerType;
+	
 	protected virtual void Start()
 	{
 		cardQ = new Queue<Card>();
@@ -39,45 +53,18 @@ public class Player : MonoBehaviour
 
 		startPos = transform.position;//new Vector2(-1.65f, 0.26f);
 	}
+	
+	
+	public void SetTilePosition(Vector2 newTilePosition)
+	{
+		m_PrevTilePosition = m_TilePosition;
+		m_TilePosition = newTilePosition;
 
-	protected virtual void Update()
-	{
-		FlipSet();
+		PlayerManager.Instance.OnPlayerPositionChanged();
 	}
-	private void FlipSet()
-	{
-		if (mMoveRect.playerPos[playerNum, 0] < mMoveRect.playerPos[playerNum == 0 ? 1 : 0, 0])
-		{
-			transform.localScale = flipPosOn;
-			curFlip = true;
-		}
-		else if (mMoveRect.playerPos[playerNum, 0] > mMoveRect.playerPos[playerNum == 0 ? 1 : 0, 0])
-		{
-			transform.localScale = flipPosOff;
-			curFlip = false;
-		}
-	}
-
-	protected void SetPlayerPos(int w = 0, int h = 0)
-	{
-		if ((mMoveRect.playerPos[playerNum, 0] + w <= mMoveRect.RectPos_x) && (mMoveRect.playerPos[playerNum, 0] + w != -1))
-		{
-			mMoveRect.playerPos[playerNum, 0] += w;
-			UpdatePos();
-		}
-		if ((mMoveRect.playerPos[playerNum, 1] + h <= mMoveRect.RectPos_y) && (mMoveRect.playerPos[playerNum, 1] + h != -1))
-		{
-			mMoveRect.playerPos[playerNum, 1] += h;
-			UpdatePos();
-		}
-	}
-
-	protected void UpdatePos()
-	{
-		transform.position = new Vector2(startPos.x + (mMoveRect.playerPos[playerNum, 0] * gapTile),
-		startPos.y + (mMoveRect.playerPos[playerNum, 1] * gapTile));
-		FlipSet();
-	}
+	
+	
+	
 
 	public int GetHP()
 	{
@@ -98,7 +85,7 @@ public class Player : MonoBehaviour
 		else if (card is HealCard) UseHealCard(card.cardName);
 		else if (card is MoveCard) UseMoveCard(card.cardName);
     }
-
+	
 	public void UseAttackCard(string name)
     {
 
@@ -119,6 +106,47 @@ public class Player : MonoBehaviour
 
     }
 
+	public void UseMoveCard(TBL_MOVE_CARD cardData)
+	{
+		Vector2 newPosition;
+		
+		switch (cardData.MoveType)
+		{
+			case MoveType.Left:
+				newPosition = m_TilePosition + new Vector2(0, -cardData.Distance);
+				if (TileManager.Instance.CanMove(newPosition))
+				{
+					SetTilePosition(newPosition);
+				}
+				break;
+			
+			case MoveType.Right:
+				newPosition = m_TilePosition + new Vector2(0, cardData.Distance);
+				if (TileManager.Instance.CanMove(newPosition))
+				{
+					SetTilePosition(newPosition);
+				}
+				break;
+			
+			case MoveType.Up:
+				newPosition = m_TilePosition + new Vector2(-cardData.Distance, 0);
+				if (TileManager.Instance.CanMove(newPosition))
+				{
+					SetTilePosition(newPosition);
+				}
+				break;
+			
+			case MoveType.Down:
+				newPosition = m_TilePosition + new Vector2(cardData.Distance, 0);
+				if (TileManager.Instance.CanMove(newPosition))
+				{
+					SetTilePosition(newPosition);
+				}
+				break;
+		}
+	}
+	
+	
 	public void UseMoveCard(string name)
     {
 
