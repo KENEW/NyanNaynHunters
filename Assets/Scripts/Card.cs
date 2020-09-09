@@ -4,13 +4,13 @@ using UnityEngine;
 
 public abstract class Card : MonoBehaviour
 {
-    public new string name;
+    public string cardName;
     public string comment;
     public float percent;
 
-    public Card(string name, string comment, float percent)
+    public Card(string cardName, string comment, float percent)
     {
-        this.name = name;
+        this.cardName = cardName;
         this.comment = comment;
         this.percent = percent;
     }

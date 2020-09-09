@@ -40,8 +40,6 @@ public class GameManager : MonoBehaviour
         if (coolDown.GetSliderValue() <= 0f) //쿨타임이 끝났다면
         {
             coolDown.Restart(); //쿨타임 재시작
-            Card playerCard = player.cardQ.Dequeue();
-            Card enemyCard = enemy.cardQ.Dequeue();
         }
     }
 }

@@ -89,7 +89,7 @@ public class CardField : MonoBehaviour
     {
         foreach(Card card in list)
         {
-            if (card.name.Equals(target.name)) return true;
+            if (card.cardName.Equals(target.cardName)) return true;
         }
         return false;
     }
