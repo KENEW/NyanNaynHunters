@@ -506,7 +506,7 @@ using BansheeGz.BGDatabase;
 					_Percent[Index] = value;
 				}
 			}
-			public System.Single EnergyIncrease
+			public System.Int32 EnergyIncrease
 			{
 				get
 				{
@@ -535,12 +535,12 @@ using BansheeGz.BGDatabase;
 					return _ufle12jhs77_Percent;
 				}
 			}
-			private static BansheeGz.BGDatabase.BGFieldFloat _ufle12jhs77_EnergyIncrease;
-			public static BansheeGz.BGDatabase.BGFieldFloat _EnergyIncrease
+			private static BansheeGz.BGDatabase.BGFieldInt _ufle12jhs77_EnergyIncrease;
+			public static BansheeGz.BGDatabase.BGFieldInt _EnergyIncrease
 			{
 				get
 				{
-					if(_ufle12jhs77_EnergyIncrease==null || _ufle12jhs77_EnergyIncrease.IsDeleted) _ufle12jhs77_EnergyIncrease=(BansheeGz.BGDatabase.BGFieldFloat) MetaDefault.GetField(new BGId(5729135438969098686,1402820915819574162));
+					if(_ufle12jhs77_EnergyIncrease==null || _ufle12jhs77_EnergyIncrease.IsDeleted) _ufle12jhs77_EnergyIncrease=(BansheeGz.BGDatabase.BGFieldInt) MetaDefault.GetField(new BGId(5298728180882023001,3731403400724660125));
 					return _ufle12jhs77_EnergyIncrease;
 				}
 			}
