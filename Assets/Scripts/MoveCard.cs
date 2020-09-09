@@ -14,6 +14,10 @@ public class MoveCard : Card
 {
     public int distance;
 
+    public MoveCard(TBL_MOVE_CARD mc) : base(mc.name, mc.Comment, mc.Percent)
+    {
+        this.distance = mc.Distance;
+    }
     public override void UseCard()
     {
 
