@@ -20,7 +20,7 @@ public class CardField : MonoBehaviour
     }
 
     void SetCard()
-    {0
+    {
         int startCount = CardSetting.AttackCardStartCount;
         while (startCount > 0)
         {
