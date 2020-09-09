@@ -17,10 +17,13 @@ public class Player : MonoBehaviour
 
 	public float gapTile = 0.79f;
 
+	public Queue<Card> cardQ;
+
 	Vector2 startPos = Vector2.zero;
 
 	protected virtual void Start()
 	{
+		cardQ = new Queue<Card>();
 		mSprite = GetComponent<SpriteRenderer>();
 		mMoveRect = FindObjectOfType<MoveRect>();
 
