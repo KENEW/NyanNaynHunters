@@ -5,12 +5,12 @@ using UnityEngine.EventSystems;
 
 public class CardClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
-    private Card card;
+    private CardComponent card;
     private CardField cardField;
 
     void Awake()
     {
-        card = GetComponent<Card>();
+        card = GetComponent<CardComponent>();
         cardField = FindObjectOfType<CardField>();
     }
 

@@ -17,6 +17,7 @@ public class CardField : MonoBehaviour
     private void Start()
     {
         SetCard();
+        Debug.Log(list[0].cardName);
     }
 
     void SetCard()
