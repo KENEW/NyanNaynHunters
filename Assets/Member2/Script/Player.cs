@@ -61,9 +61,8 @@ public class Player : MonoBehaviour
 
 		PlayerManager.Instance.OnPlayerPositionChanged();
 	}
-	
-	
-	
+
+
 
 	public int GetHP()
 	{

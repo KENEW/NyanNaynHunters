@@ -25,10 +25,8 @@ public class PlayerManager : MonoSingleton<PlayerManager>
     public void OnPlayerPositionChanged()
     {
         var playerTilePosition = Player.tilePosition;
-        var playerPrevTilePosition = Player.prevTilePosition;
-        
+    
         var enemyTilePosition = Enemy.tilePosition;
-        var enemyPrevTilePosition = Enemy.prevTilePosition;
 
         // 플레이어가 왼쪾인 경우
         if (playerTilePosition.y < enemyTilePosition.y)
@@ -37,7 +35,6 @@ public class PlayerManager : MonoSingleton<PlayerManager>
             Player.transform.localScale = new Vector3(-1, 1, 1);
             Enemy.transform.position = TileManager.Instance.GetRightPosition(enemyTilePosition);
             Enemy.transform.localScale = new Vector3(1, 1, 1);
-
         }
         // 위치가 같은 경우
         else if (playerTilePosition.y == enemyTilePosition.y)
