@@ -13,9 +13,5 @@ public enum MoveType
 public class MoveCard : Card
 {
     public int distance;
-
-    public override void UseCard()
-    {
-
-    }
+    
 }

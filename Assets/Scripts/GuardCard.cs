@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class GuardCard : Card
 {
-    public int damageReduction;
+    public int energyIncrease;
     public override void UseCard()
     {
-
+        base.UseCard();
     }
 }
