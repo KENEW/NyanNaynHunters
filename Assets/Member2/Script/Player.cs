@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
+using UnityEngine.UI;
 
 public enum PlayerType
 {
@@ -22,8 +23,6 @@ public class Player : MonoBehaviour
 
 	public float gapTile = 0.79f;
 
-	private Queue<Card> cardQ;
-
 	public Player target;
 
 	[SerializeField]
@@ -41,10 +40,12 @@ public class Player : MonoBehaviour
 	public Vector2 tilePosition => m_TilePosition;
 
 	public PlayerType playerType;
+
+	public Slider hpSlider;
+	public Slider spSlider;
 	
 	protected virtual void Start()
 	{
-		cardQ = new Queue<Card>();
 		mMoveRect = FindObjectOfType<MoveRect>();
 
 		flipPosOn	= new Vector3(-PlayerSize, PlayerSize, 1);
@@ -74,14 +75,14 @@ public class Player : MonoBehaviour
 		return sp;
 	}
 
-	public void UseCard()
+
+	public void UseCard(Card card)
     {
-		Card card = cardQ.Dequeue();
 		if (card is AttackCard) UseAttackCard(card.cardName);
 		else if (card is EnergyCard) UseEnergyCard(card.cardName);
 		else if (card is GuardCard) UseGuardCard(card.cardName);
 		else if (card is HealCard) UseHealCard(card.cardName);
-		else if (card is MoveCard) UseMoveCard(card.cardName);
+		else if (card is MoveCard) UseMoveCard(((MoveCard)card));
     }
 	
 	public void UseAttackCard(string name)
@@ -93,23 +94,36 @@ public class Player : MonoBehaviour
 		}
 
 		AttackCard card;
-		if (index == 0)
+		if (index >= 0)
 		{
 			card = new AttackCard(TBL_ATTACK_CARD.GetEntity(index));
 			for (int i = 0; i < card.positions.Count; i++)
 			{
 				Vector2 me = new Vector2(mMoveRect.playerPos[playerNum, 0], mMoveRect.playerPos[playerNum, 1]);
-				Vector2 enemy = new Vector2(mMoveRect.playerPos[playerNum == 0 ? 1 : 0, 0], mMoveRect.playerPos[playerNum == 0 ? 1 : 0, 1]);
+				Vector2 enemyPos = new Vector2(mMoveRect.playerPos[playerNum == 0 ? 1 : 0, 0], mMoveRect.playerPos[playerNum == 0 ? 1 : 0, 1]);
 				Vector2 v = GetPositionOfNumber(card.positions[i]);
-				Vector2 target = me + v;
+				Vector2 pos = me + v;
 
-                if (target == enemy)
+                if (pos == enemyPos)
                 {
-					
+					target.AddHP(-card.damage);
+					AddSP(-card.energyCost);
                 }
 			}
 		}
 	}
+
+	private void AddHP(int value)
+    {
+		hp += value;
+		hpSlider.value = hp;
+    }
+
+	private void AddSP(int value)
+    {
+		sp += value;
+		spSlider.value = sp;
+    }
 
 	private Vector2 GetPositionOfNumber(int n)
 	{
@@ -142,14 +156,14 @@ public class Player : MonoBehaviour
 
     }
 
-	public void UseMoveCard(TBL_MOVE_CARD cardData)
+	public void UseMoveCard(MoveCard cardData)
 	{
 		Vector2 newPosition;
 		
-		switch (cardData.MoveType)
+		switch (cardData.moveType)
 		{
 			case MoveType.Left:
-				newPosition = m_TilePosition + new Vector2(0, -cardData.Distance);
+				newPosition = m_TilePosition + new Vector2(0, -cardData.distance);
 				if (TileManager.Instance.CanMove(newPosition))
 				{
 					SetTilePosition(newPosition);
@@ -157,7 +171,7 @@ public class Player : MonoBehaviour
 				break;
 			
 			case MoveType.Right:
-				newPosition = m_TilePosition + new Vector2(0, cardData.Distance);
+				newPosition = m_TilePosition + new Vector2(0, cardData.distance);
 				if (TileManager.Instance.CanMove(newPosition))
 				{
 					SetTilePosition(newPosition);
@@ -165,7 +179,7 @@ public class Player : MonoBehaviour
 				break;
 			
 			case MoveType.Up:
-				newPosition = m_TilePosition + new Vector2(-cardData.Distance, 0);
+				newPosition = m_TilePosition + new Vector2(-cardData.distance, 0);
 				if (TileManager.Instance.CanMove(newPosition))
 				{
 					SetTilePosition(newPosition);
@@ -173,7 +187,7 @@ public class Player : MonoBehaviour
 				break;
 			
 			case MoveType.Down:
-				newPosition = m_TilePosition + new Vector2(cardData.Distance, 0);
+				newPosition = m_TilePosition + new Vector2(cardData.distance, 0);
 				if (TileManager.Instance.CanMove(newPosition))
 				{
 					SetTilePosition(newPosition);
@@ -181,10 +195,4 @@ public class Player : MonoBehaviour
 				break;
 		}
 	}
-	
-	
-	public void UseMoveCard(string name)
-    {
-
-    }
 }

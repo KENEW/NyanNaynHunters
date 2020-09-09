@@ -7,17 +7,37 @@ public class CardField : MonoBehaviour
     public RectTransform[] cardPos;
     public float width;//폭
     public float height;//너비
-    private List<Card> list;
+    public List<Card> list;
+    public RectTransform[] handlerPos;
+    public Queue<Card> playerHandler;
+
 
     private void Awake()
     {
         list = new List<Card>();
+        playerHandler = new Queue<Card>();
     }
 
     private void Start()
     {
         SetCard();
-        Debug.Log(list[0].cardName);
+    }
+
+    public void UpdateCardPos()
+    {
+        for(int i=0; i<list.Count; i++)
+        {
+            cardPos[i].GetComponent<CardComponent>().SetCard(list[i]);
+        }
+    }
+
+    public void UpdateHandler()
+    {
+        Queue<Card> t = new Queue<Card>(playerHandler); //clone
+        for(int i=0;i<playerHandler.Count; i++)
+        {
+            handlerPos[i].GetComponent<CardComponent>().SetCard(t.Dequeue());
+        }
     }
 
     void SetCard()
@@ -81,8 +101,17 @@ public class CardField : MonoBehaviour
                 startCount--;
             }
         }
+        
+        
 
         Shuffle(list);
+
+        //for(int i=0; i<list.Count; i++)
+        //{
+        //    cardPos[i].GetComponent<CardComponent>().SetCard(list[i]);
+        //}
+
+        UpdateCardPos();
     }
 
 

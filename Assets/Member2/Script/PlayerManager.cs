@@ -71,19 +71,19 @@ public class PlayerManager : MonoSingleton<PlayerManager>
     {
         if(Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            Player.UseMoveCard(TBL_MOVE_CARD.GetEntity(0));
+            Player.UseMoveCard(new MoveCard(TBL_MOVE_CARD.GetEntity(0)));
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            Player.UseMoveCard(TBL_MOVE_CARD.GetEntity(1));
+            Player.UseMoveCard(new MoveCard(TBL_MOVE_CARD.GetEntity(1)));
         }
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            Player.UseMoveCard(TBL_MOVE_CARD.GetEntity(2));
+            Player.UseMoveCard(new MoveCard(TBL_MOVE_CARD.GetEntity(2)));
         }
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            Player.UseMoveCard(TBL_MOVE_CARD.GetEntity(3));
+            Player.UseMoveCard(new MoveCard(TBL_MOVE_CARD.GetEntity(3)));
         }
     }
 }
