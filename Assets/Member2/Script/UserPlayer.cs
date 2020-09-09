@@ -9,6 +9,7 @@ public class UserPlayer : Player
         base.Start();
 
         playerNum = 0;
+        UpdatePos();
     }
 
 	private void Update()

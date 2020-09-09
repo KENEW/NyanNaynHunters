@@ -27,18 +27,22 @@ public class Player : MonoBehaviour
 		mSprite = GetComponent<SpriteRenderer>();
 		mMoveRect = FindObjectOfType<MoveRect>();
 
-		startPos = new Vector2(transform.position.x, transform.position.y);
-		UpdatePos();
+		startPos = new Vector2(-1.09f, 0.46f);
+
 	}
 
-	protected void FlipSet()
+	protected virtual void Update()
 	{
-		if (mMoveRect.playerPos[playerNum, 0] <= mMoveRect.playerPos[playerNum == 0 ? 1 : 0, 0])
+		FlipSet();
+	}
+	private void FlipSet()
+	{
+		if (mMoveRect.playerPos[playerNum, 0] < mMoveRect.playerPos[playerNum == 0 ? 1 : 0, 0])
 		{
 			mSprite.flipX = true;
 			curFlip = true;
 		}
-		else
+		else if (mMoveRect.playerPos[playerNum, 0] > mMoveRect.playerPos[playerNum == 0 ? 1 : 0, 0])
 		{
 			mSprite.flipX = false;
 			curFlip = false;
