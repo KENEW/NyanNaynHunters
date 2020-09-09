@@ -10,9 +10,4 @@ public class ComPlayer : Player
 
         playerNum = 1;
     }
-    
-    private void Update()
-    {
-     
-    }
 }

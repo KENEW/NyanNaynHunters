@@ -55,12 +55,12 @@ public class Player : MonoBehaviour
 	}
 	
 	
-	public void SetTilePosition(Vector2 newTilePosition)
+	public void SetTilePosition(Vector2 newTilePosition, bool xMove, int player)
 	{
 		m_PrevTilePosition = m_TilePosition;
 		m_TilePosition = newTilePosition;
 
-		PlayerManager.Instance.OnPlayerPositionChanged();
+		PlayerManager.Instance.OnPlayerPositionChanged(xMove, player);
 	}
 
 
@@ -166,7 +166,7 @@ public class Player : MonoBehaviour
 				newPosition = m_TilePosition + new Vector2(0, -cardData.distance);
 				if (TileManager.Instance.CanMove(newPosition))
 				{
-					SetTilePosition(newPosition);
+					SetTilePosition(newPosition, true, playerNum);
 				}
 				break;
 			
@@ -174,7 +174,7 @@ public class Player : MonoBehaviour
 				newPosition = m_TilePosition + new Vector2(0, cardData.distance);
 				if (TileManager.Instance.CanMove(newPosition))
 				{
-					SetTilePosition(newPosition);
+					SetTilePosition(newPosition, true, playerNum);
 				}
 				break;
 			
@@ -182,7 +182,7 @@ public class Player : MonoBehaviour
 				newPosition = m_TilePosition + new Vector2(-cardData.distance, 0);
 				if (TileManager.Instance.CanMove(newPosition))
 				{
-					SetTilePosition(newPosition);
+					SetTilePosition(newPosition, false, playerNum);
 				}
 				break;
 			
@@ -190,7 +190,7 @@ public class Player : MonoBehaviour
 				newPosition = m_TilePosition + new Vector2(cardData.distance, 0);
 				if (TileManager.Instance.CanMove(newPosition))
 				{
-					SetTilePosition(newPosition);
+					SetTilePosition(newPosition, false, playerNum);
 				}
 				break;
 		}
