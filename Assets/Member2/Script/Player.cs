@@ -14,8 +14,6 @@ public class Player : MonoBehaviour
 {
 	MoveRect mMoveRect = null;
 
-	SpriteRenderer mSprite = null;
-
 	protected int playerNum = 0;
 	protected int hp = 100;
 	protected int sp = 100;
@@ -25,6 +23,8 @@ public class Player : MonoBehaviour
 	public float gapTile = 0.79f;
 
 	private Queue<Card> cardQ;
+
+	public Player target;
 
 	[SerializeField]
 	float PlayerSize = 0.4f;
@@ -45,7 +45,6 @@ public class Player : MonoBehaviour
 	protected virtual void Start()
 	{
 		cardQ = new Queue<Card>();
-		mSprite = GetComponent<SpriteRenderer>();
 		mMoveRect = FindObjectOfType<MoveRect>();
 
 		flipPosOn	= new Vector3(-PlayerSize, PlayerSize, 1);
@@ -87,9 +86,47 @@ public class Player : MonoBehaviour
     }
 	
 	public void UseAttackCard(string name)
-    {
+	{
+		int index = TBL_ATTACK_CARD.CountEntities;
+		while (--index >= 0)
+		{
+			if (TBL_ATTACK_CARD.GetEntity(index).name.Equals(name)) break;
+		}
 
-    }
+		AttackCard card;
+		if (index == 0)
+		{
+			card = new AttackCard(TBL_ATTACK_CARD.GetEntity(index));
+			for (int i = 0; i < card.positions.Count; i++)
+			{
+				Vector2 me = new Vector2(mMoveRect.playerPos[playerNum, 0], mMoveRect.playerPos[playerNum, 1]);
+				Vector2 enemy = new Vector2(mMoveRect.playerPos[playerNum == 0 ? 1 : 0, 0], mMoveRect.playerPos[playerNum == 0 ? 1 : 0, 1]);
+				Vector2 v = GetPositionOfNumber(card.positions[i]);
+				Vector2 target = me + v;
+
+                if (target == enemy)
+                {
+					
+                }
+			}
+		}
+	}
+
+	private Vector2 GetPositionOfNumber(int n)
+	{
+		Vector2 v;
+		if (n == 0)		 v = new Vector2(-1f, 1f);
+		else if (n == 1) v = new Vector2(0f, 1f);
+		else if (n == 2) v = new Vector2(1f, 1f);
+		else if (n == 3) v = new Vector2(-1f, 0f);
+		else if (n == 4) v = new Vector2(0f, 0f);
+		else if (n == 5) v = new Vector2(1f, 0f);
+		else if (n == 6) v = new Vector2(-1f, -1f);
+		else if (n == 7) v = new Vector2(0f, -1f);
+		else if (n == 8) v = new Vector2(1f, -1f);
+		else v = new Vector2(2f, 2f);
+		return v;
+	}
 
 	public void UseEnergyCard(string name)
     {
