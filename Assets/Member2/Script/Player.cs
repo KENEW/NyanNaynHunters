@@ -78,19 +78,19 @@ public class Player : MonoBehaviour
 
 	public void UseCard(Card card)
     {
-		if (card is AttackCard) UseAttackCard(((AttackCard)card));
-		else if (card is EnergyCard) UseEnergyCard(((EnergyCard)card));
-		else if (card is GuardCard) UseGuardCard(((GuardCard)card));
-		else if (card is HealCard) UseHealCard(((HealCard)card));
+		if (card is AttackCard) UseAttackCard(card.cardName);
+		else if (card is EnergyCard) UseEnergyCard(card.cardName);
+		else if (card is GuardCard) UseGuardCard(card.cardName);
+		else if (card is HealCard) UseHealCard(card.cardName);
 		else if (card is MoveCard) UseMoveCard(((MoveCard)card));
     }
 	
-	public void UseAttackCard(AttackCard attackCard)
+	public void UseAttackCard(string name)
 	{
 		int index = TBL_ATTACK_CARD.CountEntities;
 		while (--index >= 0)
 		{
-			if (TBL_ATTACK_CARD.GetEntity(index).name.Equals(attackCard.cardName)) break;
+			if (TBL_ATTACK_CARD.GetEntity(index).name.Equals(name)) break;
 		}
 
 		AttackCard card;
@@ -141,17 +141,17 @@ public class Player : MonoBehaviour
 		return v;
 	}
 
-	public void UseEnergyCard(EnergyCard energyCard)
+	public void UseEnergyCard(string name)
     {
 
     }
 
-	public void UseGuardCard(GuardCard guardCard)
+	public void UseGuardCard(string name)
     {
 
     }
 
-	public void UseHealCard(HealCard healCard)
+	public void UseHealCard(string name)
     {
 
     }
