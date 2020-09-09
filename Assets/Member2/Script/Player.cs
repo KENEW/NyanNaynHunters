@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
 
 	protected void FlipSet()
 	{
-		if (mMoveRect.playerPos[playerNum, 0] < mMoveRect.playerPos[playerNum == 0 ? 1 : 0, 0])
+		if (mMoveRect.playerPos[playerNum, 0] <= mMoveRect.playerPos[playerNum == 0 ? 1 : 0, 0])
 		{
 			mSprite.flipX = true;
 			curFlip = true;
