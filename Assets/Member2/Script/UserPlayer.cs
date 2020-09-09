@@ -22,5 +22,13 @@ public class UserPlayer : Player
         {
             SetPlayerPos(1, 0);
         }
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            SetPlayerPos(0, -1);
+        }
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            SetPlayerPos(0, 1);
+        }
     }
 }

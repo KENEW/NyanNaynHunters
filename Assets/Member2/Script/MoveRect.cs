@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class MoveRect : MonoSingleton<MoveRect>
 {
-	public int[,] RectPos	= new int[4, 3];  //Weight, Height
-	public int[,] playerPos = new int[2, 2] { {0, 1}, { 1, 1} };
+	//public int[,] RectPos	= new int[4, 3];  //Weight, Height
+	public int[,] playerPos = new int[2, 2] { {0, 1}, {3, 1} };
 
 	public int RectPos_x = 3;
 	public int RectPos_y = 2;
