@@ -102,7 +102,7 @@ public class Player : MonoBehaviour
 		
 		if (Vector3.Distance(dist, transform.position) < 0.1) return;
 		
-		TileManager.Instance.GetTile(m_TilePosition).PlayLeftDust(GameSetting.MoveCardTime * 0.6f);
+		TileManager.Instance.GetTile(m_TilePosition)?.PlayLeftDust(GameSetting.MoveCardTime * 0.6f);
 		
 		m_SkeletonAnimation.AnimationState.SetAnimation(0, "Move", true);
 		TileManager.Instance.SetColor(m_TilePosition, GameSetting.MoveCardTime * 0.8f);
@@ -124,7 +124,7 @@ public class Player : MonoBehaviour
 
 		if (Vector3.Distance(dist, transform.position) < 0.1) return;
 		
-		TileManager.Instance.GetTile(m_TilePosition).PlayRightDust(GameSetting.MoveCardTime * 0.6f);
+		TileManager.Instance.GetTile(m_TilePosition)?.PlayRightDust(GameSetting.MoveCardTime * 0.6f);
 
 		
 		TileManager.Instance.SetColor(m_TilePosition, GameSetting.MoveCardTime * 0.8f);
@@ -266,11 +266,14 @@ public class Player : MonoBehaviour
 		
 		string randomAttackAnimationName = Random.Range(0, 2) == 0 ? "Attack1" : "Attack2";
 		var animationTime = m_SkeletonAnimation.Skeleton.Data.FindAnimation(randomAttackAnimationName).Duration;
-		
+
+		int index = Random.Range(0, 7);
+
 		foreach (var posIndex in card.positions)
 		{
 			var tilePosition = GetPosition(posIndex);
 			TileManager.Instance.SetColor(tilePosition, animationTime * 1.2f);
+			TileManager.Instance.GetTile(tilePosition)?.PlayAttack(index, animationTime);
 		}
 		
 		m_SkeletonAnimation.AnimationState.SetAnimation(0, randomAttackAnimationName, false);

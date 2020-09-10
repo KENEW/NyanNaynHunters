@@ -9,6 +9,8 @@ public class Tile : MonoBehaviour
     private SpriteRenderer m_SpriteRenderer;
 
     private Color m_BaseColor = Color.white;
+
+    [Header("공격")] public List<ParticleSystem> AttackParticles;
     
     public Transform Left;
     public Transform Right;
@@ -41,6 +43,12 @@ public class Tile : MonoBehaviour
     public void PlayRightDust(float delay)
     {
         StartCoroutine(PlayParticle_Coroutine(delay, RightDust));
+    }
+
+    public void PlayAttack(int index, float delay)
+    {
+        
+        StartCoroutine(PlayParticle_Coroutine(delay, AttackParticles[index]));
     }
     
     private IEnumerator PlayParticle_Coroutine(float delay, ParticleSystem particle)
