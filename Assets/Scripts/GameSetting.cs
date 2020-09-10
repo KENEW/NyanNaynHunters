@@ -15,5 +15,6 @@ public static class GameSetting
      public static float GuardCardTime    => TBL_GAME_SETTING.GetEntity(0).GuardCardTime;
      public static float HealCardTime     => TBL_GAME_SETTING.GetEntity(0).HealCardTime;
      public static float EnergyCardTime   => TBL_GAME_SETTING.GetEntity(0).EnergyCardTime;
-     
+     public static float CardWaitTime     => TBL_GAME_SETTING.GetEntity(0).CardWaitTime;
+
 }

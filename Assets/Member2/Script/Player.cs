@@ -3,9 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
-using UnityEngine.UI;
 using DG.Tweening;
 using Spine.Unity;
+using UnityEngine.UIElements;
+using Random = UnityEngine.Random;
+using Slider = UnityEngine.UI.Slider;
 
 public enum PlayerType
 {
@@ -62,34 +64,52 @@ public class Player : MonoBehaviour
 
 	}
 
-	public void SetTilePosition(Vector2 newTilePosition, bool xMove)
+	public void SetTilePosition(Vector2 newTilePosition, bool instantly = false)
 	{
 		m_TilePosition = newTilePosition;
 
-		PlayerManager.Instance.OnPlayerPositionChanged(xMove, playerType);
+		PlayerManager.Instance.OnPlayerPositionChanged(playerType, instantly);
 	}
 
 
-	public void LeftLerpMove(Vector3 dist, float moveSpeed, bool xMove)
+	public void LeftLerpMove(Vector3 dist, bool instantly = false)
 	{
 		transform.localScale = new Vector3(LeftXScale, 1, 1);
 
+		if (instantly)
+		{
+			transform.position = dist;
+			return;
+		}
+		
 		if (Vector3.Distance(dist, transform.position) < 0.1) return;
 		
+		
+		
 		m_SkeletonAnimation.AnimationState.SetAnimation(0, "Move", true);
-		transform.DOJump(dist, moveSpeed, 1, 0.5f).OnComplete(() =>
+		TileManager.Instance.SetColor(m_TilePosition, GameSetting.MoveCardTime * 0.8f);
+		transform.DOJump(dist, GameSetting.MoveCardTime * 0.8f, 1, GameSetting.MoveCardTime).OnComplete(() =>
 		{
 			m_SkeletonAnimation.AnimationState.SetAnimation(0, "Idle", true);
 		});
 	}
 	
-	public void RightLerpMove(Vector3 dist, float moveSpeed, bool xMove)
+	public void RightLerpMove(Vector3 dist, bool instantly = false)
 	{
 		transform.localScale = new Vector3(RightXScale, 1, 1);
 
+		if (instantly)
+		{
+			transform.position = dist;
+			return;
+		}
+
 		if (Vector3.Distance(dist, transform.position) < 0.1) return;
+		
+		
+		TileManager.Instance.SetColor(m_TilePosition, GameSetting.MoveCardTime * 0.8f);
 		m_SkeletonAnimation.AnimationState.SetAnimation(0, "Move", true);
-		transform.DOJump(dist, moveSpeed, 1, 0.5f).OnComplete(() =>
+		transform.DOJump(dist, GameSetting.MoveCardTime * 0.8f, 1, GameSetting.MoveCardTime).OnComplete(() =>
 		{
 			m_SkeletonAnimation.AnimationState.SetAnimation(0, "Idle", true);
 		});
@@ -218,6 +238,26 @@ public class Player : MonoBehaviour
 	// 공격 카드 사용
 	private void UseAttackCard(AttackCard card)
 	{
+		string randomAttackAnimationName = Random.Range(0, 2) == 0 ? "Attack1" : "Attack2";
+		var animationTime = m_SkeletonAnimation.Skeleton.Data.FindAnimation(randomAttackAnimationName).Duration;
+		
+		foreach (var posIndex in card.positions)
+		{
+			var tilePosition = GetPosition(posIndex);
+			TileManager.Instance.SetColor(tilePosition, animationTime * 1.2f);
+		}
+
+		
+		m_SkeletonAnimation.AnimationState.SetAnimation(0, randomAttackAnimationName, false);
+		
+		StartCoroutine(  UseAttackCard_Coroutine(card, animationTime));
+	}
+
+	private IEnumerator UseAttackCard_Coroutine(AttackCard card, float time)
+	{
+		yield return new WaitForSeconds(time);
+		
+		m_SkeletonAnimation.AnimationState.SetAnimation(0, "Idle", true);
 
 		Player target;
 		if (playerType == PlayerType.User)
@@ -228,6 +268,7 @@ public class Player : MonoBehaviour
 		if (InTarget(card.positions, target.tilePosition)) //명중하면 true, 빗나가면 false
 		{
 			target.AddHP(-card.damage);
+			target.TakeHitAnimation();
 		}
 
 		AddSP(-card.energyCost);
@@ -263,7 +304,7 @@ public class Player : MonoBehaviour
 				newPosition = m_TilePosition + new Vector2(0, -cardData.distance);
 				if (TileManager.Instance.CanMove(newPosition))
 				{
-					SetTilePosition(newPosition, true);
+					SetTilePosition(newPosition);
 				}
 				break;
 			
@@ -271,7 +312,7 @@ public class Player : MonoBehaviour
 				newPosition = m_TilePosition + new Vector2(0, cardData.distance);
 				if (TileManager.Instance.CanMove(newPosition))
 				{
-					SetTilePosition(newPosition, true);
+					SetTilePosition(newPosition);
 				}
 				break;
 			
@@ -279,7 +320,7 @@ public class Player : MonoBehaviour
 				newPosition = m_TilePosition + new Vector2(-cardData.distance, 0);
 				if (TileManager.Instance.CanMove(newPosition))
 				{
-					SetTilePosition(newPosition, false);
+					SetTilePosition(newPosition);
 				}
 				break;
 			
@@ -287,9 +328,23 @@ public class Player : MonoBehaviour
 				newPosition = m_TilePosition + new Vector2(cardData.distance, 0);
 				if (TileManager.Instance.CanMove(newPosition))
 				{
-					SetTilePosition(newPosition, false);
+					SetTilePosition(newPosition);
 				}
 				break;
 		}
+	}
+	
+	private void TakeHitAnimation()
+	{
+		StartCoroutine(TakeHitAnimation_Coroutine());
+	}
+
+	private IEnumerator TakeHitAnimation_Coroutine()
+	{
+		m_SkeletonAnimation.AnimationState.SetAnimation(0, "Damaged", true);
+
+		yield return new WaitForSeconds(0.6f);
+		
+		m_SkeletonAnimation.AnimationState.SetAnimation(0, "Idle", true);
 	}
 }

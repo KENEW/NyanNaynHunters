@@ -123,23 +123,37 @@ public class GameManager : MonoSingleton<GameManager>
         //몇초 뒤
         Debug.Log("Sequence" + sequence);
         if (sequence == true)
-            PlayerManager.Instance.Enemy.UseCard(cardField.enemyHandler.Dequeue());
+        {
+            playerCard = cardField.enemyHandler.Dequeue();
+            PlayerManager.Instance.Enemy.UseCard(playerCard);
+        }
         else
-            PlayerManager.Instance.Player.UseCard(cardField.playerHandler.Dequeue());
+        {
+            playerCard = cardField.playerHandler.Dequeue();
+            PlayerManager.Instance.Player.UseCard(playerCard);
+        }
+        
         cardField.UpdateHandler();
+        interval = GetInterval(playerCard);
+        yield return new WaitForSeconds(interval);
+
         Debug.Log("Action end");
 
-        //while (true)
-        //{
-        //    if (coolDown.GetSliderValue() <= 0f) break;
-        //    yield return new WaitForSeconds(1f);
-        //}
+        while (true)
+        {
+            if (coolDown.GetSliderValue() <= 0f) break;
+            yield return null;
+        }
 
-        
+        yield return new WaitForSeconds(GameSetting.CardWaitTime);
+
+        //적이 카드를 사용한 후 랜덤카드 바로 세팅
+        cardField.enemyHandler.Enqueue(CardManager.Instance.GetRandomCard());
+        cardField.UpdateHandler();
 
         if (CheckGame())
         {
-            StopCoroutine("PlayerAction");
+            StopCoroutine(PlayerAction());
         }
         else
         {
