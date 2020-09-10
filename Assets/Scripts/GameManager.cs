@@ -19,6 +19,9 @@ public class GameManager : MonoSingleton<GameManager>
     public int PlayerCharID = 0; //Init Value
     public int EnemyCharID = 1;
 
+    public float interval;//한사람 액션 후 다른사람이 액션하기까지 걸리는 시간
+    private bool sequence;//누가먼저할건지에 대한 변수, true : 플레이어, false : 적
+
     private void Start()
     {
         DontDestroyOnLoad(this);
@@ -33,17 +36,75 @@ public class GameManager : MonoSingleton<GameManager>
         //enemyEnergyBar.value = enemyEnergyBar.maxValue;
 
         StartGame();
-        coolDown.Restart();
     }
 
 
-    //라운드 1,2...마다 호출되는 게임시작 함수
+
+
+    //차례가 끝날때마다 호출되는 함수
     private void StartGame()
     {
-        if (coolDown.GetSliderValue() <= 0f) //쿨타임이 끝났다면
-        {
-            coolDown.Restart(); //쿨타임 재시작
-        }
+        Debug.Log("Start Game");
+        coolDown.Restart(); //쿨타임 재시작
+        Card playerCard = cardField.playerHandler.Peek();
+        Card enemyCard = cardField.enemyHandler.Peek();
+
+        int playerPriority = GetPriority(playerCard);
+        int enemyPriority = GetPriority(enemyCard);
+
+        if(playerCard is GuardCard && enemyCard is AttackCard)
+            sequence = true; //player선
+        else if(enemyCard is GuardCard && playerCard is AttackCard)
+            sequence = false; //enemy선
+        else if (playerPriority < enemyPriority)
+            sequence = true;
+        else if(playerPriority >= enemyPriority)
+            sequence = false;
+
+        StartCoroutine("PlayerAction");
+    }
+
+    IEnumerator PlayerAction()
+    {
+        yield return new WaitForSeconds(interval);
+        Debug.Log("Action Start");
+        Debug.Log("Sequence" + sequence);
+        if (sequence == true)
+            player.UseCard(cardField.playerHandler.Dequeue());
+        else
+            enemy.UseCard(cardField.enemyHandler.Dequeue());
+        cardField.UpdateHandler();
+
+        yield return new WaitForSeconds(interval);
+
+        //몇초 뒤
+        Debug.Log("Sequence" + sequence);
+        if (sequence == true)
+            enemy.UseCard(cardField.enemyHandler.Dequeue());
+        else
+            player.UseCard(cardField.playerHandler.Dequeue());
+        cardField.UpdateHandler();
+        Debug.Log("Action end");
+        StartGame();//다음턴
+
+    }
+
+    private int GetPriority(Card card)
+    {
+        int priority;
+        if (card is MoveCard) priority = 1;
+        else if (card is EnergyCard) priority = 2;
+        else if (card is GuardCard) priority = 3;
+        else if (card is HealCard) priority = 4;
+        else if (card is AttackCard) priority = 5;
+        else priority = 6;
+        return priority;
+    }
+
+    private void NextRound()
+    {
+        round++;
+        roundText.text = "Round : " + round.ToString();
     }
 
     public void GetCharIndex(int player = 0, int enemy = 1)

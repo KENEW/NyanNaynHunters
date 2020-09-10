@@ -114,6 +114,7 @@ public class Player : MonoBehaviour
 		else if (card is GuardCard) UseGuardCard(card.cardName);
 		else if (card is HealCard) UseHealCard(card.cardName);
 		else if (card is MoveCard) UseMoveCard(((MoveCard)card));
+		Debug.Log(name+" Use card");
     }
 	
 	public void UseAttackCard(string name)
