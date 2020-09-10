@@ -341,7 +341,6 @@ public class Player : MonoBehaviour
 		guard = 0;
 
 		Vector2 newPosition;
-		AddHP(-HP);
 		
 		switch (cardData.moveType)
 		{
