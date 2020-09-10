@@ -35,15 +35,16 @@ public class CardClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             cardField.cardList.Remove(card);
             card_c.DeleteCard();
 
-            while (true)
-            {
-                Card card2 = CardManager.Instance.GetRandomCard();
-                if (CardManager.Instance.MaxCountCheck(card2, cardField.cardList))
-                {
-                    cardField.AddCard(card2);
-                    break;
-                }
-            }
+            GameManager.Instance.clickedCardCount += 1;
+            //while (true)
+            //{
+            //    Card card2 = CardManager.Instance.GetRandomCard();
+            //    if (CardManager.Instance.MaxCountCheck(card2, cardField.cardList))
+            //    {
+            //        cardField.AddCard(card2);
+            //        break;
+            //    }
+            //}
 
             cardField.UpdateCardPos();
             cardField.UpdateHandler();
@@ -57,6 +58,8 @@ public class CardClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
             cardField.playerHandler.Dequeue();
             card_c.DeleteCard();
+
+            GameManager.Instance.clickedCardCount -= 1;
         }
         
     }

@@ -253,6 +253,7 @@ public class Player : MonoBehaviour
 
 	private void AddEnergy(int value)
     {
+		Debug.Log("Energy " + value);
 		Energy = Math.Min(Energy + value, MaxEnergy);
 		SetSliderValue();
     }
@@ -273,9 +274,9 @@ public class Player : MonoBehaviour
 		}
 		
 		m_SkeletonAnimation.AnimationState.SetAnimation(0, randomAttackAnimationName, false);
-		
-		
-		StartCoroutine(  UseAttackCard_Coroutine(card, animationTime));
+
+		if (Energy - card.energyCost >= 0)
+			StartCoroutine(UseAttackCard_Coroutine(card, animationTime));
 
 		return GameSetting.AttackCardTime;
 	}
@@ -322,8 +323,11 @@ public class Player : MonoBehaviour
     {
 	    guard = 0;
 
-		AddHP(card.HPIncrease);
-		AddEnergy(card.energyCost);
+        if (Energy - card.energyCost >= 0)
+        {
+			AddHP(card.HPIncrease);
+			AddEnergy(-card.energyCost);
+		}
 
 		return GameSetting.HealCardTime;
     }
