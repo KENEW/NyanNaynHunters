@@ -16,30 +16,31 @@ public class CardClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (cardField.playerHandler.Count > 3) return;
+        if (cardField.playerHandler.Count >= 3 || cardField.cardList.Count > 12) return;
         Card card = card_c.card;
-        //PlayerManager.Instance.Player.handler.Enqueue(card);
         cardField.playerHandler.Enqueue(card);
         cardField.cardList.Remove(card);
+        card_c.DeleteCard();
+
+        while (true)
+        {
+            Card card2 = CardManager.Instance.GetRandomCard();
+            if (CardManager.Instance.MaxCountCheck(card2, cardField.cardList))
+            {
+                cardField.AddCard(card2);
+                break;
+            }
+        }
+
         cardField.UpdateCardPos();
         cardField.UpdateHandler();
-        card_c.DeleteCard();
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        while (true)
-        {
-            Card card = CardManager.Instance.GetRandomCard();
-            if (CardManager.Instance.MaxCountCheck(card, cardField.cardList))
-            {
-                cardField.AddCard(card);
-                cardField.UpdateCardPos();
-                break;
-            }
-        }
-        
+        if (cardField.playerHandler.Count + 1 >= 3 || cardField.cardList.Count >= 12) return;
+
     }
 
-    
+
 }

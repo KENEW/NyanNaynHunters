@@ -73,6 +73,7 @@ public class CardManager : MonoSingleton<CardManager>
             if (value <= cumulative)
             {
                 card = SelectCard(list[i].cardType);
+                break;
             }
         }
         return card;
@@ -108,6 +109,7 @@ public class CardManager : MonoSingleton<CardManager>
             if (value <= cumulative)
             {
                 card = list[i].card;
+                break;
             }
         }
         return card;
@@ -132,6 +134,7 @@ public class CardManager : MonoSingleton<CardManager>
             if (value <= cumulative)
             {
                 card = list[i].card;
+                break;
             }
         }
         return card;
@@ -156,6 +159,7 @@ public class CardManager : MonoSingleton<CardManager>
             if (value <= cumulative)
             {
                 card = list[i].card;
+                break;
             }
         }
         return card;
@@ -180,6 +184,7 @@ public class CardManager : MonoSingleton<CardManager>
             if (value <= cumulative)
             {
                 card = list[i].card;
+                break;
             }
         }
         return card;
@@ -204,6 +209,7 @@ public class CardManager : MonoSingleton<CardManager>
             if (value <= cumulative)
             {
                 card = list[i].card;
+                break;
             }
         }
         return card;
