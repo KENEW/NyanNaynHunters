@@ -1241,7 +1241,7 @@ GameObject:
   - component: {fileID: 584287656}
   m_Layer: 5
   m_Name: EnemyHealthBar
-  m_TagString: Untagged
+  m_TagString: EnemyHPBar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2552,8 +2552,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roundText: {fileID: 1109503756}
-  player: {fileID: 0}
-  enemy: {fileID: 0}
   cardField: {fileID: 936412438}
   coolDown: {fileID: 1528370809}
   PlayerCharID: 0
@@ -3492,7 +3490,7 @@ GameObject:
   - component: {fileID: 1312533429}
   m_Layer: 5
   m_Name: PlayerHealthBar
-  m_TagString: Untagged
+  m_TagString: PlayerHPBar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3580,7 +3578,7 @@ GameObject:
   - component: {fileID: 1321206066}
   m_Layer: 5
   m_Name: EnemyEnergyBar
-  m_TagString: Untagged
+  m_TagString: EnemySPBar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4557,7 +4555,7 @@ GameObject:
   - component: {fileID: 1564110756}
   m_Layer: 5
   m_Name: PlayeyEnergyBar
-  m_TagString: Untagged
+  m_TagString: PlayerSPBar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5255,8 +5253,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1bf5221dd8f40143b79dcbd2b2a2fbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RectPos_x: 3
-  RectPos_y: 2
 --- !u!4 &1783235038
 Transform:
   m_ObjectHideFlags: 0
