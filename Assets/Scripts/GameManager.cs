@@ -21,10 +21,14 @@ public class GameManager : MonoSingleton<GameManager>
     public float interval;//한사람 액션 후 다른사람이 액션하기까지 걸리는 시간
     private bool sequence;//누가먼저할건지에 대한 변수, true : 플레이어, false : 적
 
+
+    private int turn;//한 라운드에 카드사용횟수에 대한 변수, 3회 다 사용하면 1로 리셋
+
     private void Start()
     {
         DontDestroyOnLoad(this);
         round = 0;
+        turn = 1;
         //playerHelathBar.maxValue = player.GetHP();
         //playerHelathBar.value = playerHelathBar.maxValue;
         //playerEnergyBar.maxValue = player.GetSP();
@@ -44,23 +48,51 @@ public class GameManager : MonoSingleton<GameManager>
     private void StartGame()
     {
         Debug.Log("Start Game");
-        coolDown.Restart(); //쿨타임 재시작
-        Card playerCard = cardField.playerHandler.Peek();
-        Card enemyCard = cardField.enemyHandler.Peek();
+        
+        if (CardClick.canClick == false)
+        {
+            Card playerCard = cardField.playerHandler.Peek();
+            Card enemyCard = cardField.enemyHandler.Peek();
 
-        int playerPriority = GetPriority(playerCard);
-        int enemyPriority = GetPriority(enemyCard);
+            int playerPriority = GetPriority(playerCard);
+            int enemyPriority = GetPriority(enemyCard);
 
-        if(playerCard is GuardCard && enemyCard is AttackCard)
-            sequence = true; //player선
-        else if(enemyCard is GuardCard && playerCard is AttackCard)
-            sequence = false; //enemy선
-        else if (playerPriority < enemyPriority)
-            sequence = true;
-        else if(playerPriority >= enemyPriority)
-            sequence = false;
+            if (playerCard is GuardCard && enemyCard is AttackCard)
+                sequence = true; //player선
+            else if (enemyCard is GuardCard && playerCard is AttackCard)
+                sequence = false; //enemy선
+            else if (playerPriority < enemyPriority)
+                sequence = true;
+            else if (playerPriority >= enemyPriority)
+                sequence = false;
 
-        StartCoroutine(PlayerAction());
+            if (turn >= 1 && turn <= 3)
+                StartCoroutine(PlayerAction());
+            else
+                CardClick.canClick = true;
+        }
+        else
+        {
+            coolDown.Restart(); //쿨타임 재시작
+            StartCoroutine(CardSelectTime());
+            
+        }
+    }
+
+    IEnumerator CardSelectTime()
+    {
+        while (true)
+        {
+            if (coolDown.GetSliderValue() <= 0f) break;
+            yield return new WaitForSeconds(1f);
+        }
+        CardClick.canClick = false;
+        //적이 카드를 사용한 후 랜덤카드 바로 세팅
+        cardField.enemyHandler.Enqueue(CardManager.Instance.GetRandomCard());
+        cardField.enemyHandler.Enqueue(CardManager.Instance.GetRandomCard());
+        cardField.enemyHandler.Enqueue(CardManager.Instance.GetRandomCard());
+        cardField.UpdateHandler();
+        StartGame();
     }
 
     IEnumerator PlayerAction()
@@ -97,15 +129,13 @@ public class GameManager : MonoSingleton<GameManager>
         cardField.UpdateHandler();
         Debug.Log("Action end");
 
-        while (true)
-        {
-            if (coolDown.GetSliderValue() <= 0f) break;
-            yield return new WaitForSeconds(1f);
-        }
+        //while (true)
+        //{
+        //    if (coolDown.GetSliderValue() <= 0f) break;
+        //    yield return new WaitForSeconds(1f);
+        //}
 
-        //적이 카드를 사용한 후 랜덤카드 바로 세팅
-        cardField.enemyHandler.Enqueue(CardManager.Instance.GetRandomCard());
-        cardField.UpdateHandler();
+        
 
         if (CheckGame())
         {
@@ -113,6 +143,7 @@ public class GameManager : MonoSingleton<GameManager>
         }
         else
         {
+            turn++;
             StartGame();
         }
 

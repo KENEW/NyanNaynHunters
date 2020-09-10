@@ -7,15 +7,18 @@ public class CardClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     private CardComponent card_c;
     private CardField cardField;
+    public static bool canClick;
 
     void Awake()
     {
         card_c = GetComponent<CardComponent>();
         cardField = FindObjectOfType<CardField>();
+        canClick = true;
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        if (canClick == false) return;
         if (cardField.playerHandler.Count >= 3 || cardField.cardList.Count > 12) return;
         Card card = card_c.card;
         cardField.playerHandler.Enqueue(card);
