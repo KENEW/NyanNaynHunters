@@ -183,9 +183,9 @@ public class Player : MonoBehaviour
 
 
 		// 타일 범위
-		// 0  1  2
-		// 3  4  5
-		// 6  7  8
+		// 0(-1,-1)  1(-1,0)  2(-1,1)
+		// 3(0, -1)  4(0,0)   5(0,1)
+		// 6(1, -1)  7(1,0)   8(1,1)
 
 		var playerTilePosition = m_TilePosition;
 
@@ -198,16 +198,16 @@ public class Player : MonoBehaviour
 				break;
 
 			case 1:
-				selectedTile.x = playerTilePosition.x;
-				selectedTile.y = playerTilePosition.y - 1;
-				break;
-			case 2:
-				selectedTile.x = playerTilePosition.x + 1;
-				selectedTile.y = playerTilePosition.y - 1;
-				break;
-			case 3:
 				selectedTile.x = playerTilePosition.x - 1;
 				selectedTile.y = playerTilePosition.y;
+				break;
+			case 2:
+				selectedTile.x = playerTilePosition.x - 1;
+				selectedTile.y = playerTilePosition.y + 1;
+				break;
+			case 3:
+				selectedTile.x = playerTilePosition.x;
+				selectedTile.y = playerTilePosition.y -1;
 				break;
 
 			case 4:
@@ -215,17 +215,17 @@ public class Player : MonoBehaviour
 				selectedTile.y = playerTilePosition.y;
 				break;
 			case 5:
-				selectedTile.x = playerTilePosition.x + 1;
-				selectedTile.y = playerTilePosition.y;
+				selectedTile.x = playerTilePosition.x;
+				selectedTile.y = playerTilePosition.y + 1;
 				break;
 			case 6:
-				selectedTile.x = playerTilePosition.x - 1;
-				selectedTile.y = playerTilePosition.y + 1;
+				selectedTile.x = playerTilePosition.x + 1;
+				selectedTile.y = playerTilePosition.y - 1;
 				break;
 
 			case 7:
-				selectedTile.x = playerTilePosition.x;
-				selectedTile.y = playerTilePosition.y + 1;
+				selectedTile.x = playerTilePosition.x + 1;
+				selectedTile.y = playerTilePosition.y;
 				break;
 			case 8:
 				selectedTile.x = playerTilePosition.x + 1;
