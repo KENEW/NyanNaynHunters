@@ -45,6 +45,11 @@ public class CardField : MonoBehaviour
         for (i=0; i<cardPos.Length; i++)
         {
             cc = cardPos[i].GetComponent<CardComponent>();
+            if (cc.GetIsUsed() == true)
+            {
+                cc.OnCard();
+                break;
+            }
             if (cc.card == null)
             {
                 cardList.Insert(i, card);
