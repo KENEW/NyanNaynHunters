@@ -22,6 +22,7 @@ public class CoolDown : MonoBehaviour
 
     IEnumerator RestartCoroutine()
     {
+        slider.value = slider.maxValue;
         while (slider.value > 0)
         {
             slider.value -= valuePerSecond * Time.deltaTime;

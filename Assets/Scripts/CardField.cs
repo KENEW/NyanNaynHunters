@@ -8,35 +8,64 @@ public class CardField : MonoBehaviour
     public float width;//폭
     public float height;//너비
     public List<Card> list;
-    public RectTransform[] handlerPos;
+    public RectTransform[] playerHandlerPos;
     public Queue<Card> playerHandler;
+    public RectTransform[] enemyHandlerPos;
+    public Queue<Card> enemyHandler;
 
 
     private void Awake()
     {
         list = new List<Card>();
-        playerHandler = new Queue<Card>();
+        playerHandler = new Queue<Card>(playerHandlerPos.Length);
+        enemyHandler = new Queue<Card>(enemyHandlerPos.Length);
     }
 
     private void Start()
     {
+        playerHandler.Enqueue(new MoveCard(TBL_MOVE_CARD.GetEntity(2)));
+        playerHandler.Enqueue(new MoveCard(TBL_MOVE_CARD.GetEntity(3)));
+        playerHandler.Enqueue(new MoveCard(TBL_MOVE_CARD.GetEntity(2)));
+
+
+        enemyHandler.Enqueue(new MoveCard(TBL_MOVE_CARD.GetEntity(3)));
+        enemyHandler.Enqueue(new MoveCard(TBL_MOVE_CARD.GetEntity(2)));
+        enemyHandler.Enqueue(new MoveCard(TBL_MOVE_CARD.GetEntity(3)));
+
+        UpdateHandler();
+
         SetCard();
     }
 
     public void UpdateCardPos()
     {
-        for(int i=0; i<list.Count; i++)
+        for(int i=0; i<cardPos.Length; i++)
         {
-            cardPos[i].GetComponent<CardComponent>().SetCard(list[i]);
+            if (i < list.Count)
+                cardPos[i].GetComponent<CardComponent>().SetCard(list[i]);
+            else
+                cardPos[i].GetComponent<CardComponent>().DeleteCard();
         }
     }
 
     public void UpdateHandler()
     {
         Queue<Card> t = new Queue<Card>(playerHandler); //clone
-        for(int i=0;i<playerHandler.Count; i++)
+        for(int i=0;i<playerHandlerPos.Length; i++)
         {
-            handlerPos[i].GetComponent<CardComponent>().SetCard(t.Dequeue());
+            if (i < playerHandler.Count)
+                playerHandlerPos[i].GetComponent<CardComponent>().SetCard(t.Dequeue());
+            else
+                playerHandlerPos[i].GetComponent<CardComponent>().DeleteCard();
+        }
+
+        t = new Queue<Card>(enemyHandler); //clone
+        for (int i = 0; i < enemyHandlerPos.Length; i++)
+        {
+            if (i < enemyHandler.Count)
+                enemyHandlerPos[i].GetComponent<CardComponent>().SetCard(t.Dequeue());
+            else
+                enemyHandlerPos[i].GetComponent<CardComponent>().DeleteCard();
         }
     }
 
