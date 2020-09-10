@@ -51,6 +51,8 @@ public class Player : MonoBehaviour
 	public const float LeftXScale = -1;
 	public const float RightXScale = 1;
 
+	private int guard;
+
 	[Header("스켈레톤 에니메이션")] public SkeletonAnimation m_SkeletonAnimation;
 	
 	protected virtual void Awake()
@@ -62,6 +64,8 @@ public class Player : MonoBehaviour
 		hpSlider.value = hp;
 		spSlider.maxValue = sp;
 		spSlider.value = sp;
+
+		guard = 0;
 
 	}
 
@@ -234,6 +238,11 @@ public class Player : MonoBehaviour
 
 	private void AddHP(int value)
     {
+        if (value < 0) //공격받을 시
+        {
+			value += guard;
+			if (value > 0) value = 0;
+        }
 		hp += value;
 		hpSlider.value = hp;
     }
@@ -245,19 +254,20 @@ public class Player : MonoBehaviour
     }
 
 
-	private void UseEnergyCard(string name)
+	private void UseEnergyCard(EnergyCard card)
     {
-
+		AddSP(card.energyIncrease);
     }
 
-	private void UseGuardCard(string name)
+	private void UseGuardCard(GuardCard card)
     {
-
+		guard = card.damageReduction;
     }
 
-	private void UseHealCard(string name)
+	private void UseHealCard(HealCard card)
     {
-
+		AddHP(card.HPIncrease);
+		AddSP(card.energyCost);
     }
 
 	public void UseMoveCard(MoveCard cardData)
