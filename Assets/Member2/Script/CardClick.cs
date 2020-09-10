@@ -9,11 +9,20 @@ public class CardClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     private CardField cardField;
     public static bool canClick;
 
+    public enum CardImageType
+    {
+        Handler,
+        Field
+    };
+    public CardImageType imageType;
+    
+
     void Awake()
     {
         card_c = GetComponent<CardComponent>();
         cardField = FindObjectOfType<CardField>();
         canClick = true;
+        Debug.Log(name);
     }
 
     public void OnPointerDown(PointerEventData eventData)
