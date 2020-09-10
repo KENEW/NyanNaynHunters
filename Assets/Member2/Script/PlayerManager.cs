@@ -15,7 +15,7 @@ public class PlayerManager : MonoSingleton<PlayerManager>
     public Player Player;
     public Player Enemy;
 
-    [SerializeField] private float moveSpeed = 1.1f;
+    [SerializeField] private float moveSpeed = 1.1f; // 나중에 업애야함 
     
     private void Start()   // 요건 나중에 없앨 예정 
     {
