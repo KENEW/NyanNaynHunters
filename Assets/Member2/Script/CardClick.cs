@@ -26,30 +26,44 @@ public class CardClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (canClick == false) return;
-        if (cardField.playerHandler.Count >= 3 || cardField.cardList.Count > 12) return;
-        Card card = card_c.card;
-        cardField.playerHandler.Enqueue(card);
-        cardField.cardList.Remove(card);
-        card_c.DeleteCard();
-
-        while (true)
+        if (imageType == CardImageType.Field)
         {
-            Card card2 = CardManager.Instance.GetRandomCard();
-            if (CardManager.Instance.MaxCountCheck(card2, cardField.cardList))
-            {
-                cardField.AddCard(card2);
-                break;
-            }
-        }
+            if (canClick == false) return;
+            if (cardField.playerHandler.Count >= 3 || cardField.cardList.Count > 12) return;
+            Card card = card_c.card;
+            cardField.playerHandler.Enqueue(card);
+            cardField.cardList.Remove(card);
+            card_c.DeleteCard();
 
-        cardField.UpdateCardPos();
-        cardField.UpdateHandler();
+            while (true)
+            {
+                Card card2 = CardManager.Instance.GetRandomCard();
+                if (CardManager.Instance.MaxCountCheck(card2, cardField.cardList))
+                {
+                    cardField.AddCard(card2);
+                    break;
+                }
+            }
+
+            cardField.UpdateCardPos();
+            cardField.UpdateHandler();
+        }
+        else
+        {
+            if (card_c.card == null) return;
+            Card card = card_c.card;
+            cardField.AddCard(card);
+            cardField.UpdateCardPos();
+
+            cardField.playerHandler.Dequeue();
+            card_c.DeleteCard();
+        }
+        
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        if (cardField.playerHandler.Count + 1 >= 3 || cardField.cardList.Count >= 12) return;
+
 
     }
 
