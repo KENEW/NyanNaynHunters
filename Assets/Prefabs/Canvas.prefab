@@ -49,9 +49,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerHPSlider: {fileID: 7687071383436026965}
-  PlayerSPSlider: {fileID: 7687071383754874948}
+  PlayerEnergySlider: {fileID: 7687071383754874948}
   EnemyHPSlider: {fileID: 7687071385103780424}
-  EnemySPSlider: {fileID: 7687071383427075794}
+  EnemyEnergySlider: {fileID: 7687071383427075794}
 --- !u!1 &2963638258892633395
 GameObject:
   m_ObjectHideFlags: 0
