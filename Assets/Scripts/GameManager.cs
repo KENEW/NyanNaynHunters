@@ -78,6 +78,10 @@ public class GameManager : MonoSingleton<GameManager>
         }
         else
         {
+            if (CheckGame())
+            {
+                return;
+            }
             coolDown.Restart(); //쿨타임 재시작
             turn = 1;
             round += 1;
@@ -159,19 +163,10 @@ public class GameManager : MonoSingleton<GameManager>
 
         yield return new WaitForSeconds(GameSetting.CardWaitTime);
 
-        
-
-        if (CheckGame())
-        {
-            StopCoroutine(PlayerAction());
-        }
-        else
-        {
-            turn++;
-            Debug.Log("Turn : " + turn);
-            if (turn > 3) CardClick.canClick = true;
-            StartGame();
-        }
+        turn++;
+        Debug.Log("Turn : " + turn);
+        if (turn > 3) CardClick.canClick = true;
+        StartGame();
 
     }
 
