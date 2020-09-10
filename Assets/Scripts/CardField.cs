@@ -7,7 +7,7 @@ public class CardField : MonoBehaviour
     public RectTransform[] cardPos;
     public float width;//폭
     public float height;//너비
-    public List<Card> list;
+    public List<Card> cardList;
     public RectTransform[] playerHandlerPos;
     public Queue<Card> playerHandler;
     public RectTransform[] enemyHandlerPos;
@@ -16,7 +16,7 @@ public class CardField : MonoBehaviour
 
     private void Awake()
     {
-        list = new List<Card>();
+        cardList = new List<Card>();
         playerHandler = new Queue<Card>(playerHandlerPos.Length);
         enemyHandler = new Queue<Card>(enemyHandlerPos.Length);
     }
@@ -39,12 +39,28 @@ public class CardField : MonoBehaviour
         SetCard();
     }
 
+    public void AddCard(Card card)
+    {
+        int i;
+        CardComponent cc = null;
+        for (i=0; i<cardPos.Length; i++)
+        {
+            cc = cardPos[i].GetComponent<CardComponent>();
+            if (cc.card == null)
+            {
+                cardList.Insert(i, card);
+                break;
+            }
+        }
+        cc.SetCard(card);
+    }
+
     public void UpdateCardPos()
     {
         for(int i=0; i<cardPos.Length; i++)
         {
-            if (i < list.Count)
-                cardPos[i].GetComponent<CardComponent>().SetCard(list[i]);
+            if (i < cardList.Count)
+                cardPos[i].GetComponent<CardComponent>().SetCard(cardList[i]);
             else
                 cardPos[i].GetComponent<CardComponent>().DeleteCard();
         }
@@ -80,7 +96,7 @@ public class CardField : MonoBehaviour
             AttackCard card = new AttackCard(TBL_ATTACK_CARD.GetEntity(random));
             if (!CheckDuplicate(card))
             {
-                list.Add(card);
+                cardList.Add(card);
                 startCount--;
             }
         }
@@ -92,7 +108,7 @@ public class CardField : MonoBehaviour
             EnergyCard card = new EnergyCard(TBL_ENERGY_CARD.GetEntity(random));
             if (!CheckDuplicate(card))
             {
-                list.Add(card);
+                cardList.Add(card);
                 startCount--;
             }
         }
@@ -104,7 +120,7 @@ public class CardField : MonoBehaviour
             GuardCard card = new GuardCard(TBL_GUARD_CARD.GetEntity(random));
             if (!CheckDuplicate(card))
             {
-                list.Add(card);
+                cardList.Add(card);
                 startCount--;
             }
         }
@@ -116,7 +132,7 @@ public class CardField : MonoBehaviour
             HealCard card = new HealCard(TBL_HEAL_CARD.GetEntity(random));
             if (!CheckDuplicate(card))
             {
-                list.Add(card);
+                cardList.Add(card);
                 startCount--;
             }
         }
@@ -128,14 +144,14 @@ public class CardField : MonoBehaviour
             MoveCard card = new MoveCard(TBL_MOVE_CARD.GetEntity(random));
             if (!CheckDuplicate(card))
             {
-                list.Add(card);
+                cardList.Add(card);
                 startCount--;
             }
         }
         
         
 
-        Shuffle(list);
+        Shuffle(cardList);
 
         //for(int i=0; i<list.Count; i++)
         //{
@@ -148,7 +164,7 @@ public class CardField : MonoBehaviour
 
     private bool CheckDuplicate(Card target)
     {
-        foreach(Card card in list)
+        foreach(Card card in cardList)
         {
             if (card.cardName.Equals(target.cardName)) return true;
         }
