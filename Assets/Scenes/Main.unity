@@ -2507,7 +2507,7 @@ MonoBehaviour:
   coolDown: {fileID: 1528370809}
   PlayerCharID: 0
   EnemyCharID: 1
-  interval: 0
+  interval: 3
 --- !u!4 &1040139580
 Transform:
   m_ObjectHideFlags: 0

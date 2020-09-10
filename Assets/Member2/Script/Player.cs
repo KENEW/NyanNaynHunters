@@ -51,6 +51,18 @@ public class Player : MonoBehaviour
 
 	[Header("스켈레톤 에니메이션")] public SkeletonAnimation m_SkeletonAnimation;
 	
+	protected virtual void Awake()
+    {
+		hp = TBL_GAME_SETTING.GetEntity(0).PlayerStartHP;
+		sp = TBL_GAME_SETTING.GetEntity(0).PlayerStartEnergy;
+
+		hpSlider.maxValue = hp;
+		hpSlider.value = hp;
+		spSlider.maxValue = sp;
+		spSlider.value = sp;
+
+	}
+
 	protected virtual void Start()
 	{
 		mMoveRect = FindObjectOfType<MoveRect>();
@@ -60,9 +72,14 @@ public class Player : MonoBehaviour
 
 		startPos = transform.position;//new Vector2(-1.65f, 0.26f);
 	}
-	
-	
-	public void SetTilePosition(Vector2 newTilePosition, bool xMove)
+
+    private void Update()
+    {
+		Debug.Log(name + " " + m_TilePosition);
+    }
+
+
+    public void SetTilePosition(Vector2 newTilePosition, bool xMove)
 	{
 		m_PrevTilePosition = m_TilePosition;
 		m_TilePosition = newTilePosition;
@@ -109,7 +126,7 @@ public class Player : MonoBehaviour
 
 	public void UseCard(Card card)
     {
-		if (card is AttackCard) UseAttackCard(card.cardName);
+		if (card is AttackCard) UseAttackCard(((AttackCard)card));
 		else if (card is EnergyCard) UseEnergyCard(card.cardName);
 		else if (card is GuardCard) UseGuardCard(card.cardName);
 		else if (card is HealCard) UseHealCard(card.cardName);
@@ -117,32 +134,100 @@ public class Player : MonoBehaviour
 		Debug.Log(name+" Use card");
     }
 	
-	public void UseAttackCard(string name)
+	private void UseAttackCard(AttackCard card)
 	{
-		int index = TBL_ATTACK_CARD.CountEntities;
-		while (--index >= 0)
+
+		Player target;
+		if (playerType == PlayerType.User)
+			target = PlayerManager.Instance.Enemy;
+		else
+			target = PlayerManager.Instance.Player;
+
+        if (InTarget(card.positions, target.tilePosition)) //명중하면 true, 빗나가면 false
+        {
+			target.AddHP(-card.damage);
+        }
+
+		AddSP(-card.energyCost);
+	}
+
+	private bool InTarget(List<int> list, Vector2 targetPosition)
+    {
+		bool inp = false;
+
+		for (int i=0; i<list.Count; i++)
+        {
+			Vector2 tilePosition = GetPosition(list[i]);
+			if(tilePosition == targetPosition) //스킬범위 안
+            {
+				inp = true;
+            }
+        }
+		return inp;
+    }
+
+	private Vector2 GetPosition(int pos)
+    {
+		// 스테이지: N(x, y)
+		//  0(0,0)   1(0, 1)   2(0, 2)    3(0, 3)
+		//  4(1,0)   5(1, 1)   6(1, 2)    7(1, 3)
+		//  8(2,0)   9(2, 1)  10(2, 2)   11(2, 3)
+		// 12(3,0)  13(3, 1)  14(3, 2)   15(3, 3)
+
+
+		// 타일 범위
+		// 0  1  2
+		// 3  4  5
+		// 6  7  8
+
+		var playerTilePosition = m_TilePosition;
+
+		Vector2 selectedTile = Vector2.zero;
+		switch (pos)
 		{
-			if (TBL_ATTACK_CARD.GetEntity(index).name.Equals(name)) break;
+			case 0:
+				selectedTile.x = playerTilePosition.x - 1;
+				selectedTile.y = playerTilePosition.y - 1;
+				break;
+
+			case 1:
+				selectedTile.x = playerTilePosition.x;
+				selectedTile.y = playerTilePosition.y - 1;
+				break;
+			case 2:
+				selectedTile.x = playerTilePosition.x + 1;
+				selectedTile.y = playerTilePosition.y - 1;
+				break;
+			case 3:
+				selectedTile.x = playerTilePosition.x - 1;
+				selectedTile.y = playerTilePosition.y;
+				break;
+
+			case 4:
+				selectedTile.x = playerTilePosition.x;
+				selectedTile.y = playerTilePosition.y;
+				break;
+			case 5:
+				selectedTile.x = playerTilePosition.x + 1;
+				selectedTile.y = playerTilePosition.y;
+				break;
+			case 6:
+				selectedTile.x = playerTilePosition.x - 1;
+				selectedTile.y = playerTilePosition.y + 1;
+				break;
+
+			case 7:
+				selectedTile.x = playerTilePosition.x;
+				selectedTile.y = playerTilePosition.y + 1;
+				break;
+			case 8:
+				selectedTile.x = playerTilePosition.x + 1;
+				selectedTile.y = playerTilePosition.y + 1;
+				break;
+
 		}
 
-		AttackCard card;
-		if (index >= 0)
-		{
-			card = new AttackCard(TBL_ATTACK_CARD.GetEntity(index));
-			for (int i = 0; i < card.positions.Count; i++)
-			{
-				Vector2 me = new Vector2(mMoveRect.playerPos[playerNum, 0], mMoveRect.playerPos[playerNum, 1]);
-				Vector2 enemyPos = new Vector2(mMoveRect.playerPos[playerNum == 0 ? 1 : 0, 0], mMoveRect.playerPos[playerNum == 0 ? 1 : 0, 1]);
-				Vector2 v = GetPositionOfNumber(card.positions[i]);
-				Vector2 pos = me + v;
-
-                if (pos == enemyPos)
-                {
-					target.AddHP(-card.damage);
-					AddSP(-card.energyCost);
-                }
-			}
-		}
+		return selectedTile;
 	}
 
 	private void AddHP(int value)
@@ -157,33 +242,18 @@ public class Player : MonoBehaviour
 		spSlider.value = sp;
     }
 
-	private Vector2 GetPositionOfNumber(int n)
-	{
-		Vector2 v;
-		if (n == 0)		 v = new Vector2(-1f, 1f);
-		else if (n == 1) v = new Vector2(0f, 1f);
-		else if (n == 2) v = new Vector2(1f, 1f);
-		else if (n == 3) v = new Vector2(-1f, 0f);
-		else if (n == 4) v = new Vector2(0f, 0f);
-		else if (n == 5) v = new Vector2(1f, 0f);
-		else if (n == 6) v = new Vector2(-1f, -1f);
-		else if (n == 7) v = new Vector2(0f, -1f);
-		else if (n == 8) v = new Vector2(1f, -1f);
-		else v = new Vector2(2f, 2f);
-		return v;
-	}
 
-	public void UseEnergyCard(string name)
+	private void UseEnergyCard(string name)
     {
 
     }
 
-	public void UseGuardCard(string name)
+	private void UseGuardCard(string name)
     {
 
     }
 
-	public void UseHealCard(string name)
+	private void UseHealCard(string name)
     {
 
     }

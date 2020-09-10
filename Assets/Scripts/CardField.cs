@@ -23,14 +23,16 @@ public class CardField : MonoBehaviour
 
     private void Start()
     {
-        playerHandler.Enqueue(new MoveCard(TBL_MOVE_CARD.GetEntity(2)));
-        playerHandler.Enqueue(new MoveCard(TBL_MOVE_CARD.GetEntity(3)));
-        playerHandler.Enqueue(new MoveCard(TBL_MOVE_CARD.GetEntity(2)));
+        //테스트용
+        playerHandler.Enqueue(new MoveCard(TBL_MOVE_CARD.GetEntity(1)));
+        playerHandler.Enqueue(new MoveCard(TBL_MOVE_CARD.GetEntity(1)));
+        playerHandler.Enqueue(new AttackCard(TBL_ATTACK_CARD.GetEntity(1)));
 
 
         enemyHandler.Enqueue(new MoveCard(TBL_MOVE_CARD.GetEntity(3)));
         enemyHandler.Enqueue(new MoveCard(TBL_MOVE_CARD.GetEntity(2)));
         enemyHandler.Enqueue(new MoveCard(TBL_MOVE_CARD.GetEntity(3)));
+        //////////
 
         UpdateHandler();
 
