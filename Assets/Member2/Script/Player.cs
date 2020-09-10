@@ -146,7 +146,7 @@ public class Player : MonoBehaviour
 
 	public float UseCard(Card card)
     {
-		if (card is AttackCard) return UseAttackCard(((AttackCard)card));
+	    if (card is AttackCard) return UseAttackCard(((AttackCard)card));
 		else if (card is EnergyCard) return UseEnergyCard(((EnergyCard)card));
 		else if (card is GuardCard) return UseGuardCard(((GuardCard)card));
 		else if (card is HealCard) return UseHealCard(((HealCard)card));
