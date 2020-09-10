@@ -11,8 +11,10 @@ using Slider = UnityEngine.UI.Slider;
 
 public class Player : MonoBehaviour
 {
-	protected int hp = 100;
-	protected int sp = 100;
+	public int MaxHP;
+	public int HP;
+	public int MaxEnergy;
+	public int Energy;
 	
 	private Vector2 m_TilePosition;
 	public Vector2 tilePosition => m_TilePosition;
@@ -37,57 +39,44 @@ public class Player : MonoBehaviour
 		guard = 0;
 
 	}
-
-	private void Start()
-	{
-		InitStat();
-	}
+	
 
 	public void InitStat()
 	{
 		if (isPlayer)
 		{
-			hp = TBL_GAME_SETTING.GetEntity(0).PlayerStartHP;
-			sp = TBL_GAME_SETTING.GetEntity(0).PlayerStartEnergy;
+			
+			HP = GameSetting.PlayerStartHP;
+			MaxHP = HP;
+			Energy = GameSetting.PlayerStartEnergy;
+			MaxEnergy = Energy;
 		}
 		else
 		{
-			hp = TBL_STAGE.GetEntity(0).EnemyHP;
-			sp = TBL_STAGE.GetEntity(0).EnemyEnergy;
+			HP = TBL_STAGE.GetEntity(0).EnemyHP;
+			MaxHP = HP;
+			Energy = TBL_STAGE.GetEntity(0).EnemyEnergy;
+			MaxEnergy = Energy;
 		}
 		
-		SetSliderValue(true);
+		SetSliderValue();
 	}
 	
-	public void SetSliderValue(bool isFirst = false)
+	public void SetSliderValue()
 	{
 		if (isPlayer)
 		{
-			if (isFirst)
-			{
-				SliderManager.Instance.PlayerHPSlider.maxValue = hp;
-				SliderManager.Instance.PlayerHPSlider.value = hp;
-				SliderManager.Instance.PlayerSPSlider.maxValue = sp;
-				SliderManager.Instance.PlayerSPSlider.value = sp;
-
-			}
-			SliderManager.Instance.PlayerHPSlider.maxValue = hp;
-			SliderManager.Instance.PlayerHPSlider.value = hp;
-			SliderManager.Instance.PlayerSPSlider.maxValue = sp;
-			SliderManager.Instance.PlayerSPSlider.value = sp;
+			SliderManager.Instance.PlayerHPSlider.maxValue = MaxHP;
+			SliderManager.Instance.PlayerEnergySlider.maxValue = MaxEnergy;
+			SliderManager.Instance.PlayerHPSlider.value = HP;
+			SliderManager.Instance.PlayerEnergySlider.value = Energy;
 		}
 		else
 		{
-			if (isFirst)
-			{
-				SliderManager.Instance.EnemyHPSlider.maxValue = hp;
-				SliderManager.Instance.EnemySPSlider.maxValue = sp;
-
-			}
-			SliderManager.Instance.EnemyHPSlider.maxValue = hp;
-			SliderManager.Instance.EnemyHPSlider.value = hp;
-			SliderManager.Instance.EnemySPSlider.maxValue = sp;
-			SliderManager.Instance.EnemySPSlider.value = sp;
+			SliderManager.Instance.EnemyHPSlider.maxValue = MaxHP;
+			SliderManager.Instance.EnemyEnergySlider.maxValue = MaxEnergy;
+			SliderManager.Instance.EnemyHPSlider.value = HP;
+			SliderManager.Instance.EnemyEnergySlider.value = Energy;
 		}
 		
 
@@ -146,12 +135,12 @@ public class Player : MonoBehaviour
 
 	public int GetHP()
 	{
-		return hp;
+		return HP;
 	}
 
 	public int GetSP()
 	{
-		return sp;
+		return Energy;
 	}
 
 
@@ -194,9 +183,9 @@ public class Player : MonoBehaviour
 
 
 		// 타일 범위
-		// 0  1  2
-		// 3  4  5
-		// 6  7  8
+		// 0(-1,-1)  1(-1,0)  2(-1,1)
+		// 3(0, -1)  4(0,0)   5(0,1)
+		// 6(1, -1)  7(1,0)   8(1,1)
 
 		var playerTilePosition = m_TilePosition;
 
@@ -209,16 +198,16 @@ public class Player : MonoBehaviour
 				break;
 
 			case 1:
-				selectedTile.x = playerTilePosition.x;
-				selectedTile.y = playerTilePosition.y - 1;
-				break;
-			case 2:
-				selectedTile.x = playerTilePosition.x + 1;
-				selectedTile.y = playerTilePosition.y - 1;
-				break;
-			case 3:
 				selectedTile.x = playerTilePosition.x - 1;
 				selectedTile.y = playerTilePosition.y;
+				break;
+			case 2:
+				selectedTile.x = playerTilePosition.x - 1;
+				selectedTile.y = playerTilePosition.y + 1;
+				break;
+			case 3:
+				selectedTile.x = playerTilePosition.x;
+				selectedTile.y = playerTilePosition.y -1;
 				break;
 
 			case 4:
@@ -226,17 +215,17 @@ public class Player : MonoBehaviour
 				selectedTile.y = playerTilePosition.y;
 				break;
 			case 5:
-				selectedTile.x = playerTilePosition.x + 1;
-				selectedTile.y = playerTilePosition.y;
+				selectedTile.x = playerTilePosition.x;
+				selectedTile.y = playerTilePosition.y + 1;
 				break;
 			case 6:
-				selectedTile.x = playerTilePosition.x - 1;
-				selectedTile.y = playerTilePosition.y + 1;
+				selectedTile.x = playerTilePosition.x + 1;
+				selectedTile.y = playerTilePosition.y - 1;
 				break;
 
 			case 7:
-				selectedTile.x = playerTilePosition.x;
-				selectedTile.y = playerTilePosition.y + 1;
+				selectedTile.x = playerTilePosition.x + 1;
+				selectedTile.y = playerTilePosition.y;
 				break;
 			case 8:
 				selectedTile.x = playerTilePosition.x + 1;
@@ -255,13 +244,14 @@ public class Player : MonoBehaviour
 			value += guard;
 			if (value > 0) value = 0;
         }
-		hp += value;
+        
+		HP = Math.Min(HP + value, MaxHP);
 		SetSliderValue();
     }
 
-	private void AddSP(int value)
+	private void AddEnergy(int value)
     {
-		sp += value;
+		Energy = Math.Min(Energy + value, MaxEnergy);
 		SetSliderValue();
     }
 
@@ -269,6 +259,8 @@ public class Player : MonoBehaviour
 	// 공격 카드 사용
 	private float UseAttackCard(AttackCard card)
 	{
+		guard = 0;
+		
 		string randomAttackAnimationName = Random.Range(0, 2) == 0 ? "Attack1" : "Attack2";
 		var animationTime = m_SkeletonAnimation.Skeleton.Data.FindAnimation(randomAttackAnimationName).Duration;
 		
@@ -302,13 +294,15 @@ public class Player : MonoBehaviour
 			target.TakeHitAnimation();
 		}
 
-		AddSP(-card.energyCost);
+		AddEnergy(-card.energyCost);
 	}
 	
 	// 에너지 카드 사용
 	private float UseEnergyCard(EnergyCard card)
     {
-		AddSP(card.energyIncrease);
+	    guard = 0;
+
+		AddEnergy(card.energyIncrease);
 
 		return GameSetting.EnergyCardTime;
     }
@@ -324,8 +318,10 @@ public class Player : MonoBehaviour
 	// 힐 카드 사용
 	private float UseHealCard(HealCard card)
     {
+	    guard = 0;
+
 		AddHP(card.HPIncrease);
-		AddSP(card.energyCost);
+		AddEnergy(card.energyCost);
 
 		return GameSetting.HealCardTime;
     }
@@ -333,6 +329,8 @@ public class Player : MonoBehaviour
 	// 무브 카드 사용
 	public float UseMoveCard(MoveCard cardData)
 	{
+		guard = 0;
+
 		Vector2 newPosition;
 		
 		switch (cardData.moveType)

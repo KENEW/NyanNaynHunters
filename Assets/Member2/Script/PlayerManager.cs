@@ -28,6 +28,7 @@ public class PlayerManager : MonoSingleton<PlayerManager>
     {
         Player = m_Playsers[index];
         Player.isPlayer = true;
+        Player.InitStat();
         m_UsedPlayers.Add(Player);
     }
 
@@ -45,6 +46,7 @@ public class PlayerManager : MonoSingleton<PlayerManager>
             }
 
             Enemy = m_Playsers[randomIndex];
+            Enemy.InitStat();
             m_UsedPlayers.Add(Enemy);
             break;
         }
