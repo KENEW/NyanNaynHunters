@@ -126,14 +126,16 @@ public class Player : MonoBehaviour
 	}
 
 
-	public void UseCard(Card card)
+	public float UseCard(Card card)
     {
-		if (card is AttackCard) UseAttackCard(((AttackCard)card));
-		else if (card is EnergyCard) UseEnergyCard(((EnergyCard)card));
-		else if (card is GuardCard) UseGuardCard(((GuardCard)card));
-		else if (card is HealCard) UseHealCard(((HealCard)card));
-		else if (card is MoveCard) UseMoveCard(((MoveCard)card));
+		if (card is AttackCard) return UseAttackCard(((AttackCard)card));
+		else if (card is EnergyCard) return UseEnergyCard(((EnergyCard)card));
+		else if (card is GuardCard) return UseGuardCard(((GuardCard)card));
+		else if (card is HealCard) return UseHealCard(((HealCard)card));
+		else if (card is MoveCard) return UseMoveCard(((MoveCard)card));
 		Debug.Log(name+" Use card");
+
+		return 1f;
     }
 	
 
@@ -236,7 +238,7 @@ public class Player : MonoBehaviour
 
 
 	// 공격 카드 사용
-	private void UseAttackCard(AttackCard card)
+	private float UseAttackCard(AttackCard card)
 	{
 		string randomAttackAnimationName = Random.Range(0, 2) == 0 ? "Attack1" : "Attack2";
 		var animationTime = m_SkeletonAnimation.Skeleton.Data.FindAnimation(randomAttackAnimationName).Duration;
@@ -246,11 +248,13 @@ public class Player : MonoBehaviour
 			var tilePosition = GetPosition(posIndex);
 			TileManager.Instance.SetColor(tilePosition, animationTime * 1.2f);
 		}
-
 		
 		m_SkeletonAnimation.AnimationState.SetAnimation(0, randomAttackAnimationName, false);
 		
+		
 		StartCoroutine(  UseAttackCard_Coroutine(card, animationTime));
+
+		return GameSetting.AttackCardTime;
 	}
 
 	private IEnumerator UseAttackCard_Coroutine(AttackCard card, float time)
@@ -275,26 +279,32 @@ public class Player : MonoBehaviour
 	}
 	
 	// 에너지 카드 사용
-	private void UseEnergyCard(EnergyCard card)
+	private float UseEnergyCard(EnergyCard card)
     {
 		AddSP(card.energyIncrease);
+
+		return GameSetting.EnergyCardTime;
     }
 
 	// 가드 카드 사용
-	private void UseGuardCard(GuardCard card)
+	private float UseGuardCard(GuardCard card)
     {
 		guard = card.damageReduction;
+
+		return GameSetting.GuardCardTime;
     }
 	
 	// 힐 카드 사용
-	private void UseHealCard(HealCard card)
+	private float UseHealCard(HealCard card)
     {
 		AddHP(card.HPIncrease);
 		AddSP(card.energyCost);
+
+		return GameSetting.HealCardTime;
     }
 
 	// 무브 카드 사용
-	public void UseMoveCard(MoveCard cardData)
+	public float UseMoveCard(MoveCard cardData)
 	{
 		Vector2 newPosition;
 		
@@ -332,6 +342,8 @@ public class Player : MonoBehaviour
 				}
 				break;
 		}
+
+		return GameSetting.MoveCardTime;
 	}
 	
 	private void TakeHitAnimation()

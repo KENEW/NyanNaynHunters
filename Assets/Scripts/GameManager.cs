@@ -19,7 +19,7 @@ public class GameManager : MonoSingleton<GameManager>
     public int EnemyCharID = 1;
 
     public float interval;//한사람 액션 후 다른사람이 액션하기까지 걸리는 시간
-    private bool sequence;//누가먼저할건지에 대한 변수, true : 플레이어, false : 적
+    private bool IsPlayerFirst;//누가먼저할건지에 대한 변수, true : 플레이어, false : 적
 
 
     private int turn;//한 라운드에 카드사용횟수에 대한 변수, 3회 다 사용하면 1로 리셋
@@ -58,13 +58,13 @@ public class GameManager : MonoSingleton<GameManager>
             int enemyPriority = GetPriority(enemyCard);
 
             if (playerCard is GuardCard && enemyCard is AttackCard)
-                sequence = true; //player선
+                IsPlayerFirst = true; //player선
             else if (enemyCard is GuardCard && playerCard is AttackCard)
-                sequence = false; //enemy선
+                IsPlayerFirst = false; //enemy선
             else if (playerPriority < enemyPriority)
-                sequence = true;
+                IsPlayerFirst = true;
             else if (playerPriority >= enemyPriority)
-                sequence = false;
+                IsPlayerFirst = false;
 
             if (turn >= 1 && turn <= 3)
                 StartCoroutine(PlayerAction());
@@ -97,51 +97,37 @@ public class GameManager : MonoSingleton<GameManager>
 
     IEnumerator PlayerAction()
     {
-        yield return new WaitForSeconds(1f);
-        Debug.Log("Action Start");
-        Debug.Log("Sequence" + sequence);
+        Card card;
 
-        Card playerCard;
+        float delayTime = 0f;
 
-        if (sequence == true)
-        {
-            playerCard = cardField.playerHandler.Dequeue();
-            PlayerManager.Instance.Player.UseCard(playerCard);
-        }
-        else
-        {
-            playerCard = cardField.enemyHandler.Dequeue();
-            PlayerManager.Instance.Enemy.UseCard(playerCard);
-        }
-            
+        var firstCharacter  = IsPlayerFirst ? PlayerManager.Instance.Player : PlayerManager.Instance.Enemy;
+        var secondCharacter = IsPlayerFirst ? PlayerManager.Instance.Enemy : PlayerManager.Instance.Player;
+
+        var firstCardHandler  = IsPlayerFirst ? cardField.playerHandler : cardField.enemyHandler;
+        var secondCardHandler = IsPlayerFirst ? cardField.enemyHandler : cardField.playerHandler;
+
+
+        card = firstCardHandler.Dequeue();
+        delayTime = firstCharacter.UseCard(card);
         cardField.UpdateHandler();
-
-        interval = GetInterval(playerCard);
-        if (interval == 0) Debug.LogError(playerCard);
-        yield return new WaitForSeconds(interval);
-
-        //몇초 뒤
-        Debug.Log("Sequence" + sequence);
-        if (sequence == true)
-        {
-            playerCard = cardField.enemyHandler.Dequeue();
-            PlayerManager.Instance.Enemy.UseCard(playerCard);
-        }
-        else
-        {
-            playerCard = cardField.playerHandler.Dequeue();
-            PlayerManager.Instance.Player.UseCard(playerCard);
-        }
+        yield return new WaitForSeconds(delayTime);
         
+        
+        
+        card = secondCardHandler.Dequeue();
+        delayTime = secondCharacter.UseCard(card);
         cardField.UpdateHandler();
-        interval = GetInterval(playerCard);
-        yield return new WaitForSeconds(interval);
+        yield return new WaitForSeconds(delayTime);
 
-        Debug.Log("Action end");
-
+        
         while (true)
         {
-            if (coolDown.GetSliderValue() <= 0f) break;
+            if (coolDown.GetSliderValue() <= 0f)
+            {
+                break;
+            }
+            
             yield return null;
         }
 
