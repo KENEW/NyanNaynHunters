@@ -321,7 +321,7 @@ public class Player : MonoBehaviour
 	    guard = 0;
 
 		AddHP(card.HPIncrease);
-		AddEnergy(card.energyCost);
+		AddEnergy(-card.energyCost);
 
 		return GameSetting.HealCardTime;
     }
