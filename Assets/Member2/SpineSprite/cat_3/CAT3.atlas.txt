@@ -1,0 +1,104 @@
+
+CAT3.png
+size: 251,266
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+body
+  rotate: false
+  xy: 71, 94
+  size: 99, 61
+  orig: 99, 61
+  offset: 0, 0
+  index: -1
+ear1
+  rotate: false
+  xy: 145, 35
+  size: 50, 57
+  orig: 50, 57
+  offset: 0, 0
+  index: -1
+ear2
+  rotate: false
+  xy: 172, 105
+  size: 35, 55
+  orig: 35, 55
+  offset: 0, 0
+  index: -1
+eye
+  rotate: true
+  xy: 223, 4
+  size: 43, 26
+  orig: 43, 26
+  offset: 0, 0
+  index: -1
+eye2
+  rotate: false
+  xy: 83, 3
+  size: 52, 22
+  orig: 52, 22
+  offset: 0, 0
+  index: -1
+hand1
+  rotate: false
+  xy: 197, 49
+  size: 52, 54
+  orig: 52, 54
+  offset: 0, 0
+  index: -1
+hand2
+  rotate: false
+  xy: 209, 124
+  size: 33, 36
+  orig: 33, 36
+  offset: 0, 0
+  index: -1
+hat
+  rotate: true
+  xy: 83, 27
+  size: 65, 60
+  orig: 65, 60
+  offset: 0, 0
+  index: -1
+hat2
+  rotate: true
+  xy: 2, 2
+  size: 89, 79
+  orig: 89, 79
+  offset: 0, 0
+  index: -1
+head
+  rotate: false
+  xy: 71, 157
+  size: 98, 107
+  orig: 98, 107
+  offset: 0, 0
+  index: -1
+leg1
+  rotate: true
+  xy: 184, 4
+  size: 29, 37
+  orig: 29, 37
+  offset: 0, 0
+  index: -1
+leg2
+  rotate: true
+  xy: 145, 3
+  size: 30, 37
+  orig: 30, 37
+  offset: 0, 0
+  index: -1
+tail
+  rotate: true
+  xy: 171, 162
+  size: 102, 69
+  orig: 102, 69
+  offset: 0, 0
+  index: -1
+waepone
+  rotate: false
+  xy: 2, 93
+  size: 67, 171
+  orig: 67, 171
+  offset: 0, 0
+  index: -1

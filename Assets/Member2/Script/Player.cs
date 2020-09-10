@@ -15,28 +15,8 @@ public enum PlayerType
 
 public class Player : MonoBehaviour
 {
-	MoveRect mMoveRect = null;
-
-	protected int playerNum = 0;
 	protected int hp = 100;
 	protected int sp = 100;
-
-	protected bool curFlip = false;
-
-	public float gapTile = 0.79f;
-
-	public Player target;
-
-	[SerializeField]
-	float PlayerSize = 0.4f;
-
-	Vector2 startPos = Vector2.zero;
-
-	Vector3 flipPosOn	= Vector3.zero;
-	Vector3 flipPosOff	= Vector3.zero;
-
-	private Vector2 m_PrevTilePosition;
-	public Vector2 prevTilePosition => m_PrevTilePosition;
 	
 	private Vector2 m_TilePosition;
 	public Vector2 tilePosition => m_TilePosition;
@@ -53,41 +33,32 @@ public class Player : MonoBehaviour
 
 	private int guard;
 
-	[Header("스켈레톤 에니메이션")] public SkeletonAnimation m_SkeletonAnimation;
+	private SkeletonAnimation m_SkeletonAnimation;
 	
 	protected virtual void Awake()
-    {
+	{
+		m_SkeletonAnimation = GetComponent<SkeletonAnimation>();
+		
 		hp = TBL_GAME_SETTING.GetEntity(0).PlayerStartHP;
 		sp = TBL_GAME_SETTING.GetEntity(0).PlayerStartEnergy;
 
-		hpSlider.maxValue = hp;
-		hpSlider.value = hp;
-		spSlider.maxValue = sp;
-		spSlider.value = sp;
+		//hpSlider.maxValue = hp;
+		//hpSlider.value = hp;
+		//spSlider.maxValue = sp;
+		//spSlider.value = sp;
 
 		guard = 0;
 
 	}
 
-	protected virtual void Start()
-	{
-		mMoveRect = FindObjectOfType<MoveRect>();
-
-		flipPosOn	= new Vector3(-PlayerSize, PlayerSize, 1);
-		flipPosOff  = new Vector3(PlayerSize, PlayerSize, 1);
-
-		startPos = transform.position;//new Vector2(-1.65f, 0.26f);
-	}
-
-    private void Update()
+	private void Update()
     {
-		Debug.Log(name + " " + m_TilePosition);
+		//Debug.Log(name + " " + m_TilePosition);
     }
 
 
     public void SetTilePosition(Vector2 newTilePosition, bool xMove)
 	{
-		m_PrevTilePosition = m_TilePosition;
 		m_TilePosition = newTilePosition;
 
 		PlayerManager.Instance.OnPlayerPositionChanged(xMove, playerType);

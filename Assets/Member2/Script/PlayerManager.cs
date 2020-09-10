@@ -8,13 +8,55 @@ public class PlayerManager : MonoSingleton<PlayerManager>
     private readonly Vector2 PlayerStartPosition = new Vector2(1, 0);
     private readonly Vector2 EnemeyStartPosition = new Vector2(1, 2);
 
+
+    public List<Player> m_Playsers;
+    private List<Player> m_UsedPlayers = new List<Player>(4);
+    
     public Player Player;
     public Player Enemy;
 
     [SerializeField] private float moveSpeed = 1.1f;
-    private void Start()
+    
+    private void Start()   // 요건 나중에 없앨 예정 
     {
+
+        SelectPlayerCharacter(0);
+        SelectRandomEnemyCharacter();
+        SetShowAndHide();
         InitPosition();
+    }
+
+    public void SelectPlayerCharacter(int index) // 0 ~ 3
+    {
+        Player = m_Playsers[index];
+        m_UsedPlayers.Add(Player);
+    }
+
+    public void SelectRandomEnemyCharacter()
+    {
+        if (m_UsedPlayers.Count >= m_Playsers.Count) return;
+        
+        while (true)
+        {
+            int randomIndex = Random.Range(0, m_Playsers.Count);
+
+            if (m_UsedPlayers.Contains(m_Playsers[randomIndex]))
+            {
+                continue;
+            }
+
+            Enemy = m_Playsers[randomIndex];
+            m_UsedPlayers.Add(Enemy);
+            break;
+        }
+    }
+
+    public void SetShowAndHide()
+    {
+        foreach (var player in m_Playsers)
+        {
+            player.gameObject.SetActive(player == Player || player == Enemy);
+        }
     }
 
     public void InitPosition()

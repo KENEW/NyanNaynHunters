@@ -12,7 +12,6 @@ public class GameManager : MonoSingleton<GameManager>
     //    playerEnergyBar,
     //    enemyHealthBar,
     //    enemyEnergyBar;
-    public Player player,enemy;
     public CardField cardField;
     public CoolDown coolDown;
 
@@ -70,19 +69,21 @@ public class GameManager : MonoSingleton<GameManager>
         Debug.Log("Action Start");
         Debug.Log("Sequence" + sequence);
         if (sequence == true)
-            player.UseCard(cardField.playerHandler.Dequeue());
+            PlayerManager.Instance.Player.UseCard(cardField.playerHandler.Dequeue());
         else
-            enemy.UseCard(cardField.enemyHandler.Dequeue());
+            PlayerManager.Instance.Enemy.UseCard(cardField.enemyHandler.Dequeue());
         cardField.UpdateHandler();
 
+        // 위쪾에서 플레이어 이동카드를 사용했따
+        
         yield return new WaitForSeconds(interval);
 
         //몇초 뒤
         Debug.Log("Sequence" + sequence);
         if (sequence == true)
-            enemy.UseCard(cardField.enemyHandler.Dequeue());
+            PlayerManager.Instance.Enemy.UseCard(cardField.enemyHandler.Dequeue());
         else
-            player.UseCard(cardField.playerHandler.Dequeue());
+            PlayerManager.Instance.Player.UseCard(cardField.playerHandler.Dequeue());
         cardField.UpdateHandler();
         Debug.Log("Action end");
         while (true)

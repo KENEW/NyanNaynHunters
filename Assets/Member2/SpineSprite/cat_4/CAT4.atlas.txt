@@ -1,0 +1,83 @@
+
+CAT4.png
+size: 366,142
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+body
+  rotate: false
+  xy: 262, 4
+  size: 53, 53
+  orig: 53, 53
+  offset: 0, 0
+  index: -1
+ear1
+  rotate: false
+  xy: 192, 57
+  size: 66, 83
+  orig: 66, 83
+  offset: 0, 0
+  index: -1
+ear2
+  rotate: false
+  xy: 260, 59
+  size: 45, 81
+  orig: 45, 81
+  offset: 0, 0
+  index: -1
+eye
+  rotate: false
+  xy: 77, 2
+  size: 43, 23
+  orig: 43, 23
+  offset: 0, 0
+  index: -1
+eye2
+  rotate: false
+  xy: 122, 5
+  size: 53, 20
+  orig: 53, 20
+  offset: 0, 0
+  index: -1
+hand1
+  rotate: false
+  xy: 307, 71
+  size: 57, 69
+  orig: 57, 69
+  offset: 0, 0
+  index: -1
+hand2
+  rotate: true
+  xy: 192, 2
+  size: 53, 68
+  orig: 53, 68
+  offset: 0, 0
+  index: -1
+head
+  rotate: false
+  xy: 77, 27
+  size: 113, 113
+  orig: 113, 113
+  offset: 0, 0
+  index: -1
+leg1
+  rotate: true
+  xy: 317, 40
+  size: 29, 39
+  orig: 29, 39
+  offset: 0, 0
+  index: -1
+leg2
+  rotate: false
+  xy: 317, 3
+  size: 29, 35
+  orig: 29, 35
+  offset: 0, 0
+  index: -1
+tail
+  rotate: true
+  xy: 2, 21
+  size: 119, 73
+  orig: 120, 73
+  offset: 1, 0
+  index: -1
