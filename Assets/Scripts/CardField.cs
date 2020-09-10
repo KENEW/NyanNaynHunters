@@ -20,14 +20,14 @@ public class CardField : MonoBehaviour
         playerHandler = new Queue<Card>(playerHandlerPos.Length);
         enemyHandler = new Queue<Card>(enemyHandlerPos.Length);
 
-        playerHandler.Enqueue(new MoveCard(TBL_MOVE_CARD.GetEntity(1)));
-        playerHandler.Enqueue(new MoveCard(TBL_MOVE_CARD.GetEntity(1)));
-        playerHandler.Enqueue(new AttackCard(TBL_ATTACK_CARD.GetEntity(1)));
+        playerHandler.Enqueue(CardManager.Instance.GetRandomCard());
+        playerHandler.Enqueue(CardManager.Instance.GetRandomCard());
+        playerHandler.Enqueue(CardManager.Instance.GetRandomCard());
 
 
-        enemyHandler.Enqueue(new MoveCard(TBL_MOVE_CARD.GetEntity(3)));
-        enemyHandler.Enqueue(new MoveCard(TBL_MOVE_CARD.GetEntity(2)));
-        enemyHandler.Enqueue(new MoveCard(TBL_MOVE_CARD.GetEntity(3)));
+        enemyHandler.Enqueue(CardManager.Instance.GetRandomCard());
+        enemyHandler.Enqueue(CardManager.Instance.GetRandomCard());
+        enemyHandler.Enqueue(CardManager.Instance.GetRandomCard());
     }
 
     private void Start()
