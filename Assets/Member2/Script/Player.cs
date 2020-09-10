@@ -79,11 +79,6 @@ public class Player : MonoBehaviour
 		startPos = transform.position;//new Vector2(-1.65f, 0.26f);
 	}
 
-    private void Update()
-    {
-		Debug.Log(name + " " + m_TilePosition);
-    }
-
 
     public void SetTilePosition(Vector2 newTilePosition, bool xMove)
 	{
@@ -140,22 +135,7 @@ public class Player : MonoBehaviour
 		Debug.Log(name+" Use card");
     }
 	
-	private void UseAttackCard(AttackCard card)
-	{
 
-		Player target;
-		if (playerType == PlayerType.User)
-			target = PlayerManager.Instance.Enemy;
-		else
-			target = PlayerManager.Instance.Player;
-
-        if (InTarget(card.positions, target.tilePosition)) //명중하면 true, 빗나가면 false
-        {
-			target.AddHP(-card.damage);
-        }
-
-		AddSP(-card.energyCost);
-	}
 
 	private bool InTarget(List<int> list, Vector2 targetPosition)
     {
@@ -254,22 +234,44 @@ public class Player : MonoBehaviour
     }
 
 
+	// 공격 카드 사용
+	private void UseAttackCard(AttackCard card)
+	{
+
+		Player target;
+		if (playerType == PlayerType.User)
+			target = PlayerManager.Instance.Enemy;
+		else
+			target = PlayerManager.Instance.Player;
+
+		if (InTarget(card.positions, target.tilePosition)) //명중하면 true, 빗나가면 false
+		{
+			target.AddHP(-card.damage);
+		}
+
+		AddSP(-card.energyCost);
+	}
+	
+	// 에너지 카드 사용
 	private void UseEnergyCard(EnergyCard card)
     {
 		AddSP(card.energyIncrease);
     }
 
+	// 가드 카드 사용
 	private void UseGuardCard(GuardCard card)
     {
 		guard = card.damageReduction;
     }
-
+	
+	// 힐 카드 사용
 	private void UseHealCard(HealCard card)
     {
 		AddHP(card.HPIncrease);
 		AddSP(card.energyCost);
     }
 
+	// 무브 카드 사용
 	public void UseMoveCard(MoveCard cardData)
 	{
 		Vector2 newPosition;

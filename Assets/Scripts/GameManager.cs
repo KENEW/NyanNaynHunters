@@ -61,7 +61,7 @@ public class GameManager : MonoSingleton<GameManager>
         else if(playerPriority >= enemyPriority)
             sequence = false;
 
-        StartCoroutine("PlayerAction");
+        StartCoroutine(PlayerAction());
     }
 
     IEnumerator PlayerAction()
@@ -69,12 +69,23 @@ public class GameManager : MonoSingleton<GameManager>
         yield return new WaitForSeconds(1f);
         Debug.Log("Action Start");
         Debug.Log("Sequence" + sequence);
+
+        Card playerCard;
+
         if (sequence == true)
-            player.UseCard(cardField.playerHandler.Dequeue());
+        {
+            playerCard = cardField.playerHandler.Dequeue();
+            player.UseCard(playerCard);
+        }
         else
-            enemy.UseCard(cardField.enemyHandler.Dequeue());
+        {
+            playerCard = cardField.enemyHandler.Dequeue();
+            enemy.UseCard(playerCard);
+        }
+            
         cardField.UpdateHandler();
 
+        interval = GetInterval(playerCard);
         yield return new WaitForSeconds(interval);
 
         //몇초 뒤
@@ -85,13 +96,46 @@ public class GameManager : MonoSingleton<GameManager>
             player.UseCard(cardField.playerHandler.Dequeue());
         cardField.UpdateHandler();
         Debug.Log("Action end");
+
         while (true)
         {
             if (coolDown.GetSliderValue() <= 0f) break;
             yield return new WaitForSeconds(1f);
         }
-        StartGame();
 
+        if (CheckGame())
+        {
+            StopCoroutine("PlayerAction");
+        }
+        else
+        {
+            StartGame();
+        }
+
+    }
+
+    private float GetInterval(Card card)
+    {
+        float interval = 0;
+        if (card is AttackCard) interval = TBL_GAME_SETTING.GetEntity(0).AttackCardTime;
+        else if (card is EnergyCard) interval = TBL_GAME_SETTING.GetEntity(0).EnergyCardTime;
+        else if (card is GuardCard) interval = TBL_GAME_SETTING.GetEntity(0).GuardCardTime;
+        else if (card is HealCard) interval = TBL_GAME_SETTING.GetEntity(0).HealCardTime;
+        else if (card is MoveCard) interval = TBL_GAME_SETTING.GetEntity(0).MoveCardTime;
+        return interval;
+    }
+
+    private bool CheckGame()
+    {
+        bool b = true;
+        int playerHP = PlayerManager.Instance.Player.GetHP();
+        int enemyHP = PlayerManager.Instance.Enemy.GetHP();
+        if (playerHP == 0 && enemyHP == 0) Debug.Log("Drawwwwwwww");
+        else if (playerHP == 0) Debug.Log("Losssssssssse");
+        else if (enemyHP == 0) Debug.Log("Winnnnnnnnnnn");
+        else b = false;
+
+        return b;
     }
 
     private int GetPriority(Card card)

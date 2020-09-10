@@ -1653,6 +1653,61 @@ using BansheeGz.BGDatabase;
 					_CardSelectTime[Index] = value;
 				}
 			}
+			public System.Single MoveCardTime
+			{
+				get
+				{
+					return _MoveCardTime[Index];
+				}
+				set
+				{
+					_MoveCardTime[Index] = value;
+				}
+			}
+			public System.Single AttackCardTime
+			{
+				get
+				{
+					return _AttackCardTime[Index];
+				}
+				set
+				{
+					_AttackCardTime[Index] = value;
+				}
+			}
+			public System.Single GuardCardTime
+			{
+				get
+				{
+					return _GuardCardTime[Index];
+				}
+				set
+				{
+					_GuardCardTime[Index] = value;
+				}
+			}
+			public System.Single HealCardTime
+			{
+				get
+				{
+					return _HealCardTime[Index];
+				}
+				set
+				{
+					_HealCardTime[Index] = value;
+				}
+			}
+			public System.Single EnergyCardTime
+			{
+				get
+				{
+					return _EnergyCardTime[Index];
+				}
+				set
+				{
+					_EnergyCardTime[Index] = value;
+				}
+			}
 			private static BansheeGz.BGDatabase.BGFieldEntityName _ufle12jhs77_name;
 			public static BansheeGz.BGDatabase.BGFieldEntityName _name
 			{
@@ -1687,6 +1742,51 @@ using BansheeGz.BGDatabase;
 				{
 					if(_ufle12jhs77_CardSelectTime==null || _ufle12jhs77_CardSelectTime.IsDeleted) _ufle12jhs77_CardSelectTime=(BansheeGz.BGDatabase.BGFieldInt) MetaDefault.GetField(new BGId(5473396789706933446,485166437803012005));
 					return _ufle12jhs77_CardSelectTime;
+				}
+			}
+			private static BansheeGz.BGDatabase.BGFieldFloat _ufle12jhs77_MoveCardTime;
+			public static BansheeGz.BGDatabase.BGFieldFloat _MoveCardTime
+			{
+				get
+				{
+					if(_ufle12jhs77_MoveCardTime==null || _ufle12jhs77_MoveCardTime.IsDeleted) _ufle12jhs77_MoveCardTime=(BansheeGz.BGDatabase.BGFieldFloat) MetaDefault.GetField(new BGId(5330299961304312493,9998610105832550286));
+					return _ufle12jhs77_MoveCardTime;
+				}
+			}
+			private static BansheeGz.BGDatabase.BGFieldFloat _ufle12jhs77_AttackCardTime;
+			public static BansheeGz.BGDatabase.BGFieldFloat _AttackCardTime
+			{
+				get
+				{
+					if(_ufle12jhs77_AttackCardTime==null || _ufle12jhs77_AttackCardTime.IsDeleted) _ufle12jhs77_AttackCardTime=(BansheeGz.BGDatabase.BGFieldFloat) MetaDefault.GetField(new BGId(4949040566732867991,10845203043196155816));
+					return _ufle12jhs77_AttackCardTime;
+				}
+			}
+			private static BansheeGz.BGDatabase.BGFieldFloat _ufle12jhs77_GuardCardTime;
+			public static BansheeGz.BGDatabase.BGFieldFloat _GuardCardTime
+			{
+				get
+				{
+					if(_ufle12jhs77_GuardCardTime==null || _ufle12jhs77_GuardCardTime.IsDeleted) _ufle12jhs77_GuardCardTime=(BansheeGz.BGDatabase.BGFieldFloat) MetaDefault.GetField(new BGId(5684670301775814087,17196610482583660459));
+					return _ufle12jhs77_GuardCardTime;
+				}
+			}
+			private static BansheeGz.BGDatabase.BGFieldFloat _ufle12jhs77_HealCardTime;
+			public static BansheeGz.BGDatabase.BGFieldFloat _HealCardTime
+			{
+				get
+				{
+					if(_ufle12jhs77_HealCardTime==null || _ufle12jhs77_HealCardTime.IsDeleted) _ufle12jhs77_HealCardTime=(BansheeGz.BGDatabase.BGFieldFloat) MetaDefault.GetField(new BGId(5700384548038912524,1357230293032668316));
+					return _ufle12jhs77_HealCardTime;
+				}
+			}
+			private static BansheeGz.BGDatabase.BGFieldFloat _ufle12jhs77_EnergyCardTime;
+			public static BansheeGz.BGDatabase.BGFieldFloat _EnergyCardTime
+			{
+				get
+				{
+					if(_ufle12jhs77_EnergyCardTime==null || _ufle12jhs77_EnergyCardTime.IsDeleted) _ufle12jhs77_EnergyCardTime=(BansheeGz.BGDatabase.BGFieldFloat) MetaDefault.GetField(new BGId(4680359010423266922,8249753946533669019));
+					return _ufle12jhs77_EnergyCardTime;
 				}
 			}
 			private static readonly TBL_MOVE_CARD.Factory _factory0_PFS = new TBL_MOVE_CARD.Factory();
