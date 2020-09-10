@@ -14,8 +14,6 @@ public class PlayerManager : MonoSingleton<PlayerManager>
     
     public Player Player;
     public Player Enemy;
-
-    [SerializeField] private float moveSpeed = 1.1f; // 나중에 업애야함 
     
     private void Start()   // 요건 나중에 없앨 예정 
     {
@@ -74,28 +72,28 @@ public class PlayerManager : MonoSingleton<PlayerManager>
         // 플레이어가 왼쪾인 경우
         if (playerTilePosition.y < enemyTilePosition.y)
         {
-            Player.LeftLerpMove(TileManager.Instance.GetLeftPosition(playerTilePosition), moveSpeed, instantly);
-            Enemy.RightLerpMove(TileManager.Instance.GetRightPosition(enemyTilePosition), moveSpeed, instantly);
+            Player.LeftLerpMove(TileManager.Instance.GetLeftPosition(playerTilePosition), instantly);
+            Enemy.RightLerpMove(TileManager.Instance.GetRightPosition(enemyTilePosition), instantly);
         }
         // 위치가 같은 경우
         else if (playerTilePosition.y == enemyTilePosition.y)
         {
             if (Player.transform.localScale.x == -1)
             {
-                Player.LeftLerpMove(TileManager.Instance.GetLeftPosition(playerTilePosition), moveSpeed, instantly);
-                Enemy.RightLerpMove(TileManager.Instance.GetRightPosition(enemyTilePosition), moveSpeed, instantly);
+                Player.LeftLerpMove(TileManager.Instance.GetLeftPosition(playerTilePosition), instantly);
+                Enemy.RightLerpMove(TileManager.Instance.GetRightPosition(enemyTilePosition), instantly);
             }
             else
             {
-                Player.RightLerpMove(TileManager.Instance.GetRightPosition(playerTilePosition), moveSpeed, instantly);
-                Enemy.LeftLerpMove(TileManager.Instance.GetLeftPosition(enemyTilePosition), moveSpeed, instantly);
+                Player.RightLerpMove(TileManager.Instance.GetRightPosition(playerTilePosition), instantly);
+                Enemy.LeftLerpMove(TileManager.Instance.GetLeftPosition(enemyTilePosition), instantly);
             }
         }
         // 플레이어가 오른쪽인 경우
         else if (playerTilePosition.y > enemyTilePosition.y)
         {
-            Player.RightLerpMove(TileManager.Instance.GetRightPosition(playerTilePosition), moveSpeed, instantly);
-            Enemy.LeftLerpMove(TileManager.Instance.GetLeftPosition(enemyTilePosition), moveSpeed, instantly);
+            Player.RightLerpMove(TileManager.Instance.GetRightPosition(playerTilePosition), instantly);
+            Enemy.LeftLerpMove(TileManager.Instance.GetLeftPosition(enemyTilePosition), instantly);
         }
     }
 
