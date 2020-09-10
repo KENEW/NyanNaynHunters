@@ -85,6 +85,7 @@ public class GameManager : MonoSingleton<GameManager>
         cardField.UpdateHandler();
 
         interval = GetInterval(playerCard);
+        if (interval == 0) Debug.LogError(playerCard);
         yield return new WaitForSeconds(interval);
 
         //몇초 뒤
@@ -101,6 +102,10 @@ public class GameManager : MonoSingleton<GameManager>
             if (coolDown.GetSliderValue() <= 0f) break;
             yield return new WaitForSeconds(1f);
         }
+
+        //적이 카드를 사용한 후 랜덤카드 바로 세팅
+        cardField.enemyHandler.Enqueue(CardManager.Instance.GetRandomCard());
+        cardField.UpdateHandler();
 
         if (CheckGame())
         {
