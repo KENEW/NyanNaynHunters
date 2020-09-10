@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
+    [Header("왼쪽 더스트")] public ParticleSystem LeftDust;
+    [Header("오른 더스트")] public ParticleSystem RightDust;
     private SpriteRenderer m_SpriteRenderer;
 
     private Color m_BaseColor = Color.white;
@@ -29,5 +31,23 @@ public class Tile : MonoBehaviour
         yield return new WaitForSeconds(time);
 
         m_SpriteRenderer.enabled = false;
+    }
+    
+    public void PlayLeftDust(float delay)
+    {
+        StartCoroutine(PlayParticle_Coroutine(delay, LeftDust));
+    }
+
+    public void PlayRightDust(float delay)
+    {
+        StartCoroutine(PlayParticle_Coroutine(delay, RightDust));
+    }
+    
+    private IEnumerator PlayParticle_Coroutine(float delay, ParticleSystem particle)
+    {
+        yield return new WaitForSeconds(delay);
+        
+        particle.gameObject.SetActive(true);
+        particle.Play();
     }
 }

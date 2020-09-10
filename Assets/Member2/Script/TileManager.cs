@@ -18,7 +18,12 @@ public class TileManager : MonoSingleton<TileManager>
     {
         return (int) tilePosition.x * COL + (int) tilePosition.y;
     }
-
+    
+    public Tile GetTile(Vector2 tilePosition)
+    {
+        return m_Tiles[(int) tilePosition.x * COL + (int) tilePosition.y];
+    }
+    
     public Vector2 GetLeftPosition(Vector2 tilePosition)
     {
         return m_Tiles[(int)tilePosition.x * COL + (int)tilePosition.y].Left.position;

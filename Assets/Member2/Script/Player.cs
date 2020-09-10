@@ -102,11 +102,11 @@ public class Player : MonoBehaviour
 		
 		if (Vector3.Distance(dist, transform.position) < 0.1) return;
 		
-		
+		TileManager.Instance.GetTile(m_TilePosition).PlayLeftDust(GameSetting.MoveCardTime * 0.6f);
 		
 		m_SkeletonAnimation.AnimationState.SetAnimation(0, "Move", true);
 		TileManager.Instance.SetColor(m_TilePosition, GameSetting.MoveCardTime * 0.8f);
-		transform.DOJump(dist, GameSetting.MoveCardTime * 0.8f, 1, GameSetting.MoveCardTime).OnComplete(() =>
+		transform.DOJump(dist, GameSetting.MoveCardTime * 0.8f, 1, GameSetting.MoveCardTime).SetEase(Ease.InOutExpo).OnComplete(() =>
 		{
 			m_SkeletonAnimation.AnimationState.SetAnimation(0, "Idle", true);
 		});
@@ -124,10 +124,12 @@ public class Player : MonoBehaviour
 
 		if (Vector3.Distance(dist, transform.position) < 0.1) return;
 		
+		TileManager.Instance.GetTile(m_TilePosition).PlayRightDust(GameSetting.MoveCardTime * 0.6f);
+
 		
 		TileManager.Instance.SetColor(m_TilePosition, GameSetting.MoveCardTime * 0.8f);
 		m_SkeletonAnimation.AnimationState.SetAnimation(0, "Move", true);
-		transform.DOJump(dist, GameSetting.MoveCardTime * 0.8f, 1, GameSetting.MoveCardTime).OnComplete(() =>
+		transform.DOJump(dist, GameSetting.MoveCardTime * 0.8f, 1, GameSetting.MoveCardTime).SetEase(Ease.InOutExpo).OnComplete(() =>
 		{
 			m_SkeletonAnimation.AnimationState.SetAnimation(0, "Idle", true);
 		});
