@@ -13,7 +13,6 @@ public class CoolDown : MonoBehaviour
     {
         slider = GetComponent<Slider>();
         slider.maxValue = TBL_GAME_SETTING.GetEntity(0).CardSelectTime;
-        slider.maxValue = 100f;
         slider.value = slider.maxValue;
     }
 

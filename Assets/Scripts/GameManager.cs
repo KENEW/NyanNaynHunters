@@ -21,14 +21,16 @@ public class GameManager : MonoSingleton<GameManager>
     public float interval;//한사람 액션 후 다른사람이 액션하기까지 걸리는 시간
     private bool IsPlayerFirst;//누가먼저할건지에 대한 변수, true : 플레이어, false : 적
 
-
     private int turn;//한 라운드에 카드사용횟수에 대한 변수, 3회 다 사용하면 1로 리셋
+
+    public int clickedCardCount;
 
     private void Start()
     {
         DontDestroyOnLoad(this);
         round = 0;
         turn = 1;
+        clickedCardCount = 0;
         //playerHelathBar.maxValue = player.GetHP();
         //playerHelathBar.value = playerHelathBar.maxValue;
         //playerEnergyBar.maxValue = player.GetSP();
@@ -78,6 +80,26 @@ public class GameManager : MonoSingleton<GameManager>
         {
             coolDown.Restart(); //쿨타임 재시작
             turn = 1;
+            round += 1;
+            roundText.text = "Round : " + round.ToString();
+            if (round > 1) clickedCardCount += 1;//추가로 하나 더
+
+            
+            for (int i = 0; i < clickedCardCount; i++)
+            {
+                Card card2 = CardManager.Instance.GetRandomCard();
+                if (cardField.cardList.Count < cardField.cardPos.Length)
+                {
+                    if (CardManager.Instance.MaxCountCheck(card2, cardField.cardList))
+                    {
+                        cardField.AddCard(card2);
+                    }
+                }
+                
+            }
+
+            clickedCardCount = 0;
+
             StartCoroutine(CardSelectTime());
             
         }
@@ -191,8 +213,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void NextRound()
     {
-        round++;
-        roundText.text = "Round : " + round.ToString();
+        
     }
 
     public void GetCharIndex(int player = 0, int enemy = 1)
