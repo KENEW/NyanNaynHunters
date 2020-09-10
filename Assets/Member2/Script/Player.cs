@@ -142,19 +142,21 @@ public class Player : MonoBehaviour
 	
 	private void UseAttackCard(AttackCard card)
 	{
-
-		Player target;
-		if (playerType == PlayerType.User)
-			target = PlayerManager.Instance.Enemy;
-		else
-			target = PlayerManager.Instance.Player;
-
-        if (InTarget(card.positions, target.tilePosition)) //명중하면 true, 빗나가면 false
+        if (card.energyCost >= sp)
         {
-			target.AddHP(-card.damage);
-        }
+			Player target;
+			if (playerType == PlayerType.User)
+				target = PlayerManager.Instance.Enemy;
+			else
+				target = PlayerManager.Instance.Player;
 
-		AddSP(-card.energyCost);
+			if (InTarget(card.positions, target.tilePosition)) //명중하면 true, 빗나가면 false
+			{
+				target.AddHP(-card.damage);
+			}
+
+			AddSP(-card.energyCost);
+		}
 	}
 
 	private bool InTarget(List<int> list, Vector2 targetPosition)
@@ -244,12 +246,15 @@ public class Player : MonoBehaviour
 			if (value > 0) value = 0;
         }
 		hp += value;
+		if (hp > hpSlider.maxValue) hp = (int)hpSlider.maxValue;
 		hpSlider.value = hp;
+		guard = 0;
     }
 
 	private void AddSP(int value)
     {
 		sp += value;
+		if (sp > spSlider.maxValue) sp = (int)spSlider.maxValue;
 		spSlider.value = sp;
     }
 
@@ -266,8 +271,11 @@ public class Player : MonoBehaviour
 
 	private void UseHealCard(HealCard card)
     {
-		AddHP(card.HPIncrease);
-		AddSP(card.energyCost);
+        if (card.energyCost >= sp)
+        {
+			AddHP(card.HPIncrease);
+			AddSP(card.energyCost);
+		}
     }
 
 	public void UseMoveCard(MoveCard cardData)
