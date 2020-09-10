@@ -61,11 +61,11 @@ public class PlayerManager : MonoSingleton<PlayerManager>
 
     public void InitPosition()
     {
-        Player.SetTilePosition(PlayerStartPosition, false);
-        Enemy.SetTilePosition(EnemeyStartPosition, false);
+        Player.SetTilePosition(PlayerStartPosition, instantly: true);
+        Enemy.SetTilePosition(EnemeyStartPosition, instantly: true);
     }
 
-    public void OnPlayerPositionChanged(bool xMove, PlayerType playerType)
+    public void OnPlayerPositionChanged(PlayerType playerType, bool instantly)
     {
         var playerTilePosition = Player.tilePosition;
         var enemyTilePosition = Enemy.tilePosition;
@@ -74,28 +74,28 @@ public class PlayerManager : MonoSingleton<PlayerManager>
         // 플레이어가 왼쪾인 경우
         if (playerTilePosition.y < enemyTilePosition.y)
         {
-            Player.LeftLerpMove(TileManager.Instance.GetLeftPosition(playerTilePosition), moveSpeed, xMove);
-            Enemy.RightLerpMove(TileManager.Instance.GetRightPosition(enemyTilePosition), moveSpeed, xMove);
+            Player.LeftLerpMove(TileManager.Instance.GetLeftPosition(playerTilePosition), moveSpeed, instantly);
+            Enemy.RightLerpMove(TileManager.Instance.GetRightPosition(enemyTilePosition), moveSpeed, instantly);
         }
         // 위치가 같은 경우
         else if (playerTilePosition.y == enemyTilePosition.y)
         {
             if (Player.transform.localScale.x == -1)
             {
-                Player.LeftLerpMove(TileManager.Instance.GetLeftPosition(playerTilePosition), moveSpeed, xMove);
-                Enemy.RightLerpMove(TileManager.Instance.GetRightPosition(enemyTilePosition), moveSpeed, xMove);
+                Player.LeftLerpMove(TileManager.Instance.GetLeftPosition(playerTilePosition), moveSpeed, instantly);
+                Enemy.RightLerpMove(TileManager.Instance.GetRightPosition(enemyTilePosition), moveSpeed, instantly);
             }
             else
             {
-                Player.RightLerpMove(TileManager.Instance.GetRightPosition(playerTilePosition), moveSpeed, xMove);
-                Enemy.LeftLerpMove(TileManager.Instance.GetLeftPosition(enemyTilePosition), moveSpeed, xMove);
+                Player.RightLerpMove(TileManager.Instance.GetRightPosition(playerTilePosition), moveSpeed, instantly);
+                Enemy.LeftLerpMove(TileManager.Instance.GetLeftPosition(enemyTilePosition), moveSpeed, instantly);
             }
         }
         // 플레이어가 오른쪽인 경우
         else if (playerTilePosition.y > enemyTilePosition.y)
         {
-            Player.RightLerpMove(TileManager.Instance.GetRightPosition(playerTilePosition), moveSpeed, xMove);
-            Enemy.LeftLerpMove(TileManager.Instance.GetLeftPosition(enemyTilePosition), moveSpeed, xMove);
+            Player.RightLerpMove(TileManager.Instance.GetRightPosition(playerTilePosition), moveSpeed, instantly);
+            Enemy.LeftLerpMove(TileManager.Instance.GetLeftPosition(enemyTilePosition), moveSpeed, instantly);
         }
     }
 

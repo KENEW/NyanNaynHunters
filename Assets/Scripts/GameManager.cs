@@ -90,21 +90,34 @@ public class GameManager : MonoSingleton<GameManager>
         //몇초 뒤
         Debug.Log("Sequence" + sequence);
         if (sequence == true)
-            PlayerManager.Instance.Enemy.UseCard(cardField.enemyHandler.Dequeue());
+        {
+            playerCard = cardField.enemyHandler.Dequeue();
+            PlayerManager.Instance.Enemy.UseCard(playerCard);
+        }
         else
-            PlayerManager.Instance.Player.UseCard(cardField.playerHandler.Dequeue());
+        {
+            playerCard = cardField.playerHandler.Dequeue();
+            PlayerManager.Instance.Player.UseCard(playerCard);
+        }
+        
         cardField.UpdateHandler();
+        interval = GetInterval(playerCard);
+        yield return new WaitForSeconds(interval);
+
         Debug.Log("Action end");
 
         while (true)
         {
             if (coolDown.GetSliderValue() <= 0f) break;
-            yield return new WaitForSeconds(1f);
+            yield return null;
         }
+
+        yield return new WaitForSeconds(GameSetting.CardWaitTime);
+
 
         if (CheckGame())
         {
-            StopCoroutine("PlayerAction");
+            StopCoroutine(PlayerAction());
         }
         else
         {

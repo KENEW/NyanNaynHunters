@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum CardType
+{
+    AttackCard,
+    EnergyCard,
+    GuardCard,
+    HealCard,
+    MoveCard
+};
+
 public class CardManager : MonoSingleton<CardManager>
 {
-    public enum CardType
-    {
-        AttackCard,
-        EnergyCard,
-        GuardCard,
-        HealCard,
-        MoveCard
-    };
-
     class Temp
     {
         public float percent;

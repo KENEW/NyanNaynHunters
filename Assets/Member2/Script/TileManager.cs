@@ -32,6 +32,7 @@ public class TileManager : MonoSingleton<TileManager>
     public void SetColor(Vector2 tilePosition, float time)
     {
         if (tilePosition.x < 0 || tilePosition.x >= COL || tilePosition.y < 0 || tilePosition.y >= ROW) return;
-        //  m_Tiles[(int)tilePosition.x * COL + (int)tilePosition.y].SetColor(time);
+        
+        m_Tiles[(int)tilePosition.x * COL + (int)tilePosition.y].FlashColor(time);
     }
 }
