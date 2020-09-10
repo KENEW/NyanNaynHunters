@@ -3,39 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class CharSelect : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
+public class CharSelect : MonoBehaviour
 {
-	public int CharIndex = 0;
-
-	bool enterCheck = false;
-	bool downCheck = false;
-
-	public void OnPointerDown(PointerEventData data)
-	{
-		downCheck = true;
-	}
-
-	public void OnPointerEnter(PointerEventData data)
-	{
-		enterCheck = true;
-	}
-	public void OnPointerExit(PointerEventData data)
-	{
-		enterCheck = false;
-	}
-
-	public void OnPointerUp(PointerEventData data)
-	{
-		if (enterCheck && downCheck)
-		{
-			//함수 전달
-
-
-			Debug.Log(CharIndex);
-		}
-		else
-		{
-			downCheck = false;
-		}
-	}
+	public int[] charID = new int[2] { 0, 0 };	//전달을 위해 저장되는 인덱스 값 / 0 = player, 1 = computer
+	public int curCount = 0;					//현재 배열에 접근하기 위한 현재 카운트 수
 }

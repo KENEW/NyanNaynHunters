@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoSingleton<GameManager>
 {
     private int round;
     public Text roundText;
@@ -16,8 +16,12 @@ public class GameManager : MonoBehaviour
     public CardField cardField;
     public CoolDown coolDown;
 
+    public int PlayerCharID = 0; //Init Value
+    public int EnemyCharID = 1;
+
     private void Start()
     {
+        DontDestroyOnLoad(this);
         round = 0;
         //playerHelathBar.maxValue = player.GetHP();
         //playerHelathBar.value = playerHelathBar.maxValue;
@@ -40,5 +44,11 @@ public class GameManager : MonoBehaviour
         {
             coolDown.Restart(); //쿨타임 재시작
         }
+    }
+
+    public void GetCharIndex(int player = 0, int enemy = 1)
+    {
+        PlayerCharID = player;
+        EnemyCharID = enemy;
     }
 }
