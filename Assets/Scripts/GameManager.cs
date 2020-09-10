@@ -67,13 +67,17 @@ public class GameManager : MonoSingleton<GameManager>
                 sequence = false;
 
             if (turn >= 1 && turn <= 3)
+            {
                 StartCoroutine(PlayerAction());
+            }
+                
             else
                 CardClick.canClick = true;
         }
         else
         {
             coolDown.Restart(); //쿨타임 재시작
+            turn = 1;
             StartCoroutine(CardSelectTime());
             
         }
@@ -147,9 +151,7 @@ public class GameManager : MonoSingleton<GameManager>
 
         yield return new WaitForSeconds(GameSetting.CardWaitTime);
 
-        //적이 카드를 사용한 후 랜덤카드 바로 세팅
-        cardField.enemyHandler.Enqueue(CardManager.Instance.GetRandomCard());
-        cardField.UpdateHandler();
+        
 
         if (CheckGame())
         {
@@ -158,6 +160,8 @@ public class GameManager : MonoSingleton<GameManager>
         else
         {
             turn++;
+            Debug.Log("Turn : " + turn);
+            if (turn > 3) CardClick.canClick = true;
             StartGame();
         }
 
