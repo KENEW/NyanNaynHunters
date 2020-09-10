@@ -1708,6 +1708,17 @@ using BansheeGz.BGDatabase;
 					_EnergyCardTime[Index] = value;
 				}
 			}
+			public System.Single TileTime
+			{
+				get
+				{
+					return _TileTime[Index];
+				}
+				set
+				{
+					_TileTime[Index] = value;
+				}
+			}
 			private static BansheeGz.BGDatabase.BGFieldEntityName _ufle12jhs77_name;
 			public static BansheeGz.BGDatabase.BGFieldEntityName _name
 			{
@@ -1787,6 +1798,15 @@ using BansheeGz.BGDatabase;
 				{
 					if(_ufle12jhs77_EnergyCardTime==null || _ufle12jhs77_EnergyCardTime.IsDeleted) _ufle12jhs77_EnergyCardTime=(BansheeGz.BGDatabase.BGFieldFloat) MetaDefault.GetField(new BGId(4680359010423266922,8249753946533669019));
 					return _ufle12jhs77_EnergyCardTime;
+				}
+			}
+			private static BansheeGz.BGDatabase.BGFieldFloat _ufle12jhs77_TileTime;
+			public static BansheeGz.BGDatabase.BGFieldFloat _TileTime
+			{
+				get
+				{
+					if(_ufle12jhs77_TileTime==null || _ufle12jhs77_TileTime.IsDeleted) _ufle12jhs77_TileTime=(BansheeGz.BGDatabase.BGFieldFloat) MetaDefault.GetField(new BGId(4980209423884880378,1103321278221045175));
+					return _ufle12jhs77_TileTime;
 				}
 			}
 			private static readonly TBL_MOVE_CARD.Factory _factory0_PFS = new TBL_MOVE_CARD.Factory();
