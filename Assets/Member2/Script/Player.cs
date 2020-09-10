@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
+using DG.Tweening;
+using Spine.Unity;
 
 public enum PlayerType
 {
@@ -44,6 +46,11 @@ public class Player : MonoBehaviour
 	public Slider hpSlider;
 	public Slider spSlider;
 	
+	public const float LeftXScale = -1;
+	public const float RightXScale = 1;
+
+	[Header("스켈레톤 에니메이션")] public SkeletonAnimation m_SkeletonAnimation;
+	
 	protected virtual void Start()
 	{
 		mMoveRect = FindObjectOfType<MoveRect>();
@@ -55,15 +62,39 @@ public class Player : MonoBehaviour
 	}
 	
 	
-	public void SetTilePosition(Vector2 newTilePosition, bool xMove, int player)
+	public void SetTilePosition(Vector2 newTilePosition, bool xMove)
 	{
 		m_PrevTilePosition = m_TilePosition;
 		m_TilePosition = newTilePosition;
 
-		PlayerManager.Instance.OnPlayerPositionChanged(xMove, player);
+		PlayerManager.Instance.OnPlayerPositionChanged(xMove, playerType);
 	}
 
 
+	public void LeftLerpMove(Vector3 dist, float moveSpeed, bool xMove)
+	{
+		transform.localScale = new Vector3(LeftXScale, 1, 1);
+
+		if (Vector3.Distance(dist, transform.position) < 0.1) return;
+		
+		m_SkeletonAnimation.AnimationState.SetAnimation(0, "Move", true);
+		transform.DOJump(dist, moveSpeed, 1, 0.5f).OnComplete(() =>
+		{
+			m_SkeletonAnimation.AnimationState.SetAnimation(0, "Idle", true);
+		});
+	}
+	
+	public void RightLerpMove(Vector3 dist, float moveSpeed, bool xMove)
+	{
+		transform.localScale = new Vector3(RightXScale, 1, 1);
+
+		if (Vector3.Distance(dist, transform.position) < 0.1) return;
+		m_SkeletonAnimation.AnimationState.SetAnimation(0, "Move", true);
+		transform.DOJump(dist, moveSpeed, 1, 0.5f).OnComplete(() =>
+		{
+			m_SkeletonAnimation.AnimationState.SetAnimation(0, "Idle", true);
+		});
+	}
 
 	public int GetHP()
 	{
@@ -166,7 +197,7 @@ public class Player : MonoBehaviour
 				newPosition = m_TilePosition + new Vector2(0, -cardData.distance);
 				if (TileManager.Instance.CanMove(newPosition))
 				{
-					SetTilePosition(newPosition, true, playerNum);
+					SetTilePosition(newPosition, true);
 				}
 				break;
 			
@@ -174,7 +205,7 @@ public class Player : MonoBehaviour
 				newPosition = m_TilePosition + new Vector2(0, cardData.distance);
 				if (TileManager.Instance.CanMove(newPosition))
 				{
-					SetTilePosition(newPosition, true, playerNum);
+					SetTilePosition(newPosition, true);
 				}
 				break;
 			
@@ -182,7 +213,7 @@ public class Player : MonoBehaviour
 				newPosition = m_TilePosition + new Vector2(-cardData.distance, 0);
 				if (TileManager.Instance.CanMove(newPosition))
 				{
-					SetTilePosition(newPosition, false, playerNum);
+					SetTilePosition(newPosition, false);
 				}
 				break;
 			
@@ -190,7 +221,7 @@ public class Player : MonoBehaviour
 				newPosition = m_TilePosition + new Vector2(cardData.distance, 0);
 				if (TileManager.Instance.CanMove(newPosition))
 				{
-					SetTilePosition(newPosition, false, playerNum);
+					SetTilePosition(newPosition, false);
 				}
 				break;
 		}
