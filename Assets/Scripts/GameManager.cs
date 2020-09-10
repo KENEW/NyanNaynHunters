@@ -66,7 +66,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     IEnumerator PlayerAction()
     {
-        yield return new WaitForSeconds(interval);
+        yield return new WaitForSeconds(1f);
         Debug.Log("Action Start");
         Debug.Log("Sequence" + sequence);
         if (sequence == true)
@@ -85,7 +85,12 @@ public class GameManager : MonoSingleton<GameManager>
             player.UseCard(cardField.playerHandler.Dequeue());
         cardField.UpdateHandler();
         Debug.Log("Action end");
-        StartGame();//다음턴
+        while (true)
+        {
+            if (coolDown.GetSliderValue() <= 0f) break;
+            yield return new WaitForSeconds(1f);
+        }
+        StartGame();
 
     }
 
