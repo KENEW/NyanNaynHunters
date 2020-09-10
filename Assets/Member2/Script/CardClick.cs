@@ -28,9 +28,17 @@ public class CardClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        Card card = CardManager.Instance.GetRandomCard();
-        cardField.AddCard(card);
-        cardField.UpdateCardPos();
+        while (true)
+        {
+            Card card = CardManager.Instance.GetRandomCard();
+            if (CardManager.Instance.MaxCountCheck(card, cardField.cardList))
+            {
+                cardField.AddCard(card);
+                cardField.UpdateCardPos();
+                break;
+            }
+        }
+        
     }
 
     

@@ -27,6 +27,28 @@ public class CardManager : MonoSingleton<CardManager>
         }
     }
 
+    public bool MaxCountCheck(Card card, List<Card> cardList)
+    {
+        int[] count = new int[5];//0 : attack, 1 : energy, 2 : guard, 3 :heal, 4: move
+        for (int i = 0; i < cardList.Count; i++)
+        {
+            if (cardList[i] is AttackCard) count[0]++;
+            else if (cardList[i] is EnergyCard) count[1]++;
+            else if (cardList[i] is GuardCard) count[2]++;
+            else if (cardList[i] is HealCard) count[3]++;
+            else if (cardList[i] is MoveCard) count[4]++;
+        }
+
+        bool b = false;
+        if (card is AttackCard && count[0] <= CardSetting.AttackCardMaxCount) b = true;
+        if (card is EnergyCard && count[1] <= CardSetting.EnergyCardMaxCount) b = true;
+        if (card is GuardCard && count[1] <= CardSetting.GuardCardMaxCount) b = true;
+        if (card is HealCard && count[1] <= CardSetting.HealCardMaxCount) b = true;
+        if (card is MoveCard && count[1] <= CardSetting.MoveCardMaxCount) b = true;
+
+        return b;
+    }
+
     public Card GetRandomCard()
     {
         int value = Random.Range(0, 100);
