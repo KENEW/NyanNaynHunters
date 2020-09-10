@@ -9,12 +9,6 @@ using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 using Slider = UnityEngine.UI.Slider;
 
-public enum PlayerType
-{
-	User,
-	Computer
-}
-
 public class Player : MonoBehaviour
 {
 	protected int hp = 100;
@@ -25,42 +19,71 @@ public class Player : MonoBehaviour
 
 	public int PositionIndex => (int)m_TilePosition.x * TileManager.COL + (int)m_TilePosition.y;
 
-	public PlayerType playerType;
-
-	public Slider hpSlider;
-	public Slider spSlider;
+	
 	
 	public const float LeftXScale = -1;
 	public const float RightXScale = 1;
 
 	private int guard;
 
+	public bool isPlayer = false;
+
 	private SkeletonAnimation m_SkeletonAnimation;
 	
 	protected virtual void Awake()
 	{
 		m_SkeletonAnimation = GetComponent<SkeletonAnimation>();
-		
-		hp = TBL_GAME_SETTING.GetEntity(0).PlayerStartHP;
-		sp = TBL_GAME_SETTING.GetEntity(0).PlayerStartEnergy;
 
-		if (playerType == PlayerType.User)
+		guard = 0;
+
+	}
+
+	private void Start()
+	{
+		InitStat();
+	}
+
+	public void InitStat()
+	{
+		if (isPlayer)
 		{
-			hpSlider = GameObject.FindGameObjectWithTag("PlayerHPBar").GetComponent<Slider>();
-			spSlider = GameObject.FindGameObjectWithTag("PlayerSPBar").GetComponent<Slider>();
+			hp = TBL_GAME_SETTING.GetEntity(0).PlayerStartHP;
+			sp = TBL_GAME_SETTING.GetEntity(0).PlayerStartEnergy;
 		}
 		else
 		{
-			hpSlider = GameObject.FindGameObjectWithTag("EnemyHPBar").GetComponent<Slider>();
-			spSlider = GameObject.FindGameObjectWithTag("EnemySPBar").GetComponent<Slider>();
+			hp = TBL_STAGE.GetEntity(0).EnemyHP;
+			sp = TBL_STAGE.GetEntity(0).EnemyEnergy;
 		}
+		
+		SetSliderValue(true);
+	}
+	
+	public void SetSliderValue(bool isFirst = false)
+	{
+		if (isPlayer)
+		{
+			if (isFirst)
+			{
+				SliderManager.Instance.PlayerHPSlider.maxValue = hp;
+				SliderManager.Instance.PlayerSPSlider.maxValue = sp;
 
-		hpSlider.maxValue = hp;
-		hpSlider.value = hp;
-		spSlider.maxValue = sp;
-		spSlider.value = sp;
+			}
+			SliderManager.Instance.PlayerHPSlider.maxValue = hp;
+			SliderManager.Instance.PlayerSPSlider.maxValue = sp;
+		}
+		else
+		{
+			if (isFirst)
+			{
+				SliderManager.Instance.EnemyHPSlider.maxValue = hp;
+				SliderManager.Instance.EnemySPSlider.maxValue = sp;
 
-		guard = 0;
+			}
+			SliderManager.Instance.EnemyHPSlider.maxValue = hp;
+			SliderManager.Instance.EnemySPSlider.maxValue = sp;
+		}
+		
 
 	}
 
@@ -68,7 +91,7 @@ public class Player : MonoBehaviour
 	{
 		m_TilePosition = newTilePosition;
 
-		PlayerManager.Instance.OnPlayerPositionChanged(playerType, instantly);
+		PlayerManager.Instance.OnPlayerPositionChanged(instantly);
 	}
 
 
@@ -227,13 +250,13 @@ public class Player : MonoBehaviour
 			if (value > 0) value = 0;
         }
 		hp += value;
-		hpSlider.value = hp;
+		SetSliderValue();
     }
 
 	private void AddSP(int value)
     {
 		sp += value;
-		spSlider.value = sp;
+		SetSliderValue();
     }
 
 
@@ -263,11 +286,9 @@ public class Player : MonoBehaviour
 		
 		m_SkeletonAnimation.AnimationState.SetAnimation(0, "Idle", true);
 
-		Player target;
-		if (playerType == PlayerType.User)
-			target = PlayerManager.Instance.Enemy;
-		else
-			target = PlayerManager.Instance.Player;
+		
+		Player target = isPlayer ? PlayerManager.Instance.Enemy : PlayerManager.Instance.Player;
+		
 
 		if (InTarget(card.positions, target.tilePosition)) //명중하면 true, 빗나가면 false
 		{

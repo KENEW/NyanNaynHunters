@@ -34,7 +34,6 @@ public class TileManager : MonoSingleton<TileManager>
         if (0 <= tilePosition.x && tilePosition.x < ROW && 0 <= tilePosition.y && tilePosition.y < COL)
         {
             m_Tiles[(int)tilePosition.x * COL + (int)tilePosition.y].FlashColor(time);
-
         }
     }
 }

@@ -27,6 +27,7 @@ public class PlayerManager : MonoSingleton<PlayerManager>
     public void SelectPlayerCharacter(int index) // 0 ~ 3
     {
         Player = m_Playsers[index];
+        Player.isPlayer = true;
         m_UsedPlayers.Add(Player);
     }
 
@@ -63,7 +64,7 @@ public class PlayerManager : MonoSingleton<PlayerManager>
         Enemy.SetTilePosition(EnemeyStartPosition, instantly: true);
     }
 
-    public void OnPlayerPositionChanged(PlayerType playerType, bool instantly)
+    public void OnPlayerPositionChanged(bool instantly)
     {
         var playerTilePosition = Player.tilePosition;
         var enemyTilePosition = Enemy.tilePosition;
