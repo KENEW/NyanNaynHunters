@@ -13,26 +13,44 @@ public class CardManager : MonoSingleton<CardManager>
         MoveCard
     };
 
+    class Temp
+    {
+        public float percent;
+        public CardType cardType;
+        public Card card;
 
+        public Temp(float percent, CardType cardType, Card card = null)
+        {
+            this.percent = percent;
+            this.cardType = cardType;
+            this.card = card;
+        }
+    }
 
     public Card GetRandomCard()
     {
         int value = Random.Range(0, 100);
         Card card = null;
-        SortedList percent = new SortedList();
-        percent.Add(CardSetting.AttackCardDropPercent, CardType.AttackCard);
-        percent.Add(CardSetting.EnergyCardDropPercent, CardType.EnergyCard);
-        percent.Add(CardSetting.GuardCardDropPercent, CardType.GuardCard);
-        percent.Add(CardSetting.HealCardDropPercent, CardType.HealCard);
-        percent.Add(CardSetting.MoveCardDropPercent, CardType.MoveCard);
+        List<Temp> list = new List<Temp>();
+
+        list.Add(new Temp(CardSetting.AttackCardDropPercent, CardType.AttackCard));
+        list.Add(new Temp(CardSetting.EnergyCardDropPercent, CardType.EnergyCard));
+        list.Add(new Temp(CardSetting.GuardCardDropPercent, CardType.GuardCard));
+        list.Add(new Temp(CardSetting.HealCardDropPercent, CardType.HealCard));
+        list.Add(new Temp(CardSetting.MoveCardDropPercent, CardType.MoveCard));
+
+        list.Sort(delegate (Temp a, Temp b)
+        {
+            return a.percent.CompareTo(b.percent);
+        });
 
         float cumulative = 0f;
-        for (int i = 0; i < percent.Count; i++)
+        for (int i = 0; i < list.Count; i++)
         {
-            cumulative += (float)percent.GetKey(i);
+            cumulative += list[i].percent;
             if (value <= cumulative)
             {
-                card = SelectCard((CardType)percent.GetByIndex(i));
+                card = SelectCard(list[i].cardType);
             }
         }
         return card;
@@ -53,20 +71,21 @@ public class CardManager : MonoSingleton<CardManager>
     {
         int value = Random.Range(0, 100);
         Card card = null;
-        SortedList<float, TBL_ATTACK_CARD> li = new SortedList<float, TBL_ATTACK_CARD>();
+        List<Temp> list = new List<Temp>();
         for (int i = 0; i < TBL_ATTACK_CARD.CountEntities; i++)
         {
             TBL_ATTACK_CARD data = TBL_ATTACK_CARD.GetEntity(i);
-            li.Add(data.Percent, data);
+            AttackCard c = new AttackCard(data);
+            list.Add(new Temp(c.percent, CardType.AttackCard, c));
         }
 
         float cumulative = 0f;
-        for (int i = 0; i < li.Count; i++)
+        for (int i = 0; i < list.Count; i++)
         {
-            cumulative += li[i].Percent;
+            cumulative += list[i].percent;
             if (value <= cumulative)
             {
-                card = new AttackCard(li[i]);
+                card = list[i].card;
             }
         }
         return card;
@@ -76,20 +95,21 @@ public class CardManager : MonoSingleton<CardManager>
     {
         int value = Random.Range(0, 100);
         Card card = null;
-        SortedList<float, TBL_ENERGY_CARD> li = new SortedList<float, TBL_ENERGY_CARD>();
+        List<Temp> list = new List<Temp>();
         for (int i = 0; i < TBL_ENERGY_CARD.CountEntities; i++)
         {
             TBL_ENERGY_CARD data = TBL_ENERGY_CARD.GetEntity(i);
-            li.Add(data.Percent, data);
+            EnergyCard c = new EnergyCard(data);
+            list.Add(new Temp(c.percent, CardType.EnergyCard, c));
         }
 
         float cumulative = 0f;
-        for (int i = 0; i < li.Count; i++)
+        for (int i = 0; i < list.Count; i++)
         {
-            cumulative += li[i].Percent;
+            cumulative += list[i].percent;
             if (value <= cumulative)
             {
-                card = new EnergyCard(li[i]);
+                card = list[i].card;
             }
         }
         return card;
@@ -99,20 +119,21 @@ public class CardManager : MonoSingleton<CardManager>
     {
         int value = Random.Range(0, 100);
         Card card = null;
-        SortedList<float, TBL_GUARD_CARD> li = new SortedList<float, TBL_GUARD_CARD>();
+        List<Temp> list = new List<Temp>();
         for (int i = 0; i < TBL_GUARD_CARD.CountEntities; i++)
         {
             TBL_GUARD_CARD data = TBL_GUARD_CARD.GetEntity(i);
-            li.Add(data.Percent, data);
+            GuardCard c = new GuardCard(data);
+            list.Add(new Temp(c.percent, CardType.EnergyCard, c));
         }
 
         float cumulative = 0f;
-        for (int i = 0; i < li.Count; i++)
+        for (int i = 0; i < list.Count; i++)
         {
-            cumulative += li[i].Percent;
+            cumulative += list[i].percent;
             if (value <= cumulative)
             {
-                card = new GuardCard(li[i]);
+                card = list[i].card;
             }
         }
         return card;
@@ -122,20 +143,21 @@ public class CardManager : MonoSingleton<CardManager>
     {
         int value = Random.Range(0, 100);
         Card card = null;
-        SortedList<float, TBL_HEAL_CARD> li = new SortedList<float, TBL_HEAL_CARD>();
+        List<Temp> list = new List<Temp>();
         for (int i = 0; i < TBL_HEAL_CARD.CountEntities; i++)
         {
             TBL_HEAL_CARD data = TBL_HEAL_CARD.GetEntity(i);
-            li.Add(data.Percent, data);
+            HealCard c = new HealCard(data);
+            list.Add(new Temp(c.percent, CardType.EnergyCard, c));
         }
 
         float cumulative = 0f;
-        for (int i = 0; i < li.Count; i++)
+        for (int i = 0; i < list.Count; i++)
         {
-            cumulative += li[i].Percent;
+            cumulative += list[i].percent;
             if (value <= cumulative)
             {
-                card = new HealCard(li[i]);
+                card = list[i].card;
             }
         }
         return card;
@@ -145,20 +167,21 @@ public class CardManager : MonoSingleton<CardManager>
     {
         int value = Random.Range(0, 100);
         Card card = null;
-        SortedList<float, TBL_MOVE_CARD> li = new SortedList<float, TBL_MOVE_CARD>();
+        List<Temp> list = new List<Temp>();
         for (int i = 0; i < TBL_MOVE_CARD.CountEntities; i++)
         {
             TBL_MOVE_CARD data = TBL_MOVE_CARD.GetEntity(i);
-            li.Add(data.Percent, data);
+            MoveCard c = new MoveCard(data);
+            list.Add(new Temp(c.percent, CardType.EnergyCard, c));
         }
 
         float cumulative = 0f;
-        for (int i = 0; i < li.Count; i++)
+        for (int i = 0; i < list.Count; i++)
         {
-            cumulative += li[i].Percent;
+            cumulative += list[i].percent;
             if (value <= cumulative)
             {
-                card = new MoveCard(li[i]);
+                card = list[i].card;
             }
         }
         return card;
