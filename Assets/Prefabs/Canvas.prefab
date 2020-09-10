@@ -1,5 +1,57 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &437623019
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 437623020}
+  - component: {fileID: 437623021}
+  m_Layer: 5
+  m_Name: SliderManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &437623020
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437623019}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7687071385376292353}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &437623021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437623019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8ab7a06b1a5a4191ab855cab2b01115, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerHPSlider: {fileID: 7687071383436026965}
+  PlayerSPSlider: {fileID: 7687071383754874948}
+  EnemyHPSlider: {fileID: 7687071385103780424}
+  EnemySPSlider: {fileID: 7687071383427075794}
 --- !u!1 &2963638258892633395
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,6 +584,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3dad3abbfe1de644ab9e5cfd16c15ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  imageType: 1
 --- !u!222 &7687071383519768031
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -786,6 +839,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3dad3abbfe1de644ab9e5cfd16c15ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  imageType: 1
 --- !u!222 &7687071383623689922
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -888,6 +942,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3dad3abbfe1de644ab9e5cfd16c15ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  imageType: 1
 --- !u!222 &7687071383646099651
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1644,6 +1699,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3dad3abbfe1de644ab9e5cfd16c15ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  imageType: 1
 --- !u!222 &7687071383786009181
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1898,6 +1954,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3dad3abbfe1de644ab9e5cfd16c15ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  imageType: 1
 --- !u!222 &7687071383851461855
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2000,6 +2057,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3dad3abbfe1de644ab9e5cfd16c15ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  imageType: 1
 --- !u!222 &7687071383943413755
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2102,6 +2160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3dad3abbfe1de644ab9e5cfd16c15ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  imageType: 1
 --- !u!222 &7687071384044457096
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2358,6 +2417,7 @@ GameObject:
   - component: {fileID: 7687071384184834978}
   - component: {fileID: 7687071384184834977}
   - component: {fileID: 7687071384184834980}
+  - component: {fileID: 7687071384614064103}
   m_Layer: 5
   m_Name: CardPos (3)
   m_TagString: Untagged
@@ -2397,6 +2457,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3dad3abbfe1de644ab9e5cfd16c15ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  imageType: 0
 --- !u!222 &7687071384184834978
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2447,6 +2508,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardname: 
+--- !u!114 &7687071384614064103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7687071384184835039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3dad3abbfe1de644ab9e5cfd16c15ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  imageType: 0
 --- !u!1 &7687071384206270218
 GameObject:
   m_ObjectHideFlags: 0
@@ -2807,6 +2881,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3dad3abbfe1de644ab9e5cfd16c15ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  imageType: 1
 --- !u!222 &7687071384299358332
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2987,6 +3062,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3dad3abbfe1de644ab9e5cfd16c15ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  imageType: 1
 --- !u!222 &7687071384379911570
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3050,6 +3126,7 @@ GameObject:
   - component: {fileID: 7687071384532750756}
   - component: {fileID: 7687071384532750755}
   - component: {fileID: 7687071384532750758}
+  - component: {fileID: 7687071384614064108}
   m_Layer: 5
   m_Name: CardPos (2)
   m_TagString: Untagged
@@ -3089,6 +3166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3dad3abbfe1de644ab9e5cfd16c15ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  imageType: 0
 --- !u!222 &7687071384532750756
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3139,6 +3217,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardname: 
+--- !u!114 &7687071384614064108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7687071384532750753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3dad3abbfe1de644ab9e5cfd16c15ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  imageType: 0
 --- !u!1 &7687071384535965679
 GameObject:
   m_ObjectHideFlags: 0
@@ -3152,6 +3243,7 @@ GameObject:
   - component: {fileID: 7687071384535965682}
   - component: {fileID: 7687071384535965681}
   - component: {fileID: 7687071384535965684}
+  - component: {fileID: 7687071384614064106}
   m_Layer: 5
   m_Name: CardPos
   m_TagString: Untagged
@@ -3191,6 +3283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3dad3abbfe1de644ab9e5cfd16c15ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  imageType: 0
 --- !u!222 &7687071384535965682
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3241,6 +3334,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardname: 
+--- !u!114 &7687071384614064106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7687071384535965679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3dad3abbfe1de644ab9e5cfd16c15ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  imageType: 0
 --- !u!1 &7687071384542182381
 GameObject:
   m_ObjectHideFlags: 0
@@ -3254,6 +3360,7 @@ GameObject:
   - component: {fileID: 7687071384542182384}
   - component: {fileID: 7687071384542182383}
   - component: {fileID: 7687071384542182386}
+  - component: {fileID: 7687071384614064107}
   m_Layer: 5
   m_Name: CardPos (1)
   m_TagString: Untagged
@@ -3293,6 +3400,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3dad3abbfe1de644ab9e5cfd16c15ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  imageType: 0
 --- !u!222 &7687071384542182384
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3343,6 +3451,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardname: 
+--- !u!114 &7687071384614064107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7687071384542182381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3dad3abbfe1de644ab9e5cfd16c15ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  imageType: 0
 --- !u!1 &7687071384593695162
 GameObject:
   m_ObjectHideFlags: 0
@@ -3356,6 +3477,7 @@ GameObject:
   - component: {fileID: 7687071384593695165}
   - component: {fileID: 7687071384593695164}
   - component: {fileID: 7687071384593695167}
+  - component: {fileID: 7687071384614064105}
   m_Layer: 5
   m_Name: CardPos (5)
   m_TagString: Untagged
@@ -3395,6 +3517,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3dad3abbfe1de644ab9e5cfd16c15ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  imageType: 0
 --- !u!222 &7687071384593695165
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3445,6 +3568,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardname: 
+--- !u!114 &7687071384614064105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7687071384593695162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3dad3abbfe1de644ab9e5cfd16c15ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  imageType: 0
 --- !u!1 &7687071384606842931
 GameObject:
   m_ObjectHideFlags: 0
@@ -3497,6 +3633,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3dad3abbfe1de644ab9e5cfd16c15ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  imageType: 1
 --- !u!222 &7687071384606842935
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3899,6 +4036,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3dad3abbfe1de644ab9e5cfd16c15ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  imageType: 1
 --- !u!222 &7687071385054142831
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3962,6 +4100,7 @@ GameObject:
   - component: {fileID: 7687071385090552018}
   - component: {fileID: 7687071385090552017}
   - component: {fileID: 7687071385090552020}
+  - component: {fileID: 7687071384614064104}
   m_Layer: 5
   m_Name: CardPos (4)
   m_TagString: Untagged
@@ -4001,6 +4140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3dad3abbfe1de644ab9e5cfd16c15ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  imageType: 0
 --- !u!222 &7687071385090552018
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4051,6 +4191,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardname: 
+--- !u!114 &7687071384614064104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7687071385090552015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3dad3abbfe1de644ab9e5cfd16c15ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  imageType: 0
 --- !u!1 &7687071385103780422
 GameObject:
   m_ObjectHideFlags: 0
@@ -4409,6 +4562,7 @@ RectTransform:
   - {fileID: 7687071383656126871}
   - {fileID: 5711952301034366409}
   - {fileID: 3532163768789535538}
+  - {fileID: 437623020}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4607,6 +4761,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3dad3abbfe1de644ab9e5cfd16c15ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  imageType: 1
 --- !u!222 &7687071385437816064
 CanvasRenderer:
   m_ObjectHideFlags: 0

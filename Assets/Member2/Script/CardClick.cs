@@ -22,7 +22,6 @@ public class CardClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         card_c = GetComponent<CardComponent>();
         cardField = FindObjectOfType<CardField>();
         canClick = true;
-        Debug.Log(name);
     }
 
     public void OnPointerDown(PointerEventData eventData)
