@@ -27,7 +27,7 @@ public class CardClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        //PlayerManager.Instance.Player.UseCard(cardField.playerHandler.Dequeue());
+
     }
 
     
