@@ -51,13 +51,7 @@ public class Player : MonoBehaviour
 
 	}
 
-	private void Update()
-    {
-		//Debug.Log(name + " " + m_TilePosition);
-    }
-
-
-    public void SetTilePosition(Vector2 newTilePosition, bool xMove)
+	public void SetTilePosition(Vector2 newTilePosition, bool xMove)
 	{
 		m_TilePosition = newTilePosition;
 
