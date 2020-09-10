@@ -66,11 +66,15 @@ public class Player : MonoBehaviour
 			if (isFirst)
 			{
 				SliderManager.Instance.PlayerHPSlider.maxValue = hp;
+				SliderManager.Instance.PlayerHPSlider.value = hp;
 				SliderManager.Instance.PlayerSPSlider.maxValue = sp;
+				SliderManager.Instance.PlayerSPSlider.value = sp;
 
 			}
 			SliderManager.Instance.PlayerHPSlider.maxValue = hp;
+			SliderManager.Instance.PlayerHPSlider.value = hp;
 			SliderManager.Instance.PlayerSPSlider.maxValue = sp;
+			SliderManager.Instance.PlayerSPSlider.value = sp;
 		}
 		else
 		{
@@ -81,7 +85,9 @@ public class Player : MonoBehaviour
 
 			}
 			SliderManager.Instance.EnemyHPSlider.maxValue = hp;
+			SliderManager.Instance.EnemyHPSlider.value = hp;
 			SliderManager.Instance.EnemySPSlider.maxValue = sp;
+			SliderManager.Instance.EnemySPSlider.value = sp;
 		}
 		
 
