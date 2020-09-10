@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - PlayerHPBar
+  - PlayerSPBar
+  - EnemyHPBar
+  - EnemySPBar
   layers:
   - Default
   - TransparentFX

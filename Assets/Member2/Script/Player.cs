@@ -42,10 +42,21 @@ public class Player : MonoBehaviour
 		hp = TBL_GAME_SETTING.GetEntity(0).PlayerStartHP;
 		sp = TBL_GAME_SETTING.GetEntity(0).PlayerStartEnergy;
 
-		//hpSlider.maxValue = hp;
-		//hpSlider.value = hp;
-		//spSlider.maxValue = sp;
-		//spSlider.value = sp;
+		if (playerType == PlayerType.User)
+		{
+			hpSlider = GameObject.FindGameObjectWithTag("PlayerHPBar").GetComponent<Slider>();
+			spSlider = GameObject.FindGameObjectWithTag("PlayerSPBar").GetComponent<Slider>();
+		}
+		else
+		{
+			hpSlider = GameObject.FindGameObjectWithTag("EnemyHPBar").GetComponent<Slider>();
+			spSlider = GameObject.FindGameObjectWithTag("EnemySPBar").GetComponent<Slider>();
+		}
+
+		hpSlider.maxValue = hp;
+		hpSlider.value = hp;
+		spSlider.maxValue = sp;
+		spSlider.value = sp;
 
 		guard = 0;
 
