@@ -61,7 +61,7 @@ public class GameManager : MonoSingleton<GameManager>
         else if(playerPriority >= enemyPriority)
             sequence = false;
 
-        StartCoroutine("PlayerAction");
+        StartCoroutine(PlayerAction());
     }
 
     IEnumerator PlayerAction()
