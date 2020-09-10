@@ -14,6 +14,11 @@ public class TileManager : MonoSingleton<TileManager>
         return 0 <= tilePosition.x && tilePosition.x < ROW && 0 <= tilePosition.y && tilePosition.y < COL;
     }
 
+    public int GetTileIndexByTilePosition(Vector2 tilePosition)
+    {
+        return (int) tilePosition.x * COL + (int) tilePosition.y;
+    }
+
     public Vector2 GetLeftPosition(Vector2 tilePosition)
     {
         return m_Tiles[(int)tilePosition.x * COL + (int)tilePosition.y].Left.position;
@@ -22,5 +27,11 @@ public class TileManager : MonoSingleton<TileManager>
     public Vector2 GetRightPosition(Vector2 tilePosition)
     {
         return m_Tiles[(int)tilePosition.x * COL + (int)tilePosition.y].Right.position;
+    }
+
+    public void SetColor(Vector2 tilePosition, float time)
+    {
+        if (tilePosition.x < 0 || tilePosition.x >= COL || tilePosition.y < 0 || tilePosition.y >= ROW) return;
+        //  m_Tiles[(int)tilePosition.x * COL + (int)tilePosition.y].SetColor(time);
     }
 }
