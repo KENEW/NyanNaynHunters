@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class TileManager : MonoSingleton<TileManager>
 {
-    private const int COL = 4;
-    private const int ROW = 3;
+    public const int COL = 4;
+    public const int ROW = 3;
     
     public List<Tile> m_Tiles;
 

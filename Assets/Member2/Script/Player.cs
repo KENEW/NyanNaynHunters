@@ -41,6 +41,8 @@ public class Player : MonoBehaviour
 	private Vector2 m_TilePosition;
 	public Vector2 tilePosition => m_TilePosition;
 
+	public int PositionIndex => (int)m_TilePosition.x * TileManager.COL + (int)m_TilePosition.y;
+
 	public PlayerType playerType;
 
 	public Slider hpSlider;
