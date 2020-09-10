@@ -19,11 +19,7 @@ public class CardField : MonoBehaviour
         cardList = new List<Card>();
         playerHandler = new Queue<Card>(playerHandlerPos.Length);
         enemyHandler = new Queue<Card>(enemyHandlerPos.Length);
-    }
 
-    private void Start()
-    {
-        //테스트용
         playerHandler.Enqueue(new MoveCard(TBL_MOVE_CARD.GetEntity(1)));
         playerHandler.Enqueue(new MoveCard(TBL_MOVE_CARD.GetEntity(1)));
         playerHandler.Enqueue(new AttackCard(TBL_ATTACK_CARD.GetEntity(1)));
@@ -32,7 +28,10 @@ public class CardField : MonoBehaviour
         enemyHandler.Enqueue(new MoveCard(TBL_MOVE_CARD.GetEntity(3)));
         enemyHandler.Enqueue(new MoveCard(TBL_MOVE_CARD.GetEntity(2)));
         enemyHandler.Enqueue(new MoveCard(TBL_MOVE_CARD.GetEntity(3)));
-        //////////
+    }
+
+    private void Start()
+    {
 
         UpdateHandler();
 
