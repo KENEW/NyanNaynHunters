@@ -63,6 +63,7 @@ public class GameManager : MonoSingleton<GameManager>, GameEventListener<GameEve
         {
             Card playerCard = cardField.playerHandler[index];
             Card enemyCard = cardField.enemyHandler[index];
+            
 
             int playerPriority = GetPriority(playerCard);
             int enemyPriority = GetPriority(enemyCard);
