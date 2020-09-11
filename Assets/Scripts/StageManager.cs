@@ -14,9 +14,7 @@ public class StageManager : MonoSingleton<StageManager>, GameEventListener<GameE
     private void Awake()
     {
         this.AddGameEventListening<GameEvent>();
-
-        this.gameObject.SetActive(false);
-        
+        Hide();
     }
     
     public void Init()
@@ -29,12 +27,21 @@ public class StageManager : MonoSingleton<StageManager>, GameEventListener<GameE
         m_SpriteRenderer.sprite = m_Backgrounds[CurrentScene];
     }
 
+    public void Hide()
+    {
+        m_SpriteRenderer.enabled = false;
+    }
+
+    public void Show()
+    {
+        m_SpriteRenderer.enabled = true;
+    }
     public void OnGameEvent(GameEvent e)
     {
         switch (e.Type)
         {
             case GameEventType.StageStart:
-                gameObject.SetActive(true);
+                Show();
                 break;
         }
     }

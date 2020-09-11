@@ -187,6 +187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55f8f37e1d50e7b4b8232c9af1f7bde2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_BackgroundTiles: {fileID: 1763725728}
   m_Tiles:
   - {fileID: 6743207566951470370}
   - {fileID: 6743207567313995418}
@@ -249,7 +250,7 @@ MonoBehaviour:
   m_Backgrounds:
   - {fileID: 21300000, guid: c28ec8e674ae29b4eaf7f6acc8a6e980, type: 3}
   - {fileID: 21300000, guid: beaa903e046a1d54ca468da299654c95, type: 3}
-  - {fileID: 21300000, guid: beaa903e046a1d54ca468da299654c95, type: 3}
+  - {fileID: 21300000, guid: 5a9eb52fd44b2a849b440a15d37d71cf, type: 3}
   - {fileID: 21300000, guid: beaa903e046a1d54ca468da299654c95, type: 3}
   - {fileID: 21300000, guid: beaa903e046a1d54ca468da299654c95, type: 3}
   CurrentScene: 0

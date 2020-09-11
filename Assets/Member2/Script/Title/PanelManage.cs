@@ -22,7 +22,8 @@ public class PanelManage : MonoBehaviour
     [SerializeField] float fadeSpeed = 100.0f;
     Color color;
     bool isPlayCheck = false;
-	private void Update()
+	
+    private void Update()
 	{
         if(FadePanel.color.a >= 0.9f)
         {

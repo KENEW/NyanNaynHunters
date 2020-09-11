@@ -49,3 +49,4 @@ MonoBehaviour:
   PlayerCharID: 0
   EnemyCharID: 1
   interval: 3
+  clickedCardCount: 0

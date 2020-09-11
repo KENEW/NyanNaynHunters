@@ -41,6 +41,7 @@ public class PlayerManager : MonoSingleton<PlayerManager>, GameEventListener<Gam
                 SetShowAndHide();
                 InitPosition();
                 GameEvent.Trigger(GameEventType.StageStart);
+                Debug.LogError("StageStart");
                 break;
         }
     }
