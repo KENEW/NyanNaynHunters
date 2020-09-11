@@ -11,6 +11,7 @@ using Slider = UnityEngine.UI.Slider;
 
 public class Player : MonoBehaviour
 {
+	public int Index;
 	public int MaxHP;
 	public int HP;
 	public int MaxEnergy;

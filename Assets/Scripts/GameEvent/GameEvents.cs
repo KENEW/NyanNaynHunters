@@ -1,7 +1,7 @@
 ﻿
 public enum GameEventType
 {
-    Open,
+    GameStart
 }
 
 public struct GameEvent
