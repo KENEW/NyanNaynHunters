@@ -98,14 +98,14 @@ public class GameManager : MonoSingleton<GameManager>
                 if (cc.GetIsUsed() == true) cc.OnCard();
             }
 
-            if (cardField.cardList.Count < cardField.cardPos.Length)
-            {
-                Card card2 = CardManager.Instance.GetRandomCard();
-                if (CardManager.Instance.MaxCountCheck(card2, cardField.cardList))
-                {
-                    cardField.AddCard(card2);
-                }
-            }
+            //if (cardField.cardList.Count < cardField.cardPos.Length)
+            //{
+            //    Card card2 = CardManager.Instance.GetRandomCard();
+            //    if (CardManager.Instance.MaxCountCheck(card2, cardField.cardList))
+            //    {
+            //        cardField.AddCard(card2);
+            //    }
+            //}
 
             clickedCardCount = 0;
 
