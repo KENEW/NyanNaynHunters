@@ -36,7 +36,7 @@ public class PanelManage : MonoBehaviour
                 PanelCount();
             }
         }
-        if (FadePanel.color.a <= 0.05f && mCharSelect.curCount == 0)
+        if (FadePanel.color.a <= 0.005f && mCharSelect.curCount == 0)
         {
             FadePanel.raycastTarget = false;
         }
