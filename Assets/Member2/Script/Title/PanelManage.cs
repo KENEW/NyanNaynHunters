@@ -21,7 +21,11 @@ public class PanelManage : MonoBehaviour
     [SerializeField] float fadeSpeed = 100.0f;
     Color color;
     bool isPlayCheck = false;
-	
+    private void Start()
+    {
+        SoundManager.Instance.PlayBGM("Main_BGM1");
+    }
+
     private void Update()
 	{
         if(FadePanel.color.a >= 0.9f)
@@ -52,6 +56,8 @@ public class PanelManage : MonoBehaviour
             case 2:
                 StoryPanel.SetActive(false);
                 SelectPanel.SetActive(true);
+                SoundManager.Instance.StopBGM();
+                SoundManager.Instance.PlayBGM("Character_Select_BGM");
                 break;
         }
             
