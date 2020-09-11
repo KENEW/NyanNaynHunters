@@ -106,17 +106,6 @@ public class GameManager : MonoSingleton<GameManager>
                     cardField.AddCard(card2);
                 }
             }
-            //for (int i = 0; i < clickedCardCount; i++)
-            //{
-            //    Card card2 = CardManager.Instance.GetRandomCard();
-            //    if (cardField.cardList.Count < cardField.cardPos.Length)
-            //    {
-            //        if (CardManager.Instance.MaxCountCheck(card2, cardField.cardList))
-            //        {
-            //            cardField.AddCard(card2);
-            //        }
-            //    }
-            //}
 
             clickedCardCount = 0;
 
