@@ -25,12 +25,15 @@ public class GameManager : MonoSingleton<GameManager>
 
     public int clickedCardCount;
 
+    private int index = 0;//사용할 카드에 대한 인덱스
+
     private void Start()
     {
         DontDestroyOnLoad(this);
         round = 0;
         turn = 1;
         clickedCardCount = 0;
+        index = 0;
         //playerHelathBar.maxValue = player.GetHP();
         //playerHelathBar.value = playerHelathBar.maxValue;
         //playerEnergyBar.maxValue = player.GetSP();
@@ -53,8 +56,8 @@ public class GameManager : MonoSingleton<GameManager>
         
         if (CardClick.canClick == false)
         {
-            Card playerCard = cardField.playerHandler.Peek();
-            Card enemyCard = cardField.enemyHandler.Peek();
+            Card playerCard = cardField.playerHandler[index];
+            Card enemyCard = cardField.enemyHandler[index];
 
             int playerPriority = GetPriority(playerCard);
             int enemyPriority = GetPriority(enemyCard);
@@ -85,22 +88,35 @@ public class GameManager : MonoSingleton<GameManager>
             coolDown.Restart(); //쿨타임 재시작
             turn = 1;
             round += 1;
+            index = 0;
             roundText.text = "Round : " + round.ToString();
             if (round > 1) clickedCardCount += 1;//추가로 하나 더
 
-            
-            for (int i = 0; i < clickedCardCount; i++)
+            for (int i = 0; i < cardField.cardPos.Length; i++)
+            {
+                var cc = cardField.cardPos[i].GetComponent<CardComponent>();
+                if (cc.GetIsUsed() == true) cc.OnCard();
+            }
+
+            if (cardField.cardList.Count < cardField.cardPos.Length)
             {
                 Card card2 = CardManager.Instance.GetRandomCard();
-                if (cardField.cardList.Count < cardField.cardPos.Length)
+                if (CardManager.Instance.MaxCountCheck(card2, cardField.cardList))
                 {
-                    if (CardManager.Instance.MaxCountCheck(card2, cardField.cardList))
-                    {
-                        cardField.AddCard(card2);
-                    }
+                    cardField.AddCard(card2);
                 }
-                
             }
+            //for (int i = 0; i < clickedCardCount; i++)
+            //{
+            //    Card card2 = CardManager.Instance.GetRandomCard();
+            //    if (cardField.cardList.Count < cardField.cardPos.Length)
+            //    {
+            //        if (CardManager.Instance.MaxCountCheck(card2, cardField.cardList))
+            //        {
+            //            cardField.AddCard(card2);
+            //        }
+            //    }
+            //}
 
             clickedCardCount = 0;
 
@@ -118,9 +134,9 @@ public class GameManager : MonoSingleton<GameManager>
         }
         CardClick.canClick = false;
         //적이 카드를 사용한 후 랜덤카드 바로 세팅
-        cardField.enemyHandler.Enqueue(CardManager.Instance.GetRandomCard());
-        cardField.enemyHandler.Enqueue(CardManager.Instance.GetRandomCard());
-        cardField.enemyHandler.Enqueue(CardManager.Instance.GetRandomCard());
+        cardField.enemyHandler.Add(CardManager.Instance.GetRandomCard());
+        cardField.enemyHandler.Add(CardManager.Instance.GetRandomCard());
+        cardField.enemyHandler.Add(CardManager.Instance.GetRandomCard());
         cardField.UpdateHandler();
         StartGame();
     }
@@ -138,15 +154,17 @@ public class GameManager : MonoSingleton<GameManager>
         var secondCardHandler = IsPlayerFirst ? cardField.enemyHandler : cardField.playerHandler;
 
 
-        card = firstCardHandler.Dequeue();
+        card = firstCardHandler[index];
         delayTime = firstCharacter.UseCard(card);
+        firstCardHandler.Remove(card);
         cardField.UpdateHandler();
         yield return new WaitForSeconds(delayTime);
-        
-        
-        
-        card = secondCardHandler.Dequeue();
+
+
+
+        card = secondCardHandler[index];
         delayTime = secondCharacter.UseCard(card);
+        secondCardHandler.Remove(card);
         cardField.UpdateHandler();
         yield return new WaitForSeconds(delayTime);
 

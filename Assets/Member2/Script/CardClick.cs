@@ -34,11 +34,11 @@ public class CardClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
             if (card_c.GetIsUsed() == true)
             {
-
+                return;
             }
             else
             {
-                cardField.playerHandler.Enqueue(card);
+                cardField.playerHandler.Add(card);
                 //cardField.cardList.Remove(card);
                 //card_c.DeleteCard();
                 card_c.OffCard();
@@ -57,8 +57,13 @@ public class CardClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             cardField.AddCard(card);
             cardField.UpdateCardPos();
 
-            cardField.playerHandler.Dequeue();
+            cardField.playerHandler.Remove(card);
             card_c.DeleteCard();
+
+            foreach(Card c in cardField.playerHandler)
+            {
+                Debug.Log("Debug : " + c.cardName);
+            }
 
             GameManager.Instance.clickedCardCount -= 1;
         }

@@ -9,16 +9,16 @@ public class CardField : MonoBehaviour
     public float height;//너비
     public List<Card> cardList;
     public RectTransform[] playerHandlerPos;
-    public Queue<Card> playerHandler;
+    public List<Card> playerHandler;
     public RectTransform[] enemyHandlerPos;
-    public Queue<Card> enemyHandler;
+    public List<Card> enemyHandler;
 
 
     private void Awake()
     {
         cardList = new List<Card>();
-        playerHandler = new Queue<Card>(playerHandlerPos.Length);
-        enemyHandler = new Queue<Card>(enemyHandlerPos.Length);
+        playerHandler = new List<Card>(playerHandlerPos.Length);
+        enemyHandler = new List<Card>(enemyHandlerPos.Length);
 
         //playerHandler.Enqueue(CardManager.Instance.GetRandomCard());
         //playerHandler.Enqueue(CardManager.Instance.GetRandomCard());
