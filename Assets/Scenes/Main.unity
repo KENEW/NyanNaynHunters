@@ -7819,6 +7819,60 @@ MonoBehaviour:
     clip: {fileID: 0}
   - name: 
     clip: {fileID: 0}
+  - name: 
+    clip: {fileID: 0}
+  - name: 
+    clip: {fileID: 0}
+  - name: 
+    clip: {fileID: 0}
+  - name: 
+    clip: {fileID: 0}
+  - name: 
+    clip: {fileID: 0}
+  - name: 
+    clip: {fileID: 0}
+  - name: 
+    clip: {fileID: 0}
+  - name: 
+    clip: {fileID: 0}
+  - name: 
+    clip: {fileID: 0}
+  - name: 
+    clip: {fileID: 0}
+  - name: 
+    clip: {fileID: 0}
+  - name: 
+    clip: {fileID: 0}
+  - name: 
+    clip: {fileID: 0}
+  - name: 
+    clip: {fileID: 0}
+  - name: 
+    clip: {fileID: 0}
+  - name: 
+    clip: {fileID: 0}
+  - name: 
+    clip: {fileID: 0}
+  - name: 
+    clip: {fileID: 0}
+  - name: 
+    clip: {fileID: 0}
+  - name: 
+    clip: {fileID: 0}
+  - name: 
+    clip: {fileID: 0}
+  - name: 
+    clip: {fileID: 0}
+  - name: 
+    clip: {fileID: 0}
+  - name: 
+    clip: {fileID: 0}
+  - name: 
+    clip: {fileID: 0}
+  - name: 
+    clip: {fileID: 0}
+  - name: 
+    clip: {fileID: 0}
   bgm:
   - name: 
     clip: {fileID: 0}
@@ -7842,6 +7896,27 @@ MonoBehaviour:
   - {fileID: 1532571296}
   - {fileID: 1532571295}
   - {fileID: 1532571294}
+  - {fileID: 1532571292}
+  - {fileID: 1532571292}
+  - {fileID: 1532571292}
+  - {fileID: 1532571292}
+  - {fileID: 1532571292}
+  - {fileID: 1532571292}
+  - {fileID: 1532571292}
+  - {fileID: 1532571292}
+  - {fileID: 1532571292}
+  - {fileID: 1532571292}
+  - {fileID: 1532571292}
+  - {fileID: 1532571292}
+  - {fileID: 1532571292}
+  - {fileID: 1532571292}
+  - {fileID: 1532571292}
+  - {fileID: 1532571292}
+  - {fileID: 1532571292}
+  - {fileID: 1532571292}
+  - {fileID: 1532571292}
+  - {fileID: 1532571292}
+  - {fileID: 1532571292}
   - {fileID: 1532571292}
 --- !u!4 &1791711570
 Transform:
