@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EmptyCard : Card
 {
-    public EmptyCard() : base("empty", "empty", 0)
+    public EmptyCard() : base("비어있음", "empty", 0)
     {
        
     }
