@@ -7,6 +7,11 @@ public class Sound
 {
     public string name;
     public AudioClip clip;
+    public Sound(TBL_SOUND tc)
+    {
+        this.name = tc.name;
+        this.clip = tc.Sound;
+    }
 }
 public class SoundManager : MonoBehaviour
 {
@@ -29,6 +34,16 @@ public class SoundManager : MonoBehaviour
             Destroy(Instance);
 		}
         DontDestroyOnLoad(this);
+
+        for(int i=0; i<4; i++)
+        {
+            bgm[i] = new Sound(TBL_SOUND.GetEntity(i));
+        }
+
+        for (int i = 4; i < TBL_SOUND.CountEntities; i++)
+        {
+            sfx[i - 4] = new Sound(TBL_SOUND.GetEntity(i));
+        }
     }
     public void PlayBGM(string p_bgmName)
     {
@@ -55,12 +70,13 @@ public class SoundManager : MonoBehaviour
             {
                 for (int x = 0; x < sfxPlayer.Length; x++)
                 {
-                    if (!sfxPlayer[x].isPlaying)
+                    if (sfxPlayer[x] != null)
                     {
                         sfxPlayer[x].clip = sfx[i].clip;
                         sfxPlayer[x].Play();
                         return;
                     }
+                        
 
                 }
                 Debug.Log("모든 오디오 플레이어가 재생중");

@@ -6964,11 +6964,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 011aedf745f249d47bec64abdacbc2f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sfx: []
-  bgm: []
+  sfx:
+  - name: 
+    clip: {fileID: 0}
+  - name: 
+    clip: {fileID: 0}
+  - name: 
+    clip: {fileID: 0}
+  - name: 
+    clip: {fileID: 0}
+  - name: 
+    clip: {fileID: 0}
+  - name: 
+    clip: {fileID: 0}
+  - name: 
+    clip: {fileID: 0}
+  bgm:
+  - name: 
+    clip: {fileID: 0}
+  - name: 
+    clip: {fileID: 0}
+  - name: 
+    clip: {fileID: 0}
+  - name: 
+    clip: {fileID: 0}
   bgmPlayer: {fileID: 2126537109}
   sfxPlayer:
-  - {fileID: 1532571304}
+  - {fileID: 0}
   - {fileID: 1532571303}
   - {fileID: 1532571302}
   - {fileID: 1532571301}

@@ -38,6 +38,7 @@ public class GameManager : MonoSingleton<GameManager>, GameEventListener<GameEve
         switch (e.Type)
         {
             case GameEventType.StageStart:
+                SoundManager.Instance.PlayBGM("GameStart_BGM");
                 round = 0;
                 turn = 1;
                 clickedCardCount = 0;
