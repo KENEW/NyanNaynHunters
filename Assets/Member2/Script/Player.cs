@@ -277,15 +277,29 @@ public class Player : MonoBehaviour
 			TileManager.Instance.GetTile(tilePosition)?.PlayAttack(index, animationTime);
 		}
 		
-		m_SkeletonAnimation.AnimationState.SetAnimation(0, randomAttackAnimationName, false);
+		
 
 		if (Energy - card.energyCost >= 0)
+        {
+			Invoke("SSS", 1f);
+			int i = Random.Range(1, 4);
+			string str = "Attack_Voice" + i.ToString();
+			SoundManager.Instance.PlaySFX(str);
+			m_SkeletonAnimation.AnimationState.SetAnimation(0, randomAttackAnimationName, false);
 			StartCoroutine(UseAttackCard_Coroutine(card, animationTime));
+		}
+			
 
 		return GameSetting.AttackCardTime;
 	}
 
-	private IEnumerator UseAttackCard_Coroutine(AttackCard card, float time)
+    private void SSS()
+    {
+		SoundManager.Instance.PlaySFX("Explosion_Sound1");
+	}
+
+
+    private IEnumerator UseAttackCard_Coroutine(AttackCard card, float time)
 	{
 		yield return new WaitForSeconds(time);
 		
@@ -350,6 +364,7 @@ public class Player : MonoBehaviour
 				if (TileManager.Instance.CanMove(newPosition))
 				{
 					SetTilePosition(newPosition);
+					SoundManager.Instance.PlaySFX("Move_Sound1");
 				}
 				break;
 			
@@ -358,6 +373,7 @@ public class Player : MonoBehaviour
 				if (TileManager.Instance.CanMove(newPosition))
 				{
 					SetTilePosition(newPosition);
+					SoundManager.Instance.PlaySFX("Move_Sound2");
 				}
 				break;
 			
@@ -366,6 +382,7 @@ public class Player : MonoBehaviour
 				if (TileManager.Instance.CanMove(newPosition))
 				{
 					SetTilePosition(newPosition);
+					SoundManager.Instance.PlaySFX("Move_Sound3");
 				}
 				break;
 			
@@ -374,6 +391,7 @@ public class Player : MonoBehaviour
 				if (TileManager.Instance.CanMove(newPosition))
 				{
 					SetTilePosition(newPosition);
+					SoundManager.Instance.PlaySFX("Move_Sound4");
 				}
 				break;
 		}
@@ -389,7 +407,7 @@ public class Player : MonoBehaviour
 	private IEnumerator TakeHitAnimation_Coroutine()
 	{
 		m_SkeletonAnimation.AnimationState.SetAnimation(0, "Damaged", true);
-
+		SoundManager.Instance.PlaySFX("Damage_Voice3");
 		yield return new WaitForSeconds(0.6f);
 		
 		m_SkeletonAnimation.AnimationState.SetAnimation(0, "Idle", true);

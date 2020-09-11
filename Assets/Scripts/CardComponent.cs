@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class CardComponent : MonoBehaviour
 {
+    public List<Sprite> m_Backgrounds;
+    
     public Card card;
     public string cardname;
     public Text CardName;

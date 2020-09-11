@@ -26,6 +26,7 @@ public class CardClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        SoundManager.Instance.PlaySFX("UIButton_Sound1");
         if (imageType == CardImageType.Field)
         {
             if (canClick == false) return;
