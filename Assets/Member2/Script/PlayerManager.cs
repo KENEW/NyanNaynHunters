@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class PlayerManager : MonoSingleton<PlayerManager>
+public class PlayerManager : MonoSingleton<PlayerManager>, GameEventListener<GameEvent>
 {
     private readonly Vector2 PlayerStartPosition = new Vector2(1, 0);
     private readonly Vector2 EnemeyStartPosition = new Vector2(1, 2);
@@ -14,15 +14,44 @@ public class PlayerManager : MonoSingleton<PlayerManager>
     
     public Player Player;
     public Player Enemy;
-    
-    private void Start()   // 요건 나중에 없앨 예정 
-    {
 
-        SelectPlayerCharacter(0);
-        SelectRandomEnemyCharacter();
-        SetShowAndHide();
-        InitPosition();
+
+    private void Awake()
+    {
+        Hide();
+        this.AddGameEventListening<GameEvent>();
     }
+
+    public void Hide()
+    {
+        foreach (var player in m_Playsers)
+        {
+            player.gameObject.SetActive(false);
+        }
+    }
+
+    public void OnGameEvent(GameEvent e)
+    {
+        switch (e.Type)
+        {
+            case GameEventType.CharacterSelect:
+                Init();
+                SelectPlayerCharacter(e.Value);
+                SelectRandomEnemyCharacter();
+                SetShowAndHide();
+                InitPosition();
+                GameEvent.Trigger(GameEventType.StageStart);
+                break;
+        }
+    }
+
+    private void Init()
+    {
+        m_UsedPlayers.Clear();
+        Player = null;
+        Enemy = null;
+    }
+    
 
     public void SelectPlayerCharacter(int index) // 0 ~ 3
     {

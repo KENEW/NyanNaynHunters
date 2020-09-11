@@ -26,7 +26,7 @@ public class UI_PlayerProfile : MonoBehaviour, GameEventListener<GameEvent>
     
     public void OnGameEvent(GameEvent e)
     {
-        if (e.Type == GameEventType.GameStart)
+        if (e.Type == GameEventType.StageStart)
         {
             int index;
             index = isPlayer ? PlayerManager.Instance.Player.Index : PlayerManager.Instance.Enemy.Index;

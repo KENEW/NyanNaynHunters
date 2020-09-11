@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameManager : MonoSingleton<GameManager>
+public class GameManager : MonoSingleton<GameManager>, GameEventListener<GameEvent>
 {
     private int round;
     public Text roundText;
@@ -27,25 +27,27 @@ public class GameManager : MonoSingleton<GameManager>
 
     private int index = 0;//사용할 카드에 대한 인덱스
 
-    private void Start()
+    private void Awake()
     {
-        DontDestroyOnLoad(this);
-        round = 0;
-        turn = 1;
-        clickedCardCount = 0;
-        index = 0;
-        //playerHelathBar.maxValue = player.GetHP();
-        //playerHelathBar.value = playerHelathBar.maxValue;
-        //playerEnergyBar.maxValue = player.GetSP();
-        //playerEnergyBar.value = playerEnergyBar.maxValue;
-        //enemyHealthBar.maxValue = enemy.GetHP();
-        //enemyHealthBar.value = enemyHealthBar.maxValue;
-        //enemyEnergyBar.maxValue = enemy.GetSP();
-        //enemyEnergyBar.value = enemyEnergyBar.maxValue;
-
-        StartGame();
+        this.AddGameEventListening<GameEvent>();
     }
 
+
+    public void OnGameEvent(GameEvent e)
+    {
+        switch (e.Type)
+        {
+            case GameEventType.StageStart:
+                round = 0;
+                turn = 1;
+                clickedCardCount = 0;
+                index = 0;
+
+                StartGame();
+
+                break;
+        }
+    }
 
 
 

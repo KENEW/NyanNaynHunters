@@ -19,7 +19,7 @@ public class CharSelect : MonoBehaviour
 	}
 	void NextLoadScene()
 	{
-		SceneManager.LoadScene("Main");
+		//SceneManager.LoadScene("Main");
 	}
 	public void CharacterSelect(int ID)
 	{
@@ -49,7 +49,11 @@ public class CharSelect : MonoBehaviour
 			if(curCount > 1)
 			{
 				Debug.Log(PlayerCharID[0] + PlayerCharID[1]);
-				NextLoadScene();
+					
+				
+				//PlayerManager.Instance.SelectPlayerCharacter(ID);
+				GameEvent.Trigger(GameEventType.CharacterSelect, ID);
+				//NextLoadScene();
 				//Invoke("NextLoadScene", 3.3f);
 			}
 		}
