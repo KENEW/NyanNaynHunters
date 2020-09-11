@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class Title : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
-	public GameObject SelectPanel = null;
+	public PanelManage mPanelManage = null;
 	public void OnPointerDown(PointerEventData data)
 	{
 		
@@ -13,7 +13,6 @@ public class Title : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
 	public void OnPointerUp(PointerEventData data)
 	{
-		this.gameObject.SetActive(false);
-		SelectPanel.SetActive(true);
+		mPanelManage.NextScene();
 	}
 }
