@@ -159,7 +159,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a7e7ae8bfcde2a94394ed4340a45604d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 202068ecc4a65c04c9507e1d443d8ec6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -359,6 +359,7 @@ GameObject:
   - component: {fileID: 5249684226887603261}
   - component: {fileID: 5249684226887603260}
   - component: {fileID: 5249684226887603259}
+  - component: {fileID: 973247415}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -476,6 +477,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 973247415}
+        m_MethodName: OnSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &973247415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5249684226887603257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03d7e59f890996149a09e3629c8a9d50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfxName: UIButton_Sound2
 --- !u!1 &5249684227002697049
 GameObject:
   m_ObjectHideFlags: 0
@@ -1196,6 +1221,7 @@ GameObject:
   - component: {fileID: 5249684227447619374}
   - component: {fileID: 5249684227447619373}
   - component: {fileID: 5249684227447619361}
+  - component: {fileID: 1470322203}
   m_Layer: 5
   m_Name: Character2
   m_TagString: Untagged
@@ -1217,9 +1243,9 @@ RectTransform:
   m_Father: {fileID: 5249684227313495667}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 274.8306, y: -358.4314}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 295.0806, y: 0}
   m_SizeDelta: {x: 500, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5249684227447619360
@@ -1316,7 +1342,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5249684227447619374}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1470322203}
+        m_MethodName: OnSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &5249684227447619361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1332,6 +1369,19 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 7, y: 7}
   m_UseGraphicAlpha: 1
+--- !u!114 &1470322203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5249684227447619371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03d7e59f890996149a09e3629c8a9d50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfxName: UIButton_Sound3
 --- !u!1 &5249684227708979472
 GameObject:
   m_ObjectHideFlags: 0
@@ -1742,6 +1792,7 @@ GameObject:
   - component: {fileID: 5249684228224182172}
   - component: {fileID: 5249684228224182171}
   - component: {fileID: 5249684228224182175}
+  - component: {fileID: 755984871}
   m_Layer: 5
   m_Name: Character3
   m_TagString: Untagged
@@ -1763,9 +1814,9 @@ RectTransform:
   m_Father: {fileID: 5249684227313495667}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 274.8306, y: -535.529}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 295.0806, y: 0}
   m_SizeDelta: {x: 500, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5249684228224182174
@@ -1862,7 +1913,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5249684228224182172}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 755984871}
+        m_MethodName: OnSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &5249684228224182175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1878,6 +1940,19 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 7, y: 7}
   m_UseGraphicAlpha: 1
+--- !u!114 &755984871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5249684228224182169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03d7e59f890996149a09e3629c8a9d50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfxName: UIButton_Sound3
 --- !u!1 &5249684228231984964
 GameObject:
   m_ObjectHideFlags: 0
@@ -2045,6 +2120,7 @@ GameObject:
   - component: {fileID: 5249684228335984691}
   - component: {fileID: 5249684228335984690}
   - component: {fileID: 5249684228335984694}
+  - component: {fileID: 1373694513}
   m_Layer: 5
   m_Name: Character1
   m_TagString: Untagged
@@ -2066,9 +2142,9 @@ RectTransform:
   m_Father: {fileID: 5249684227313495667}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 274.8306, y: -181.3338}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 295.0806, y: 0}
   m_SizeDelta: {x: 500, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5249684228335984693
@@ -2165,7 +2241,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5249684228335984691}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1373694513}
+        m_MethodName: OnSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &5249684228335984694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2181,6 +2268,19 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 7, y: 7}
   m_UseGraphicAlpha: 1
+--- !u!114 &1373694513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5249684228335984688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03d7e59f890996149a09e3629c8a9d50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfxName: UIButton_Sound3
 --- !u!1 &5249684228523818383
 GameObject:
   m_ObjectHideFlags: 0
@@ -2273,6 +2373,7 @@ GameObject:
   - component: {fileID: 5249684228633982482}
   - component: {fileID: 5249684228633982481}
   - component: {fileID: 5249684228633982485}
+  - component: {fileID: 890938056}
   m_Layer: 5
   m_Name: Character4
   m_TagString: Untagged
@@ -2294,9 +2395,9 @@ RectTransform:
   m_Father: {fileID: 5249684227313495667}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 274.8306, y: -712.6266}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 295.0806, y: 0}
   m_SizeDelta: {x: 500, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5249684228633982484
@@ -2393,7 +2494,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5249684228633982482}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 890938056}
+        m_MethodName: OnSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &5249684228633982485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2409,6 +2521,19 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 7, y: 7}
   m_UseGraphicAlpha: 1
+--- !u!114 &890938056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5249684228633982495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03d7e59f890996149a09e3629c8a9d50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfxName: UIButton_Sound3
 --- !u!1 &5520729505080430448
 GameObject:
   m_ObjectHideFlags: 0
@@ -2496,6 +2621,7 @@ GameObject:
   - component: {fileID: 8023310153598443819}
   - component: {fileID: 4654780404782626076}
   - component: {fileID: 2109678871135544123}
+  - component: {fileID: 1806232496}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -2614,6 +2740,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1806232496}
+        m_MethodName: OnSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1806232496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6108796937155046407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03d7e59f890996149a09e3629c8a9d50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfxName: UIButton_Sound3
 --- !u!1 &8185771269093044957
 GameObject:
   m_ObjectHideFlags: 0
