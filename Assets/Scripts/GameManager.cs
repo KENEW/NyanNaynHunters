@@ -30,6 +30,7 @@ public class GameManager : MonoSingleton<GameManager>, GameEventListener<GameEve
     private void Awake()
     {
         this.AddGameEventListening<GameEvent>();
+
     }
 
 
