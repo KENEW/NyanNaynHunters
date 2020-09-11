@@ -212,6 +212,7 @@ public class GameManager : MonoSingleton<GameManager>, GameEventListener<GameEve
         else if (card is GuardCard) priority = 3;
         else if (card is HealCard) priority = 4;
         else if (card is AttackCard) priority = 5;
+        else if (card is EmptyCard) priority = 0;
         else priority = 6;
         return priority;
     }
