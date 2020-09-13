@@ -6,6 +6,11 @@ Game Gam Project(Gyeongsan GM 2020)
 
 Position : Programmer
 
+## 스크린샷
+![1](https://user-images.githubusercontent.com/32855863/93016051-44505a80-f5f9-11ea-9ca6-ef29eaabad54.PNG)
+![3](https://user-images.githubusercontent.com/32855863/93016052-461a1e00-f5f9-11ea-9117-c61c1aa51bbe.png)
+![2](https://user-images.githubusercontent.com/32855863/93016053-46b2b480-f5f9-11ea-839a-fe41764e6461.png)
+
 ## 5인 협업 프로젝트
 기획 개발자, 프로그래머, 아티스트   
 
