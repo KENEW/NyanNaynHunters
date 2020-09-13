@@ -1,4 +1,4 @@
-# NyanNyanHunters
+# NyanNyanHunters (냥냥헌터스)
 경산 게임잼 2020 3박 4일 온라인 게임잼
 Game Gam Project(Gyeongsan GM 2020)
 
@@ -14,4 +14,8 @@ Position : Programmer
 ## 5인 협업 프로젝트
 기획 개발자, 프로그래머, 아티스트   
 
+## 사용 프로그램
+유니티(Unity), 깃 허브(소스트리), Visual Studio
 
+## 활동 범위  
+타이틀 씬, 초기 플레이어 4x3 움직임 박스
