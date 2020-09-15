@@ -1,6 +1,6 @@
 # NyanNyanHunters (냥냥헌터스)
 경산 게임잼 2020 3박 4일 온라인 게임잼
-Game Gam Project(Gyeongsan GM 2020)
+Game Jam Project(Gyeongsan GM 2020)
 
 - [`기획`](https://www.notion.so/39b60a639c9048cc9d7099897a6b7d17)
 
